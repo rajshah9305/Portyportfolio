@@ -351,12 +351,25 @@ const Button = ({ children, onClick, variant = 'primary', icon: Icon, href }) =>
   );
 
   if (href) {
-    const isExternal = href.startsWith('http');
+    const isExternal = href.startsWith('http') || href.startsWith('mailto:');
+    const isAnchor = href.startsWith('#');
+    
+    const handleClick = (e) => {
+      if (isAnchor) {
+        e.preventDefault();
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    };
+    
     return (
       <a 
         href={href} 
-        target={isExternal ? "_blank" : undefined} 
-        rel={isExternal ? "noopener noreferrer" : undefined} 
+        onClick={handleClick}
+        target={isExternal && !href.startsWith('mailto:') ? "_blank" : undefined} 
+        rel={isExternal && !href.startsWith('mailto:') ? "noopener noreferrer" : undefined} 
         className={`${baseClasses} ${variants[variant]}`}
       >
         {content}
@@ -464,7 +477,15 @@ const ProjectCard = ({ project, index }) => {
            
            <div className="pt-4 border-t border-zinc-100 flex items-center justify-between">
               <span className="font-mono text-[10px] font-bold text-zinc-400 uppercase tracking-widest">{project.stat}</span>
-              <a href={project.link} target="_blank" rel="noreferrer" className="flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-widest text-zinc-900 group-hover:text-orange-600 transition-colors">
+              <a 
+                href={project.link} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-widest text-zinc-900 hover:text-orange-600 transition-colors"
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+              >
                 View Repo <MoveRight size={12} />
               </a>
            </div>
@@ -555,6 +576,27 @@ export default function App() {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMobileMenuOpen]);
+
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape' && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [isMobileMenuOpen]);
+
   if (loading) {
     return (
       <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-zinc-50 font-mono text-xs text-zinc-900">
@@ -611,12 +653,16 @@ export default function App() {
       <nav className="fixed top-0 z-40 w-full border-b border-zinc-200 bg-zinc-50/80 backdrop-blur-md">
         <div className="flex h-16 md:h-20 items-center justify-between px-6 md:px-12 max-w-[1920px] mx-auto">
           {/* Logo */}
-          <div className="flex items-center gap-4 group cursor-pointer" onClick={scrollToTop}>
+          <button 
+            className="flex items-center gap-4 group cursor-pointer" 
+            onClick={scrollToTop}
+            aria-label="Scroll to top"
+          >
             <div className="flex h-8 w-8 items-center justify-center bg-orange-600 text-white font-black text-sm tracking-tighter shadow-md hover:scale-105 transition-transform">RS</div>
             <div className="flex flex-col">
               <span className="font-bold tracking-wider text-sm text-zinc-900">{PORTFOLIO_DATA.profile.name}</span>
             </div>
-          </div>
+          </button>
 
           {/* Nav Links */}
           <div className="hidden lg:flex items-center p-1.5 bg-zinc-100/80 backdrop-blur-md border border-zinc-200/50 rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300">
@@ -629,7 +675,14 @@ export default function App() {
                return (
                  <a 
                    key={item.name}
-                   href={item.href} 
+                   href={item.href}
+                   onClick={(e) => {
+                     e.preventDefault();
+                     const element = document.querySelector(item.href);
+                     if (element) {
+                       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                     }
+                   }}
                    className={`relative px-6 py-2.5 rounded-full font-mono text-[11px] font-bold tracking-widest transition-all duration-300 flex items-center gap-2 group ${isActive ? 'bg-white text-zinc-900 shadow-sm' : 'text-zinc-500 hover:text-zinc-900 hover:bg-white/50'}`}
                  >
                    <span className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${isActive ? 'bg-orange-600 scale-125' : 'bg-zinc-300 group-hover:bg-orange-400'}`} />
@@ -650,7 +703,12 @@ export default function App() {
              <a href={PORTFOLIO_DATA.profile.socials.linkedin} target="_blank" rel="noreferrer" className="text-zinc-500 hover:text-blue-700 transition-colors hidden sm:block"><Linkedin size={20} /></a>
              
              {/* Mobile Menu Button */}
-             <button onClick={toggleMobileMenu} className="lg:hidden p-2 text-zinc-900 hover:bg-zinc-100 rounded-md z-50">
+             <button 
+               onClick={toggleMobileMenu} 
+               className="lg:hidden p-2 text-zinc-900 hover:bg-zinc-100 rounded-md z-50"
+               aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+               aria-expanded={isMobileMenuOpen}
+             >
                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
              </button>
           </div>
@@ -658,7 +716,14 @@ export default function App() {
       </nav>
 
       {/* Refined Mobile Command Menu */}
-      <div className={`fixed inset-0 z-40 bg-zinc-50/90 backdrop-blur-xl transition-transform duration-500 ease-cubic-bezier lg:hidden ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+      <div 
+        className={`fixed inset-0 z-40 bg-zinc-50/90 backdrop-blur-xl transition-transform duration-500 ease-cubic-bezier lg:hidden ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) {
+            setIsMobileMenuOpen(false);
+          }
+        }}
+      >
         <div className="flex flex-col h-full justify-between p-8 pt-32">
            <div className="flex flex-col gap-6">
              {[
@@ -669,7 +734,16 @@ export default function App() {
                <a 
                  key={item.name}
                  href={item.href}
-                 onClick={() => setIsMobileMenuOpen(false)}
+                 onClick={(e) => {
+                   e.preventDefault();
+                   setIsMobileMenuOpen(false);
+                   setTimeout(() => {
+                     const element = document.querySelector(item.href);
+                     if (element) {
+                       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                     }
+                   }, 300);
+                 }}
                  className="group flex items-baseline gap-4 font-sans text-6xl font-black text-zinc-900 hover:text-orange-600 transition-colors tracking-tighter"
                >
                  <span className="text-sm font-mono font-bold text-orange-600 group-hover:text-orange-400 -translate-y-4">{item.num}</span>
@@ -888,8 +962,18 @@ export default function App() {
                    </div>
                    <div className="flex flex-col gap-2">
                       <span className="font-mono text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-2">Legal</span>
-                      <a href="#" className="font-mono text-sm font-bold text-zinc-900 hover:text-orange-600 tracking-wider">PRIVACY</a>
-                      <a href="#" className="font-mono text-sm font-bold text-zinc-900 hover:text-orange-600 tracking-wider">IMPRINT</a>
+                      <button 
+                        onClick={() => alert('Privacy Policy: This portfolio is for demonstration purposes. No personal data is collected or stored.')} 
+                        className="font-mono text-sm font-bold text-zinc-900 hover:text-orange-600 tracking-wider text-right"
+                      >
+                        PRIVACY
+                      </button>
+                      <button 
+                        onClick={() => alert('Imprint: RAJ SHAH\nGujarat, India\nEmail: rajshah9305@gmail.com')} 
+                        className="font-mono text-sm font-bold text-zinc-900 hover:text-orange-600 tracking-wider text-right"
+                      >
+                        IMPRINT
+                      </button>
                    </div>
                 </div>
               </div>
