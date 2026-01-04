@@ -1,26 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { 
   Terminal, 
-  ArrowUpRight, 
   Github, 
   Linkedin, 
   Mail, 
   Cpu, 
   Layers, 
-  Globe, 
   Code,
   MoveRight,
-  Hash,
   Database,
   Search,
   CheckCircle2,
-  Briefcase,
   Copy,
   ArrowUp,
   LayoutTemplate,
   Server,
   Zap,
-  ChevronRight,
   Menu,
   X,
   Eye,
@@ -282,7 +277,17 @@ const Scanline = () => (
 );
 
 // Parallax Grid Component
-const ParallaxGrid = ({ mousePos }) => {
+const ParallaxGrid = () => {
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
   const moveX = (mousePos.x / window.innerWidth) * 20;
   const moveY = (mousePos.y / window.innerHeight) * 20;
 
@@ -471,19 +476,33 @@ const ProjectCard = ({ project, index }) => {
 
 // --- MAIN APPLICATION ---
 
+const ScrollProgress = () => {
+  const [scrolled, setScrolled] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const winScroll = document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      setScrolled((winScroll / height) * 100);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <div className="fixed right-0 top-0 z-50 h-full w-1.5 hidden md:block bg-zinc-200/30 backdrop-blur-sm">
+      <div className="w-full bg-orange-600 transition-all duration-150 ease-out" style={{ height: `${scrolled}%` }} />
+    </div>
+  );
+};
+
 export default function App() {
   const [loading, setLoading] = useState(true);
   const [bootLog, setBootLog] = useState([]);
   const [currentTime, setCurrentTime] = useState("");
-  const [scrolled, setScrolled] = useState(0);
   const [copied, setCopied] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
-
-  const handleMouseMove = (e) => {
-    setMousePos({ x: e.clientX, y: e.clientY });
-  };
 
   useEffect(() => {
     document.title = "RAJ SHAH // ARCHITECT";
@@ -507,10 +526,6 @@ export default function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const winScroll = document.documentElement.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      setScrolled((winScroll / height) * 100);
-
       const sections = ['services', 'work', 'experience'];
       for (const section of sections) {
         const element = document.getElementById(section);
@@ -564,15 +579,10 @@ export default function App() {
   return (
     <div 
       className="min-h-screen bg-zinc-50 text-zinc-900 selection:bg-orange-600 selection:text-white font-sans overflow-x-hidden relative"
-      onMouseMove={handleMouseMove}
     >
       <Scanline />
-      <ParallaxGrid mousePos={mousePos} />
-      
-      {/* Scroll Indicator */}
-      <div className="fixed right-0 top-0 z-50 h-full w-1.5 hidden md:block bg-zinc-200/30 backdrop-blur-sm">
-        <div className="w-full bg-orange-600 transition-all duration-150 ease-out" style={{ height: `${scrolled}%` }} />
-      </div>
+      <ParallaxGrid />
+      <ScrollProgress />
 
       {/* Floating Command Bar (Bottom Right) */}
       <div className="fixed bottom-8 right-8 z-40 flex flex-col gap-2">
@@ -580,6 +590,7 @@ export default function App() {
            onClick={handleCopyEmail}
            className="h-10 w-10 bg-zinc-900 text-white flex items-center justify-center shadow-lg hover:bg-orange-600 transition-colors relative group rounded-sm"
            title="Copy Email"
+           aria-label={copied ? "Email copied" : "Copy email address"}
          >
            {copied ? <CheckCircle2 size={18} /> : <Mail size={18} />}
            <span className="absolute right-full mr-2 bg-zinc-900 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap font-mono pointer-events-none">
@@ -590,6 +601,7 @@ export default function App() {
            onClick={scrollToTop}
            className="h-10 w-10 bg-white border border-zinc-200 text-zinc-900 flex items-center justify-center shadow-lg hover:border-orange-600 hover:text-orange-600 transition-colors rounded-sm"
            title="Back to Top"
+           aria-label="Back to top"
          >
            <ArrowUp size={18} />
          </button>
