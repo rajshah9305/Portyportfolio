@@ -1,12 +1,33 @@
 {
-  "name": "portfolio-fix",
+  "name": "rajshah-portfolio",
   "private": true,
-  "version": "1.0.0",
+  "version": "2.0.0",
   "type": "module",
+  "description": "Production-grade portfolio website showcasing full-stack architecture and UI/UX engineering",
+  "author": {
+    "name": "Raj Shah",
+    "email": "rajshah9305@gmail.com",
+    "url": "https://rajshah.dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rajshah9305/Portyportfolio.git"
+  },
+  "keywords": [
+    "portfolio",
+    "react",
+    "vite",
+    "tailwindcss",
+    "full-stack",
+    "web-development",
+    "ui-ux"
+  ],
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
     "react": "^18.2.0",
