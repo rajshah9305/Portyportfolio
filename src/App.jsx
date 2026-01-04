@@ -60,19 +60,55 @@ const PORTFOLIO_DATA = {
       id: "01",
       title: "System Architecture",
       desc: "Designing scalable, fault-tolerant backend infrastructures using microservices or monoliths depending on scale.",
-      icon: Server
+      icon: Server,
+      details: {
+        fullDescription: "I design and implement enterprise-grade system architectures that scale from MVP to millions of users. My approach combines modern cloud-native patterns with battle-tested architectural principles.",
+        capabilities: [
+          "Microservices & API Gateway Design",
+          "Database Schema & Query Optimization",
+          "Load Balancing & Auto-scaling",
+          "Event-Driven Architecture",
+          "CQRS & Event Sourcing Patterns"
+        ],
+        technologies: ["AWS", "Docker", "Kubernetes", "PostgreSQL", "Redis", "RabbitMQ"],
+        deliverables: ["Architecture Diagrams", "Technical Specifications", "Infrastructure as Code", "Performance Benchmarks"]
+      }
     },
     {
       id: "02",
       title: "MVP Engineering",
       desc: "Rapid prototyping and development of Minimum Viable Products for startups, focusing on speed-to-market and code quality.",
-      icon: Zap
+      icon: Zap,
+      details: {
+        fullDescription: "I help startups validate their ideas quickly by building production-ready MVPs in weeks, not months. Focus on core features, clean code, and technical debt prevention.",
+        capabilities: [
+          "Rapid Full-Stack Development",
+          "Product Feature Prioritization",
+          "Technical Feasibility Analysis",
+          "Scalable Foundation Setup",
+          "CI/CD Pipeline Configuration"
+        ],
+        technologies: ["Next.js", "React", "Node.js", "Supabase", "Vercel", "Stripe"],
+        deliverables: ["Working MVP", "Source Code", "Deployment Setup", "Technical Documentation"]
+      }
     },
     {
       id: "03",
       title: "UI/UX Engineering",
       desc: "Translating complex Figma designs into pixel-perfect, responsive, and accessible frontend code.",
-      icon: LayoutTemplate
+      icon: LayoutTemplate,
+      details: {
+        fullDescription: "I bridge the gap between design and development, transforming static designs into interactive, performant, and accessible web experiences that work flawlessly across all devices.",
+        capabilities: [
+          "Pixel-Perfect Implementation",
+          "Responsive & Mobile-First Design",
+          "Animation & Micro-interactions",
+          "WCAG 2.1 Accessibility Compliance",
+          "Performance Optimization"
+        ],
+        technologies: ["React", "TypeScript", "Tailwind CSS", "Framer Motion", "GSAP", "Three.js"],
+        deliverables: ["Production Code", "Component Library", "Style Guide", "Performance Report"]
+      }
     }
   ],
   experience: [
@@ -108,7 +144,7 @@ const PORTFOLIO_DATA = {
       category: "ARTIFICIAL INTELLIGENCE",
       tech: ["Next.js 14", "TypeScript", "Cerebras"],
       description: "Autonomous recursive agent orchestrator. Capable of self-prompting, task decomposition, and multi-agent coordination.",
-      link: "https://github.com/rajshah9305",
+      link: "https://github.com/rajshah9305/v0-ai-agent-visualization",
       stat: "99.9% ACCURACY",
       icon: Cpu,
       image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=2000"
@@ -119,7 +155,7 @@ const PORTFOLIO_DATA = {
       category: "IMMERSIVE WEB",
       tech: ["WebGL", "Three.js", "GSAP"],
       description: "Non-linear digital experience for creative agencies. Features complex shader transitions, scroll-linked physics, and a custom rendering pipeline.",
-      link: "https://rajshah9305.github.io/PortfolioRAJ/",
+      link: "https://github.com/rajshah9305/aurora-orchestrator",
       stat: "60FPS LOCKED",
       icon: Layers,
       image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=2000"
@@ -130,7 +166,7 @@ const PORTFOLIO_DATA = {
       category: "DATA WARFARE",
       tech: ["Python", "Selenium", "Proxies"],
       description: "Enterprise-grade extraction engine. Bypasses modern fingerprinting and anti-bot measures. Features rotating proxy pools and headless browser clustering.",
-      link: "https://github.com/rajshah9305",
+      link: "https://github.com/rajshah9305/awsmetagpt",
       stat: "10K+ RPS",
       icon: Search,
       image: "https://images.unsplash.com/photo-1558494949-efdeb6bf80d1?auto=format&fit=crop&q=80&w=2000"
@@ -141,7 +177,7 @@ const PORTFOLIO_DATA = {
       category: "SAAS INFRASTRUCTURE",
       tech: ["React", "Redux", "Supabase"],
       description: "Version control system for LLM prompts. Allows engineering teams to test, iterate, and deploy prompts like code. Includes A/B testing suite.",
-      link: "https://github.com/rajshah9305",
+      link: "https://github.com/rajshah9305/raj-ai-app-builder",
       stat: "V 2.1.0",
       icon: Database,
       image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&q=80&w=2000"
@@ -152,7 +188,7 @@ const PORTFOLIO_DATA = {
       category: "REAL-TIME SYSTEMS",
       tech: ["Socket.io", "Redis", "Node.js"],
       description: "End-to-end encrypted messaging infrastructure designed for zero-latency communication. Features ephemeral message storage.",
-      link: "https://github.com/rajshah9305",
+      link: "https://github.com/rajshah9305/kindred-heart-story",
       stat: "< 50ms LATENCY",
       icon: Terminal,
       image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=2000"
@@ -163,7 +199,7 @@ const PORTFOLIO_DATA = {
       category: "MACHINE LEARNING",
       tech: ["PyTorch", "OpenCV", "FastAPI"],
       description: "High-performance object detection pipeline optimized for edge deployment. Processes video streams in real-time with custom trained YOLOv8 models.",
-      link: "https://github.com/rajshah9305",
+      link: "https://github.com/rajshah9305/Auraka",
       stat: "95% MAP",
       icon: Eye,
       image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2000"
@@ -174,7 +210,7 @@ const PORTFOLIO_DATA = {
       category: "DISTRIBUTED COMPUTING",
       tech: ["Rust", "WASM", "libp2p"],
       description: "Decentralized compute sharing protocol allowing browsers to contribute idle processing power to scientific simulations.",
-      link: "https://github.com/rajshah9305",
+      link: "https://github.com/rajshah9305/groqqcrewwss",
       stat: "1M+ OPS/SEC",
       icon: Network,
       image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&q=80&w=2000"
@@ -185,7 +221,7 @@ const PORTFOLIO_DATA = {
       category: "CRYPTOGRAPHY",
       tech: ["Go", "gRPC", "AES-256"],
       description: "Zero-knowledge proof storage solution for enterprise secrets. Ensures mathematical privacy without trusting the storage provider.",
-      link: "https://github.com/rajshah9305",
+      link: "https://github.com/rajshah9305/nocodeaoigemini",
       stat: "MIL-SPEC SEC",
       icon: Lock,
       image: "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&q=80&w=2000"
@@ -196,7 +232,7 @@ const PORTFOLIO_DATA = {
       category: "FINTECH ENGINE",
       tech: ["C++", "Python", "FPGA"],
       description: "High-frequency trading execution engine designed for microsecond latency arbitrage. Optimized for kernel bypass networking.",
-      link: "https://github.com/rajshah9305",
+      link: "https://github.com/rajshah9305/taxkeepAI",
       stat: "10μs LATENCY",
       icon: BarChart3,
       image: "https://images.unsplash.com/photo-1611974765270-ca1258634369?auto=format&fit=crop&q=80&w=2000"
@@ -207,7 +243,7 @@ const PORTFOLIO_DATA = {
       category: "MEDIA INFRASTRUCTURE",
       tech: ["Elixir", "Phoenix", "WebRTC"],
       description: "Adaptive bitrate video streaming server capable of handling millions of concurrent connections with minimal resource footprint.",
-      link: "https://github.com/rajshah9305",
+      link: "https://github.com/rajshah9305/hoteldeposits",
       stat: "4K HDR LIVE",
       icon: Cloud,
       image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&q=80&w=2000"
@@ -218,7 +254,7 @@ const PORTFOLIO_DATA = {
       category: "IOT ORCHESTRATION",
       tech: ["Node.js", "MQTT", "Docker"],
       description: "Lightweight container orchestration system specifically built for low-power edge devices and industrial IoT sensors.",
-      link: "https://github.com/rajshah9305",
+      link: "https://github.com/rajshah9305/Fantastic-doodle",
       stat: "5MB FOOTPRINT",
       icon: Smartphone,
       image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2000"
@@ -229,7 +265,7 @@ const PORTFOLIO_DATA = {
       category: "CYBERSECURITY",
       tech: ["Python", "TensorFlow", "eBPF"],
       description: "Kernel-level intrusion detection system using anomaly detection to identify zero-day exploits in real-time.",
-      link: "https://github.com/rajshah9305",
+      link: "https://github.com/rajshah9305/codingnexusai",
       stat: "99.8% DETECTION",
       icon: Shield,
       image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=2000"
@@ -384,8 +420,130 @@ const Button = ({ children, onClick, variant = 'primary', icon: Icon, href }) =>
   );
 };
 
+// Service Modal Component
+const ServiceModal = ({ service, isOpen, onClose }) => {
+  const Icon = service.icon;
+  
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape' && isOpen) {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [isOpen, onClose]);
+
+  if (!isOpen) return null;
+
+  return (
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-900/80 backdrop-blur-sm animate-fadeIn"
+      onClick={onClose}
+    >
+      <div 
+        className="relative bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-sm shadow-2xl animate-slideUp"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="sticky top-0 bg-white border-b border-zinc-200 p-6 md:p-8 flex items-start justify-between z-10">
+          <div className="flex items-center gap-4">
+            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-orange-600 text-white">
+              <Icon size={24} />
+            </div>
+            <div>
+              <span className="font-mono text-[10px] font-bold text-orange-600 uppercase tracking-widest">Service {service.id}</span>
+              <h3 className="font-sans text-2xl md:text-3xl font-black uppercase tracking-tight text-zinc-900">{service.title}</h3>
+            </div>
+          </div>
+          <button 
+            onClick={onClose}
+            className="p-2 hover:bg-zinc-100 rounded-sm transition-colors"
+            aria-label="Close modal"
+          >
+            <X size={24} className="text-zinc-500" />
+          </button>
+        </div>
+
+        {/* Content */}
+        <div className="p-6 md:p-8 space-y-8">
+          {/* Full Description */}
+          <div>
+            <h4 className="font-mono text-xs font-bold text-zinc-400 uppercase tracking-widest mb-3">Overview</h4>
+            <p className="font-sans text-lg font-medium text-zinc-600 leading-relaxed">
+              {service.details.fullDescription}
+            </p>
+          </div>
+
+          {/* Capabilities */}
+          <div>
+            <h4 className="font-mono text-xs font-bold text-zinc-400 uppercase tracking-widest mb-4">Core Capabilities</h4>
+            <div className="grid gap-3">
+              {service.details.capabilities.map((capability, index) => (
+                <div key={index} className="flex items-start gap-3 p-3 bg-zinc-50 border border-zinc-100 hover:border-orange-200 transition-colors">
+                  <CheckCircle2 size={18} className="text-orange-600 flex-shrink-0 mt-0.5" />
+                  <span className="font-sans text-sm font-medium text-zinc-700">{capability}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Technologies */}
+          <div>
+            <h4 className="font-mono text-xs font-bold text-zinc-400 uppercase tracking-widest mb-4">Technology Stack</h4>
+            <div className="flex flex-wrap gap-2">
+              {service.details.technologies.map((tech, index) => (
+                <span 
+                  key={index} 
+                  className="px-3 py-2 bg-zinc-900 text-white font-mono text-xs font-bold uppercase tracking-wider"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Deliverables */}
+          <div>
+            <h4 className="font-mono text-xs font-bold text-zinc-400 uppercase tracking-widest mb-4">Deliverables</h4>
+            <div className="grid md:grid-cols-2 gap-3">
+              {service.details.deliverables.map((deliverable, index) => (
+                <div key={index} className="flex items-center gap-2 p-3 border border-zinc-200">
+                  <div className="w-1.5 h-1.5 bg-orange-600 rounded-full"></div>
+                  <span className="font-sans text-sm font-medium text-zinc-700">{deliverable}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* CTA */}
+          <div className="pt-6 border-t border-zinc-200">
+            <Button 
+              href={`mailto:${PORTFOLIO_DATA.profile.socials.email}?subject=Inquiry about ${service.title}`}
+              icon={Mail}
+            >
+              Request Quote
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // Service Card - Typography Optimized
-const ServiceCard = ({ service }) => {
+const ServiceCard = ({ service, onDetailsClick }) => {
   const Icon = service.icon;
   return (
     <div className="group border border-zinc-200 bg-white p-8 transition-all duration-300 hover:border-orange-600 hover:shadow-lg hover:-translate-y-1 relative overflow-hidden h-full flex flex-col">
@@ -396,9 +554,12 @@ const ServiceCard = ({ service }) => {
         </div>
         <h3 className="mb-3 font-sans text-xl font-bold uppercase tracking-tight text-zinc-900">{service.title}</h3>
         <p className="font-sans text-sm font-medium leading-relaxed text-zinc-600 flex-grow">{service.desc}</p>
-        <div className="mt-6 flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-widest text-zinc-400 group-hover:text-orange-600">
+        <button 
+          onClick={() => onDetailsClick(service)}
+          className="mt-6 flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-widest text-zinc-400 group-hover:text-orange-600 transition-colors cursor-pointer"
+        >
           <span>Details</span> <MoveRight size={12} />
-        </div>
+        </button>
       </div>
     </div>
   );
@@ -524,6 +685,7 @@ export default function App() {
   const [copied, setCopied] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const [selectedService, setSelectedService] = useState(null);
 
   useEffect(() => {
     document.title = "RAJ SHAH // ARCHITECT";
@@ -832,9 +994,18 @@ export default function App() {
            
            <div className="grid md:grid-cols-3 gap-8">
               {PORTFOLIO_DATA.services.map((service) => (
-                 <ServiceCard key={service.id} service={service} />
+                 <ServiceCard key={service.id} service={service} onDetailsClick={setSelectedService} />
               ))}
            </div>
+           
+           {/* Service Modal */}
+           {selectedService && (
+             <ServiceModal 
+               service={selectedService} 
+               isOpen={!!selectedService} 
+               onClose={() => setSelectedService(null)} 
+             />
+           )}
         </section>
 
         {/* SELECTED WORKS */}
@@ -995,6 +1166,26 @@ export default function App() {
         }
         .animate-marquee {
           animation: marquee 60s linear infinite;
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.2s ease-out;
+        }
+        @keyframes slideUp {
+          from { 
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to { 
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-slideUp {
+          animation: slideUp 0.3s ease-out;
         }
         .ease-cubic-bezier {
           transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
