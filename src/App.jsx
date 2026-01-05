@@ -11,8 +11,7 @@ import {
   Navigation,
   FloatingActions,
   LoadingScreen,
-  Button,
-  Hero3D
+  Button
 } from './components';
 import { PORTFOLIO_DATA } from './data/portfolio';
 import architectureDiagram from './assets/architecture.jpg';
@@ -57,9 +56,8 @@ export default function App() {
 
       <main className="relative z-10">
         {/* HERO SECTION */}
-        <section className="container mx-auto px-6 md:px-12 pt-32 md:pt-40 pb-24 md:pb-32 relative">
-          <Hero3D />
-          <div className="space-y-12 relative z-10">
+        <section className="container mx-auto px-6 md:px-12 pt-32 md:pt-40 pb-24 md:pb-32">
+          <div className="space-y-12">
             <h1 className="font-sans text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tighter leading-[0.85] text-zinc-900">
               RAJ <span className="text-outline-zinc"><DecryptText text="SHAH" /></span>
             </h1>
