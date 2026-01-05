@@ -52,7 +52,7 @@ export default function App() {
 
       {/* Hero Graphic */}
       <div
-        className="absolute top-0 right-0 pointer-events-none z-0 mix-blend-multiply translate-x-[10%] -translate-y-[10%]"
+        className="absolute top-0 right-0 pointer-events-none z-0 mix-blend-multiply translate-x-[10%] translate-y-[5%]"
         aria-hidden="true"
       >
         <img
