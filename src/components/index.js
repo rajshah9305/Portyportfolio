@@ -9,4 +9,5 @@ export { ProjectCard } from './ProjectCard';
 export { ExperienceItem } from './ExperienceItem';
 export { Navigation } from './Navigation';
 export { FloatingActions } from './FloatingActions';
+export { Hero3D } from './Hero3D';
 export { LoadingScreen } from './LoadingScreen';
