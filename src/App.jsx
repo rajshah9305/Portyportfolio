@@ -52,7 +52,7 @@ export default function App() {
 
       {/* Hero Graphic */}
       <div
-        className="absolute top-0 right-0 pointer-events-none z-0 mix-blend-multiply translate-x-1/4 -translate-y-[15%]"
+        className="absolute top-0 right-0 pointer-events-none z-0 mix-blend-multiply translate-x-[10%] -translate-y-[10%]"
         aria-hidden="true"
       >
         <img
@@ -72,7 +72,7 @@ export default function App() {
         <section className="container mx-auto px-6 md:px-12 pt-32 md:pt-40 pb-24 md:pb-32">
           <div className="space-y-12">
             <h1 className="font-sans text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tighter leading-[0.85] text-zinc-900">
-              RAJ <span className="text-outline-zinc"><DecryptText text="SHAH" /></span>
+              RAJ <span className="text-outline-zinc">SHAH</span>
             </h1>
 
             <div className="flex flex-col md:flex-row gap-16 md:items-end justify-between">
