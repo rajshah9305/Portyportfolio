@@ -131,7 +131,7 @@ export default function App() {
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-1.5 h-1.5 bg-orange-600 rounded-full"></div>
-                <h2 className="label-mono text-zinc-500">Project_Index_2024</h2>
+                <h2 className="label-mono text-zinc-500">Project_Index_2026</h2>
               </div>
               <h3 className="heading-1">Selected Works</h3>
             </div>
