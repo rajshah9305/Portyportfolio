@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Terminal, Cpu, Code, CheckCircle2, Copy, Check } from 'lucide-react';
+import { Mail, Terminal, Cpu, CheckCircle2, Copy, Check } from 'lucide-react';
 import {
   ParallaxGrid,
   ScrollProgress,
@@ -246,10 +246,10 @@ export default function App() {
             <div className="grid md:grid-cols-2 gap-16 mb-16">
               <div>
                 <h2 className="font-sans text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[0.9] mb-8 text-white">
-                  Let's Build<br />Something.
+                  Let&apos;s Build<br />Something.
                 </h2>
                 <p className="body-large text-zinc-400 mb-8">
-                  Available for select projects. If you're building something ambitious and need a technical partner who cares about craft, let's talk.
+                  Available for select projects. If you&apos;re building something ambitious and need a technical partner who cares about craft, let&apos;s talk.
                 </p>
                 <Button
                   href={`mailto:${PORTFOLIO_DATA.profile.socials.email}`}

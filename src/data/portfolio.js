@@ -1,11 +1,7 @@
 import {
   Terminal,
-  Github,
-  Linkedin,
-  Mail,
   Cpu,
   Layers,
-  Code,
   Database,
   Search,
   LayoutTemplate,
