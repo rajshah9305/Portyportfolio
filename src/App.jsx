@@ -51,12 +51,16 @@ export default function App() {
       />
 
       {/* Hero Graphic */}
-      <img
-        src={heroGraphic}
-        alt=""
-        className="absolute top-0 right-0 w-[400px] md:w-[600px] lg:w-[750px] opacity-80 pointer-events-none z-0 mix-blend-multiply translate-x-1/4 -translate-y-[15%] animate-[spin_60s_linear_infinite]"
+      <div
+        className="absolute top-0 right-0 pointer-events-none z-0 mix-blend-multiply translate-x-1/4 -translate-y-[15%]"
         aria-hidden="true"
-      />
+      >
+        <img
+          src={heroGraphic}
+          alt=""
+          className="w-[300px] md:w-[450px] lg:w-[550px] opacity-80 animate-[spin_60s_linear_infinite]"
+        />
+      </div>
 
       <ScrollProgress />
 
