@@ -7,8 +7,8 @@ export const ProjectCard = ({ project, index }) => {
   return (
     <div className="group card relative overflow-hidden h-full flex flex-col">
       {/* Background Image - Subtle Reveal */}
-      <div 
-        className="absolute inset-0 z-0 transition-opacity duration-500 ease-out opacity-0 group-hover:opacity-10"
+      <div
+        className="absolute inset-0 z-0 transition-opacity duration-500 ease-out opacity-10 lg:opacity-0 lg:group-hover:opacity-10"
         style={{
           backgroundImage: `url(${project.image})`,
           backgroundSize: 'cover',
@@ -16,7 +16,7 @@ export const ProjectCard = ({ project, index }) => {
           filter: 'grayscale(100%)'
         }}
       />
-      
+
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-orange-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
@@ -35,7 +35,7 @@ export const ProjectCard = ({ project, index }) => {
         <h3 className="heading-3 mb-3">
           {project.title}
         </h3>
-        
+
         <p className="body-base mb-6 flex-grow">
           {project.description}
         </p>
@@ -44,28 +44,28 @@ export const ProjectCard = ({ project, index }) => {
         <div className="flex flex-col gap-4 mt-auto">
           <div className="flex flex-wrap gap-2">
             {project.tech.slice(0, 3).map((t, i) => (
-              <span 
-                key={i} 
+              <span
+                key={i}
                 className="px-2 py-1 bg-zinc-50 border border-zinc-100 text-[10px] font-mono font-bold text-zinc-500 uppercase tracking-wider"
               >
                 {t}
               </span>
             ))}
           </div>
-          
+
           <div className="pt-4 border-t border-zinc-100 flex items-center justify-between">
             <span className="label-mono text-zinc-400">
               {project.stat}
             </span>
-            <a 
-              href={project.link} 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-2 label-mono text-zinc-900 hover:text-orange-600 transition-colors"
               onClick={(e) => e.stopPropagation()}
               aria-label={`View ${project.title} repository on GitHub`}
             >
-              View Repo 
+              View Repo
               <MoveRight size={12} className="transition-transform group-hover:translate-x-1" />
             </a>
           </div>

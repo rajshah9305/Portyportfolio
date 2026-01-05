@@ -58,7 +58,7 @@ export const Navigation = ({ onScrollToTop }) => {
 
   return (
     <>
-      <nav className="fixed top-0 z-40 w-full border-b border-zinc-200 bg-white/80 backdrop-blur-md">
+      <nav className="fixed top-0 z-50 w-full border-b border-zinc-200 bg-white/80 backdrop-blur-md">
         <div className="flex h-16 md:h-20 items-center justify-between px-6 md:px-12 max-w-[1920px] mx-auto">
           {/* Logo */}
           <button
@@ -86,14 +86,14 @@ export const Navigation = ({ onScrollToTop }) => {
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
                   className={`relative px-6 py-2.5 rounded-full font-mono text-[11px] font-bold tracking-widest transition-all duration-300 flex items-center gap-2 group ${isActive
-                      ? 'bg-white text-zinc-900 shadow-sm'
-                      : 'text-zinc-500 hover:text-zinc-900 hover:bg-white/50'
+                    ? 'bg-white text-zinc-900 shadow-sm'
+                    : 'text-zinc-500 hover:text-zinc-900 hover:bg-white/50'
                     }`}
                 >
                   <span
                     className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${isActive
-                        ? 'bg-orange-600 scale-125'
-                        : 'bg-zinc-300 group-hover:bg-orange-400'
+                      ? 'bg-orange-600 scale-125'
+                      : 'bg-zinc-300 group-hover:bg-orange-400'
                       }`}
                   />
                   {item.name}
@@ -163,7 +163,7 @@ export const Navigation = ({ onScrollToTop }) => {
                 key={item.name}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
-                className="group flex items-baseline gap-4 font-sans text-6xl font-black text-zinc-900 hover:text-orange-600 transition-colors tracking-tighter"
+                className="group flex items-baseline gap-4 font-sans text-4xl sm:text-5xl font-black text-zinc-900 hover:text-orange-600 transition-colors tracking-tighter"
               >
                 <span className="text-sm font-mono font-bold text-zinc-400 group-hover:text-orange-600">
                   {item.num}

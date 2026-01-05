@@ -254,6 +254,7 @@ export default function App() {
                 <Button
                   href={`mailto:${PORTFOLIO_DATA.profile.socials.email}`}
                   icon={Mail}
+                  variant="minimal"
                 >
                   Start Conversation
                 </Button>
@@ -262,7 +263,7 @@ export default function App() {
               <div className="space-y-8">
                 <div>
                   <h3 className="label-mono text-zinc-500 mb-4">Contact</h3>
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2">
                     <a
                       href={`mailto:${PORTFOLIO_DATA.profile.socials.email}`}
                       className="font-mono text-lg text-white hover:text-orange-500 transition-colors"

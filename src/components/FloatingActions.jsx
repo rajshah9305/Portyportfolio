@@ -16,8 +16,8 @@ export const FloatingActions = ({ onScrollToTop }) => {
   };
 
   return (
-    <div className="fixed bottom-8 right-8 z-40 flex flex-col gap-2">
-      <button 
+    <div className="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-40 flex flex-col gap-2">
+      <button
         onClick={handleCopyEmail}
         className="h-10 w-10 bg-zinc-900 text-white flex items-center justify-center shadow-lg hover:bg-orange-600 transition-colors relative group rounded-sm"
         title="Copy Email"
@@ -28,8 +28,8 @@ export const FloatingActions = ({ onScrollToTop }) => {
           {copied ? "COPIED" : "COPY EMAIL"}
         </span>
       </button>
-      
-      <button 
+
+      <button
         onClick={onScrollToTop}
         className="h-10 w-10 bg-white border border-zinc-200 text-zinc-900 flex items-center justify-center shadow-lg hover:border-orange-600 hover:text-orange-600 transition-colors rounded-sm"
         title="Back to Top"
