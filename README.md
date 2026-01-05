@@ -1,325 +1,66 @@
-# Raj Shah — Portfolio
+# Raj Shah
+> **Full Stack Architect & Digital Craftsman**
 
-A production-grade portfolio website showcasing full-stack architecture, system design, and UI/UX engineering expertise. Built with modern web technologies and refined to Awwwards/FWA standards.
+_"Systems over Templates"_
 
-## 🎯 Overview
+[![Portfolio](https://img.shields.io/badge/Portfolio-Live-orange?style=for-the-badge)](https://rajshah.dev)
+[![GitHub](https://img.shields.io/badge/GitHub-rajshah9305-black?style=for-the-badge&logo=github)](https://github.com/rajshah9305)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/rajshah9305)
+[![Email](https://img.shields.io/badge/Email-Contact_Me-red?style=for-the-badge&logo=gmail)](mailto:rajshah9305@gmail.com)
 
-This portfolio represents a benchmark in technical execution and design refinement. Every component, interaction, and line of code has been crafted with precision to demonstrate professional-grade web development.
+## 📌 Overview
+Production-grade portfolio architectural system showcasing expertise in high-performance web engineering. This repository houses the source code for my personal digital presence, built with a focus on performance, accessibility (WCAG 2.1), and strict type safety.
 
-### Key Features
+**Location**: Gujarat, IN  
+**Availability**: Open for high-impact contracts
 
-- **Modular Architecture**: Component-based structure for maintainability and scalability
-- **Performance Optimized**: Sub-100ms load times with code splitting and lazy loading
-- **Accessibility First**: WCAG 2.1 compliant with proper ARIA labels and keyboard navigation
-- **Responsive Design**: Flawless experience across all devices and screen sizes
-- **Advanced Animations**: Smooth micro-interactions with optimized easing curves
-- **SEO Ready**: Comprehensive meta tags, Open Graph, and structured data
-- **Type-Safe**: Clean, maintainable code following React best practices
+## 🛠 Technical Arsenal
 
-## 🛠 Tech Stack
+### Engineering Core
+*   **Frontend**: React 18, Next.js, TypeScript, Tailwind CSS
+*   **Backend**: Node.js, PostgreSQL, Supabase, Redis
+*   **Architecture**: Microservices, Event-Driven, Serverless (AWS/Vercel)
 
-### Core
-- **React 18** - UI library with hooks and modern patterns
-- **Vite 5** - Lightning-fast build tool and dev server
-- **Tailwind CSS 3** - Utility-first CSS framework with custom design system
+### Specialized Domains
+*   **AI Integration**: LangChain, OpenAI, TensorFlow (Custom Agents)
+*   **Immersive Web**: WebGL, Three.js, GSAP, Framer Motion
+*   **Infrastructure**: Docker, Kubernetes, CI/CD Pipelines
 
-### Design System
-- **Custom CSS Variables** - Consistent spacing, typography, and color scales
-- **Inter & JetBrains Mono** - Professional font pairing for readability
-- **Lucide React** - Consistent, customizable icon system
+## 🚀 Key Projects
 
-### Development
-- **ESM Modules** - Modern JavaScript module system
-- **PostCSS** - CSS processing with Autoprefixer
-- **Component Library** - Reusable, composable UI components
+| Project | Category | Tech Stack | Status |
+|:---|:---|:---|:---|
+| **AGENT_GPT** | Artificial Intelligence | Next.js 14, TypeScript, Cerebras | `99.9% Accuracy` |
+| **AURA_WEAVE** | Immersive Web | WebGL, Three.js, GSAP | `60FPS Locked` |
+| **ELITE_SCRAPER** | Data Systems | Python, Selenium, Proxies | `10K+ RPS` |
+| **PROMPT_CRAFT** | SaaS Infrastructure | React, Redux, Supabase | `v2.1.0` |
 
-## 📁 Project Structure
+> *Full project index available in the source code or live portfolio.*
 
-```
-Portyportfolio/
-├── src/
-│   ├── components/          # Reusable UI components
-│   │   ├── Button.jsx
-│   │   ├── Navigation.jsx
-│   │   ├── ServiceCard.jsx
-│   │   ├── ProjectCard.jsx
-│   │   ├── ServiceModal.jsx
-│   │   ├── LoadingScreen.jsx
-│   │   └── ...
-│   ├── hooks/               # Custom React hooks
-│   │   ├── useDecrypt.js
-│   │   ├── useScrollProgress.js
-│   │   ├── useActiveSection.js
-│   │   └── ...
-│   ├── data/                # Content and configuration
-│   │   └── portfolio.js
-│   ├── styles/              # Global styles and utilities
-│   ├── App.jsx              # Main application component
-│   ├── main.jsx             # Application entry point
-│   └── index.css            # Global styles and design tokens
-├── public/                  # Static assets
-├── dist/                    # Production build output
-├── index.html               # HTML template with SEO meta tags
-├── tailwind.config.js       # Tailwind configuration
-├── vite.config.js           # Vite configuration
-└── package.json             # Dependencies and scripts
-```
+## ⚡ Performance Metrics
+*   **Lighthouse Score**: 95+ (Performance, Accessibility, SEO)
+*   **First Contentful Paint**: < 0.5s
+*   **Bundle Size**: < 200KB (Gzipped)
 
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js 18+ and npm 9+
-- Modern browser with ES6+ support
-
-### Installation
+## 🏗 Installation & Setup
+To explore the architecture locally:
 
 ```bash
 # Clone the repository
 git clone https://github.com/rajshah9305/Portyportfolio.git
-cd Portyportfolio
 
 # Install dependencies
 npm install
 
-# Start development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
-```
-
-### Development
-
-The development server runs on `http://localhost:5173` with hot module replacement (HMR) enabled.
-
-```bash
+# Initialize development environment
 npm run dev
 ```
 
-### Production Build
+## 📬 Contact
+Interested in building something ambitious?
 
-Creates an optimized production build in the `dist/` directory.
-
-```bash
-npm run build
-```
-
-Build output includes:
-- Minified and tree-shaken JavaScript
-- Optimized CSS with unused styles removed
-- Compressed assets with gzip
-- Source maps for debugging
-
-## 🎨 Design System
-
-### Color Palette
-
-```css
-Primary:    #ea580c (Orange 600)
-Surface:    #fafafa (Zinc 50)
-Text:       #18181b (Zinc 900)
-Secondary:  #52525b (Zinc 600)
-Border:     #e4e4e7 (Zinc 200)
-```
-
-### Typography Scale
-
-- **Display**: 48px - 96px (Hero headings)
-- **Heading**: 24px - 48px (Section titles)
-- **Body**: 16px - 18px (Content text)
-- **Label**: 10px - 12px (Metadata, tags)
-
-### Spacing System
-
-Based on 4px grid with consistent rhythm:
-- xs: 4px, sm: 8px, md: 16px, lg: 24px, xl: 32px, 2xl: 48px, 3xl: 64px, 4xl: 96px
-
-### Animation Easing
-
-- **Cubic**: `cubic-bezier(0.65, 0, 0.35, 1)` - Standard transitions
-- **Expo**: `cubic-bezier(0.16, 1, 0.3, 1)` - Smooth entrances
-- **Circ**: `cubic-bezier(0.85, 0, 0.15, 1)` - Elegant exits
-
-## 🧩 Component Architecture
-
-### Core Components
-
-**Button** - Versatile button component with variants and icon support
-```jsx
-<Button href="#contact" icon={Mail} variant="primary">
-  Contact Me
-</Button>
-```
-
-**ServiceCard** - Interactive service showcase with modal details
-```jsx
-<ServiceCard service={serviceData} onDetailsClick={handleClick} />
-```
-
-**ProjectCard** - Project display with hover effects and metadata
-```jsx
-<ProjectCard project={projectData} index={0} />
-```
-
-### Custom Hooks
-
-**useDecrypt** - Text decryption animation effect
-```jsx
-const decrypted = useDecrypt("SECRET_TEXT", isVisible);
-```
-
-**useScrollProgress** - Track scroll position for progress indicator
-```jsx
-const scrolled = useScrollProgress();
-```
-
-**useActiveSection** - Detect active section for navigation highlighting
-```jsx
-const activeSection = useActiveSection(['services', 'work', 'experience']);
-```
-
-## ♿ Accessibility
-
-- Semantic HTML5 elements throughout
-- ARIA labels on interactive elements
-- Keyboard navigation support
-- Focus visible states with custom ring styling
-- Screen reader friendly content structure
-- Color contrast ratios meeting WCAG AA standards
-
-## 🔍 SEO Optimization
-
-- Comprehensive meta tags (title, description, keywords)
-- Open Graph tags for social media sharing
-- Twitter Card metadata
-- Structured data (JSON-LD) for rich snippets
-- Semantic HTML for better crawling
-- Optimized images with alt text
-- Fast load times (< 100ms)
-
-## 📱 Responsive Design
-
-Breakpoints:
-- Mobile: < 640px
-- Tablet: 640px - 1024px
-- Desktop: 1024px - 1920px
-- Wide: > 1920px
-
-All components are mobile-first and fully responsive with touch-optimized interactions.
-
-## ⚡ Performance
-
-### Metrics
-- **First Contentful Paint**: < 0.5s
-- **Time to Interactive**: < 1s
-- **Lighthouse Score**: 95+
-- **Bundle Size**: < 200KB (gzipped)
-
-### Optimizations
-- Code splitting with dynamic imports
-- Lazy loading for images and components
-- CSS purging with Tailwind
-- Asset compression and minification
-- Efficient re-renders with React.memo
-- Passive event listeners for scroll
-- Will-change for animated elements
-
-## 🔧 Configuration
-
-### Tailwind Config
-
-Custom theme extensions in `tailwind.config.js`:
-- Font families (Inter, JetBrains Mono)
-- Custom easing functions
-- Extended color palette
-- Animation keyframes
-
-### Vite Config
-
-Optimized build settings in `vite.config.js`:
-- React plugin with Fast Refresh
-- Build optimizations
-- Asset handling
-
-## 📝 Content Management
-
-All content is centralized in `src/data/portfolio.js` for easy updates:
-
-```javascript
-export const PORTFOLIO_DATA = {
-  profile: { /* Personal info */ },
-  stats: [ /* Metrics */ ],
-  services: [ /* Service offerings */ ],
-  projects: [ /* Portfolio projects */ ],
-  experience: [ /* Work history */ ],
-  skills: [ /* Technical skills */ ]
-};
-```
-
-## 🚢 Deployment
-
-### Vercel (Recommended)
-
-```bash
-# Install Vercel CLI
-npm i -g vercel
-
-# Deploy
-vercel
-```
-
-### Netlify
-
-```bash
-# Build command
-npm run build
-
-# Publish directory
-dist
-```
-
-### Manual Deployment
-
-```bash
-# Build the project
-npm run build
-
-# Upload dist/ folder to your hosting provider
-```
-
-## 🤝 Contributing
-
-This is a personal portfolio project, but suggestions and feedback are welcome:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/improvement`)
-3. Commit your changes (`git commit -m 'Add improvement'`)
-4. Push to the branch (`git push origin feature/improvement`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## 👤 Author
-
-**Raj Shah**
-- Website: [rajshah.dev](https://rajshah.dev)
-- GitHub: [@rajshah9305](https://github.com/rajshah9305)
-- LinkedIn: [rajshah9305](https://linkedin.com/in/rajshah9305)
-- Email: rajshah9305@gmail.com
-
-## 🙏 Acknowledgments
-
-- Design inspiration from Awwwards and FWA winners
-- Icons by [Lucide](https://lucide.dev)
-- Fonts from [Google Fonts](https://fonts.google.com)
-- Built with [Vite](https://vitejs.dev) and [React](https://react.dev)
+*   **Email**: [rajshah9305@gmail.com](mailto:rajshah9305@gmail.com)
+*   **Social**: [@rajshah9305](https://twitter.com/rajshah9305)
 
 ---
-
-**Built with precision. Engineered for performance. Designed for impact.**
+© 2026 Raj Shah. Engineered with precision.
