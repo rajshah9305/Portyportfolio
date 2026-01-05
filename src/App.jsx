@@ -15,6 +15,7 @@ import {
 } from './components';
 import { PORTFOLIO_DATA } from './data/portfolio';
 import architectureDiagram from './assets/architecture.jpg';
+import heroGraphic from './assets/hero-graphic.png';
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -46,6 +47,17 @@ export default function App() {
       {/* Orange Spray Effect */}
       <div
         className="absolute top-0 right-0 w-[800px] h-[600px] bg-orange-600/10 rounded-full blur-[100px] pointer-events-none translate-x-1/3 -translate-y-1/4 mix-blend-multiply z-0"
+        aria-hidden="true"
+      <div
+        className="absolute top-0 right-0 w-[800px] h-[600px] bg-orange-600/10 rounded-full blur-[100px] pointer-events-none translate-x-1/3 -translate-y-1/4 mix-blend-multiply z-0"
+        aria-hidden="true"
+      />
+
+      {/* Hero Graphic */}
+      <img
+        src={heroGraphic}
+        alt=""
+        className="absolute top-0 right-0 w-[500px] md:w-[700px] lg:w-[900px] opacity-80 pointer-events-none z-0 mix-blend-multiply translate-x-1/4 -translate-y-[10%]"
         aria-hidden="true"
       />
 
