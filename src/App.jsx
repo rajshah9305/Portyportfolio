@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Mail, Terminal, Cpu, CheckCircle2, Copy, Check } from 'lucide-react';
+import { Analytics } from '@vercel/analytics/react';
 import {
   ParallaxGrid,
   ScrollProgress,
@@ -345,6 +346,7 @@ export default function App() {
           animation-play-state: paused;
         }
       `}</style>
+      <Analytics />
     </div>
   );
 }
