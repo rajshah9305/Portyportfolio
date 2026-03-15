@@ -20,27 +20,7 @@ Production-grade portfolio architectural system showcasing expertise in high-per
 *   **Backend**: Node.js, PostgreSQL, Supabase, Redis
 *   **Architecture**: Microservices, Event-Driven, Serverless (AWS/Vercel)
 
-### Specialized Domains
-*   **AI Integration**: LangChain, OpenAI, TensorFlow (Custom Agents)
-*   **Immersive Web**: WebGL, Three.js, GSAP, Framer Motion
-*   **Infrastructure**: Docker, Kubernetes, CI/CD Pipelines
-
-## 🚀 Key Projects
-
-| Project | Category | Tech Stack | Status |
-|:---|:---|:---|:---|
-| **AGENT_GPT** | Artificial Intelligence | Next.js 14, TypeScript, Cerebras | `99.9% Accuracy` |
-| **AURA_WEAVE** | Immersive Web | WebGL, Three.js, GSAP | `60FPS Locked` |
-| **ELITE_SCRAPER** | Data Systems | Python, Selenium, Proxies | `10K+ RPS` |
-| **PROMPT_CRAFT** | SaaS Infrastructure | React, Redux, Supabase | `v2.1.0` |
-
-> *Full project index available in the source code or live portfolio.*
-
-## ⚡ Performance Metrics
-*   **Lighthouse Score**: 95+ (Performance, Accessibility, SEO)
-*   **First Contentful Paint**: < 0.5s
-*   **Bundle Size**: < 200KB (Gzipped)
-
+### 
 ## 🏗 Installation & Setup
 To explore the architecture locally:
 
