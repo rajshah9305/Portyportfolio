@@ -26,7 +26,7 @@ export const LoadingScreen = ({ onComplete }) => {
   }, [onComplete]);
 
   return (
-    <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-white font-mono text-xs text-zinc-900">
+    <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-white font-mono text-xs text-black">
       <div className="w-80 space-y-6">
         <div className="flex justify-between border-b border-zinc-200 pb-2">
           <span className="font-bold">BOOT_LOADER</span>
