@@ -31,7 +31,7 @@ export const FloatingActions = ({ onScrollToTop }) => {
 
       <button
         onClick={onScrollToTop}
-        className="h-10 w-10 bg-white border border-zinc-200 text-black flex items-center justify-center shadow-lg hover:border-orange-600 hover:text-orange-600 transition-colors rounded-sm"
+        className="h-10 w-10 bg-white border border-black text-black flex items-center justify-center shadow-lg hover:border-orange-600 hover:text-orange-600 transition-colors rounded-sm"
         title="Back to Top"
         aria-label="Back to top"
       >

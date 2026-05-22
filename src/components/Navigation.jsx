@@ -42,9 +42,12 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
       }
 
       if (e.key === 'Tab' && isMobileMenuOpen && mobileMenuRef.current) {
-        const focusableElements = mobileMenuRef.current.querySelectorAll(
+        const focusableElements = Array.from(mobileMenuRef.current.querySelectorAll(
           'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-        );
+        )).filter(el => !el.hasAttribute('disabled') && el.offsetParent !== null);
+
+        if (focusableElements.length === 0) return;
+
         const firstElement = focusableElements[0];
         const lastElement = focusableElements[focusableElements.length - 1];
 
@@ -109,7 +112,7 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
                   onClick={(e) => handleNavClick(e, item.href)}
                   className={`relative px-6 py-2.5 rounded-full font-mono text-[11px] font-bold tracking-widest transition-all duration-300 flex items-center gap-2 group ${isActive
                     ? 'bg-white text-black shadow-sm'
-                    : 'text-zinc-500 hover:text-black hover:bg-white/50'
+                    : 'text-black hover:text-black hover:bg-white/50'
                     }`}
                 >
                   <span
@@ -131,7 +134,7 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
               onToggle={() => setBlueprintMode(!blueprintMode)}
             />
 
-            <div className="hidden md:flex flex-col items-end text-[10px] font-mono font-medium leading-tight text-zinc-500">
+            <div className="hidden md:flex flex-col items-end text-[10px] font-mono font-medium leading-tight text-black">
               <span>
                 STATUS: <span className="text-orange-600 font-bold">ONLINE</span>
               </span>
@@ -144,7 +147,7 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
               href={PORTFOLIO_DATA.profile.socials.github}
               target="_blank"
               rel="noreferrer"
-              className="text-zinc-500 hover:text-black transition-colors hidden sm:block"
+              className="text-black hover:text-black transition-colors hidden sm:block"
               aria-label="GitHub Profile"
             >
               <Github size={20} />
@@ -154,7 +157,7 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
               href={PORTFOLIO_DATA.profile.socials.linkedin}
               target="_blank"
               rel="noreferrer"
-              className="text-zinc-500 hover:text-blue-700 transition-colors hidden sm:block"
+              className="text-black hover:text-blue-700 transition-colors hidden sm:block"
               aria-label="LinkedIn Profile"
             >
               <Linkedin size={20} />
@@ -193,7 +196,7 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
                 onClick={(e) => handleNavClick(e, item.href)}
                 className="group flex items-baseline gap-4 font-sans text-4xl sm:text-5xl font-black text-black hover:text-orange-600 transition-colors tracking-tighter"
               >
-                <span className="text-sm font-mono font-bold text-zinc-500 group-hover:text-orange-600">
+                <span className="text-sm font-mono font-bold text-black group-hover:text-orange-600">
                   {item.num}
                 </span>
                 {item.name}
@@ -206,7 +209,7 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
               href={PORTFOLIO_DATA.profile.socials.github}
               target="_blank"
               rel="noreferrer"
-              className="text-zinc-500 hover:text-black transition-colors"
+              className="text-black hover:text-black transition-colors"
               aria-label="GitHub Profile"
             >
               <Github size={32} />
@@ -215,7 +218,7 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
               href={PORTFOLIO_DATA.profile.socials.linkedin}
               target="_blank"
               rel="noreferrer"
-              className="text-zinc-500 hover:text-blue-700 transition-colors"
+              className="text-black hover:text-blue-700 transition-colors"
               aria-label="LinkedIn Profile"
             >
               <Linkedin size={32} />

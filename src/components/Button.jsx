@@ -13,8 +13,8 @@ export const Button = ({
 
   const variants = {
     primary: "px-8 py-4 border shadow-sm hover:shadow-md border-black bg-black text-white hover:bg-orange-600 hover:border-orange-600",
-    outline: "px-8 py-4 border shadow-sm hover:shadow-md border-zinc-300 bg-white text-black hover:border-orange-600 hover:text-white",
-    minimal: "px-0 py-2 border-none bg-transparent text-zinc-500 hover:text-white justify-start"
+    outline: "px-8 py-4 border shadow-sm hover:shadow-md border-black bg-white text-black hover:border-orange-600 hover:text-white",
+    minimal: "px-0 py-2 border-none bg-transparent text-black hover:text-white justify-start"
   };
 
   const content = (

@@ -28,12 +28,12 @@ export const LoadingScreen = ({ onComplete }) => {
   return (
     <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-white font-mono text-xs text-black">
       <div className="w-80 space-y-6">
-        <div className="flex justify-between border-b border-zinc-200 pb-2">
+        <div className="flex justify-between border-b border-black pb-2">
           <span className="font-bold">BOOT_LOADER</span>
           <span className="text-orange-600 animate-pulse">RS.SYS</span>
         </div>
 
-        <div className="h-48 font-mono font-medium text-zinc-500 space-y-2 overflow-hidden flex flex-col justify-end pb-2" role="status" aria-live="polite">
+        <div className="h-48 font-mono font-medium text-black space-y-2 overflow-hidden flex flex-col justify-end pb-2" role="status" aria-live="polite">
           {bootLog.map((log, i) => (
             <div key={i}>&gt; {log}</div>
           ))}
