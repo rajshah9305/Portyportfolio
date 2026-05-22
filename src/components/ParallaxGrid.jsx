@@ -4,12 +4,22 @@ export const ParallaxGrid = () => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
+    let requestRef;
+
     const handleMouseMove = (e) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
+      if (requestRef) return;
+
+      requestRef = requestAnimationFrame(() => {
+        setMousePos({ x: e.clientX, y: e.clientY });
+        requestRef = null;
+      });
     };
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      if (requestRef) cancelAnimationFrame(requestRef);
+    };
   }, []);
 
   const moveX = (mousePos.x / window.innerWidth) * 40;

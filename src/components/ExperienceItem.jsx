@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { memo } from 'react';
 
-export const ExperienceItem = ({ item, last }) => (
+export const ExperienceItem = memo(({ item, last }) => (
   <div className="relative pl-8 md:pl-12 py-2 group">
     {!last && (
       <div className="absolute left-[11px] md:left-[15px] top-4 h-full w-[1px] bg-zinc-200 group-hover:bg-zinc-300 transition-colors"></div>
@@ -25,4 +25,6 @@ export const ExperienceItem = ({ item, last }) => (
       </p>
     </div>
   </div>
-);
+));
+
+ExperienceItem.displayName = 'ExperienceItem';

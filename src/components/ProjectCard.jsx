@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { MoveRight } from 'lucide-react';
 
-export const ProjectCard = ({ project, index }) => {
+export const ProjectCard = memo(({ project, index }) => {
   const Icon = project.icon;
 
   return (
@@ -53,8 +53,8 @@ export const ProjectCard = ({ project, index }) => {
             ))}
           </div>
 
-          <div className="pt-4 border-t border-zinc-100 flex items-center justify-between">
-            <span className="label-mono text-zinc-500">
+          <div className="pt-4 border-t border-black/5 flex items-center justify-between">
+            <span className="label-mono text-black/60">
               {project.stat}
             </span>
             <a
@@ -73,4 +73,6 @@ export const ProjectCard = ({ project, index }) => {
       </div>
     </div>
   );
-};
+});
+
+ProjectCard.displayName = 'ProjectCard';

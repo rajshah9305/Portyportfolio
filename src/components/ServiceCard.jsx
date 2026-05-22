@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { MoveRight } from 'lucide-react';
 
-export const ServiceCard = ({ service, onDetailsClick }) => {
+export const ServiceCard = memo(({ service, onDetailsClick }) => {
   const Icon = service.icon;
 
   return (
@@ -32,4 +32,6 @@ export const ServiceCard = ({ service, onDetailsClick }) => {
       </div>
     </div>
   );
-};
+});
+
+ServiceCard.displayName = 'ServiceCard';
