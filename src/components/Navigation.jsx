@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Github, Linkedin, Menu, X } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../data/portfolio';
 import { BlueprintToggle } from './BlueprintToggle';
@@ -14,6 +14,7 @@ const NAV_ITEMS = [
 export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) => {
   const [currentTime, setCurrentTime] = useState('');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const mobileMenuRef = useRef(null);
   const activeSection = useActiveSection(['services', 'work', 'experience']);
 
   useLockBodyScroll(isMobileMenuOpen);
@@ -35,14 +36,34 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
   }, []);
 
   useEffect(() => {
-    const handleEscape = (e) => {
+    const handleKeyDown = (e) => {
       if (e.key === 'Escape' && isMobileMenuOpen) {
         setIsMobileMenuOpen(false);
       }
+
+      if (e.key === 'Tab' && isMobileMenuOpen && mobileMenuRef.current) {
+        const focusableElements = mobileMenuRef.current.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === firstElement) {
+            lastElement.focus();
+            e.preventDefault();
+          }
+        } else {
+          if (document.activeElement === lastElement) {
+            firstElement.focus();
+            e.preventDefault();
+          }
+        }
+      }
     };
 
-    window.addEventListener('keydown', handleEscape);
-    return () => window.removeEventListener('keydown', handleEscape);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isMobileMenuOpen]);
 
   const handleNavClick = (e, href) => {
@@ -59,7 +80,7 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
 
   return (
     <>
-      <nav className="fixed top-0 z-50 w-full border-b border-zinc-200 bg-white/80 backdrop-blur-md">
+      <nav className="fixed top-0 z-50 w-full border-b border-black/10 bg-white/80 backdrop-blur-md">
         <div className="flex h-16 md:h-20 items-center justify-between px-6 md:px-12 max-w-[1920px] mx-auto">
           {/* Logo */}
           <button
@@ -78,7 +99,7 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
           </button>
 
           {/* Desktop Nav Links */}
-          <div className="hidden lg:flex items-center p-1.5 bg-zinc-100/80 backdrop-blur-md border border-zinc-200/50 rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div className="hidden lg:flex items-center p-1.5 bg-zinc-100/80 backdrop-blur-md border border-black/5 rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300">
             {NAV_ITEMS.map((item) => {
               const isActive = activeSection === item.id;
               return (
@@ -117,7 +138,7 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
               <span>UTC {currentTime}</span>
             </div>
 
-            <div className="h-8 w-[1px] bg-zinc-200 hidden md:block"></div>
+            <div className="h-8 w-[1px] bg-black/10 hidden md:block"></div>
 
             <a
               href={PORTFOLIO_DATA.profile.socials.github}
@@ -154,6 +175,7 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
 
       {/* Mobile Menu */}
       <div
+        ref={mobileMenuRef}
         className={`fixed inset-0 z-40 bg-zinc-50/90 backdrop-blur-xl transition-transform duration-500 ease-out-expo lg:hidden ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
         onClick={(e) => {
@@ -179,7 +201,7 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
             ))}
           </div>
 
-          <div className="flex gap-6 pt-8 border-t border-zinc-200">
+          <div className="flex gap-6 pt-8 border-t border-black/10">
             <a
               href={PORTFOLIO_DATA.profile.socials.github}
               target="_blank"

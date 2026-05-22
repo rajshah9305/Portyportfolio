@@ -75,7 +75,9 @@ export default function App() {
 
             <div className="flex flex-col md:flex-row gap-16 md:items-end justify-between">
               <div>
-                <h2 className="heading-2 mb-6">Digital Architect & Engineer</h2>
+                <h2 className="heading-2 mb-6">
+                  <DecryptText text="Digital Architect & Engineer" />
+                </h2>
                 <p className="max-w-xl body-large">
                   Fusing <span className="text-black font-bold underline decoration-orange-600 underline-offset-4">Algorithmic Complexity</span> with <span className="text-black font-bold underline decoration-orange-600 underline-offset-4">Structural Minimalism</span>. I architect high-performance digital ecosystems where form follows function—delivering software that is fault-tolerant, scalable, and aesthetically absolute.
                 </p>
@@ -144,7 +146,9 @@ export default function App() {
                 <div className="w-1.5 h-1.5 bg-orange-600 rounded-full"></div>
                 <h2 className="label-mono text-zinc-500">Project_Index_2026</h2>
               </div>
-              <h3 className="heading-1">Selected Works</h3>
+              <h3 className="heading-1">
+                <DecryptText text="Selected Works" />
+              </h3>
             </div>
             <div className="hidden md:block text-right label-mono text-zinc-500">
               <span>Sort: Chronological</span><br />

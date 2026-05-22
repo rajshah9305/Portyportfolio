@@ -101,6 +101,11 @@
     box-shadow: none !important;
     text-shadow: none !important;
     background-image: none !important;
+    transition: background-color 500ms var(--ease-out-expo),
+      border-color 500ms var(--ease-out-expo),
+      color 500ms var(--ease-out-expo),
+      opacity 500ms var(--ease-out-expo),
+      filter 500ms var(--ease-out-expo) !important;
   }
 
   .blueprint-mode img,
@@ -125,7 +130,7 @@
   }
 
   body {
-    @apply bg-white text-zinc-900;
+    @apply bg-white text-black;
     font-family: var(--font-sans);
   }
 
@@ -163,15 +168,15 @@
 
   /* Typography Components */
   .heading-1 {
-    @apply font-sans text-5xl md:text-6xl font-black uppercase tracking-tighter text-zinc-900;
+    @apply font-sans text-5xl md:text-6xl font-black uppercase tracking-tighter text-black;
   }
 
   .heading-2 {
-    @apply font-sans text-3xl md:text-4xl font-black uppercase tracking-tight text-zinc-900;
+    @apply font-sans text-3xl md:text-4xl font-black uppercase tracking-tight text-black;
   }
 
   .heading-3 {
-    @apply font-sans text-xl md:text-2xl font-bold uppercase tracking-tight text-zinc-900;
+    @apply font-sans text-xl md:text-2xl font-bold uppercase tracking-tight text-black;
   }
 
   .body-large {

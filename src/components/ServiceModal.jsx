@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { X, CheckCircle2, Mail } from 'lucide-react';
 import { Button } from './Button';
 import { useLockBodyScroll } from '../hooks/useLockBodyScroll';
@@ -6,18 +6,39 @@ import { PORTFOLIO_DATA } from '../data/portfolio';
 
 export const ServiceModal = ({ service, isOpen, onClose }) => {
   const Icon = service?.icon;
+  const modalRef = useRef(null);
   
   useLockBodyScroll(isOpen);
 
   useEffect(() => {
-    const handleEscape = (e) => {
+    const handleKeyDown = (e) => {
       if (e.key === 'Escape' && isOpen) {
         onClose();
       }
+
+      if (e.key === 'Tab' && isOpen && modalRef.current) {
+        const focusableElements = modalRef.current.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === firstElement) {
+            lastElement.focus();
+            e.preventDefault();
+          }
+        } else {
+          if (document.activeElement === lastElement) {
+            firstElement.focus();
+            e.preventDefault();
+          }
+        }
+      }
     };
     
-    window.addEventListener('keydown', handleEscape);
-    return () => window.removeEventListener('keydown', handleEscape);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
   if (!isOpen || !service) return null;
@@ -31,6 +52,7 @@ export const ServiceModal = ({ service, isOpen, onClose }) => {
       aria-labelledby="modal-title"
     >
       <div 
+        ref={modalRef}
         className="relative bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-sm shadow-2xl animate-slideUp"
         onClick={(e) => e.stopPropagation()}
       >
