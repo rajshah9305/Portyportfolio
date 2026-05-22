@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Mail, Terminal, Cpu, CheckCircle2, Copy, Check } from 'lucide-react';
 import { Analytics } from '@vercel/analytics/react';
 import {
@@ -12,37 +12,37 @@ import {
   Navigation,
   FloatingActions,
   LoadingScreen,
-  Button
+  Button,
+  Cursor
 } from './components';
 import { PORTFOLIO_DATA } from './data/portfolio';
+import { usePortfolioState } from './hooks/usePortfolioState';
 import architectureDiagram from './assets/architecture.jpg';
 
 export default function App() {
-  const [loading, setLoading] = useState(true);
-  const [blueprintMode, setBlueprintMode] = useState(false);
-  const [selectedService, setSelectedService] = useState(null);
-  const [emailCopied, setEmailCopied] = useState(false);
-
-  const handleCopyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText(PORTFOLIO_DATA.profile.socials.email);
-      setEmailCopied(true);
-      setTimeout(() => setEmailCopied(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy text: ', err);
-    }
-  };
+  const {
+    loading,
+    blueprintMode,
+    selectedService,
+    emailCopied,
+    setBlueprintMode,
+    setSelectedService,
+    handleCopyEmail,
+    closeServiceModal,
+    completeLoading
+  } = usePortfolioState();
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   if (loading) {
-    return <LoadingScreen onComplete={() => setLoading(false)} />;
+    return <LoadingScreen onComplete={completeLoading} />;
   }
 
   return (
     <div className={`group/body min-h-screen bg-white text-black font-sans overflow-x-hidden relative ${blueprintMode ? 'blueprint-mode' : ''}`}>
+      <Cursor />
       <ParallaxGrid />
 
       {/* Orange Spray Effect */}
@@ -96,11 +96,11 @@ export default function App() {
         </section>
 
         {/* METRICS & STATS */}
-        <section className="mb-32 border-y border-zinc-200">
+        <section className="mb-32 border-y border-black">
           <div className="container mx-auto grid grid-cols-2 md:grid-cols-4 divide-x divide-zinc-200">
             {PORTFOLIO_DATA.stats.map((stat, i) => (
               <div key={i} className="p-8 md:p-12 hover:bg-zinc-50 transition-colors duration-300">
-                <span className="block label-mono text-zinc-500 mb-2">{stat.label}</span>
+                <span className="block label-mono text-black mb-2">{stat.label}</span>
                 <span className="block font-sans text-3xl md:text-5xl font-black tracking-tighter text-black">
                   {stat.value}
                 </span>
@@ -119,7 +119,7 @@ export default function App() {
               </p>
             </div>
             <div className="hidden md:block">
-              <Cpu size={48} className="text-zinc-200" />
+              <Cpu size={48} className="text-black" />
             </div>
           </div>
 
@@ -133,7 +133,7 @@ export default function App() {
             <ServiceModal
               service={selectedService}
               isOpen={!!selectedService}
-              onClose={() => setSelectedService(null)}
+              onClose={closeServiceModal}
             />
           )}
         </section>
@@ -144,13 +144,13 @@ export default function App() {
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-1.5 h-1.5 bg-orange-600 rounded-full"></div>
-                <h2 className="label-mono text-zinc-500">Project_Index_2026</h2>
+                <h2 className="label-mono text-black">Project_Index_2026</h2>
               </div>
               <h3 className="heading-1">
                 <DecryptText text="Selected Works" />
               </h3>
             </div>
-            <div className="hidden md:block text-right label-mono text-zinc-500">
+            <div className="hidden md:block text-right label-mono text-black">
               <span>Sort: Chronological</span><br />
               <span>Status: All Systems Go</span>
             </div>
@@ -176,7 +176,7 @@ export default function App() {
                 A timeline of increasing responsibility and technical complexity.
               </p>
             </div>
-            <div className="md:col-span-8 border-l border-zinc-200 pl-0 md:pl-8">
+            <div className="md:col-span-8 border-l border-black pl-0 md:pl-8">
               {PORTFOLIO_DATA.experience.map((item, index) => (
                 <ExperienceItem
                   key={index}
@@ -189,7 +189,7 @@ export default function App() {
         </section>
 
         {/* PHILOSOPHY / ABOUT */}
-        <section className="bg-black text-zinc-50 py-24 mb-32 relative overflow-hidden">
+        <section className="bg-black text-black py-24 mb-32 relative overflow-hidden">
           <div
             className="absolute inset-0 opacity-10 pointer-events-none"
             style={{
@@ -205,24 +205,24 @@ export default function App() {
               <h2 className="font-sans text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[0.9] mb-8">
                 Code as<br />Craftsmanship.
               </h2>
-              <p className="body-large text-zinc-500 mb-8">
+              <p className="body-large text-black mb-8">
                 I believe that software should be as beautiful internally as it is externally.
                 Every function, every component, and every API endpoint is crafted with the same attention to detail as the visual interface.
                 <br /><br />
                 In an era of AI-generated code, human intent and architectural precision are the true differentiators.
               </p>
-              <div className="grid grid-cols-2 gap-8 border-t border-zinc-800 pt-8">
+              <div className="grid grid-cols-2 gap-8 border-t border-black pt-8">
                 <div>
                   <span className="block font-sans text-4xl font-black text-white mb-2">0.1s</span>
-                  <span className="label-mono text-zinc-500">Avg. Load Time</span>
+                  <span className="label-mono text-black">Avg. Load Time</span>
                 </div>
                 <div>
                   <span className="block font-sans text-4xl font-black text-white mb-2">100%</span>
-                  <span className="label-mono text-zinc-500">Type Safety</span>
+                  <span className="label-mono text-black">Type Safety</span>
                 </div>
               </div>
             </div>
-            <div className="h-full min-h-[400px] relative overflow-hidden flex items-center justify-center border border-zinc-700 bg-black">
+            <div className="h-full min-h-[400px] relative overflow-hidden flex items-center justify-center border border-black bg-black">
               <img
                 src={architectureDiagram}
                 alt="System Architecture Diagram"
@@ -235,7 +235,7 @@ export default function App() {
         </section>
 
         {/* SKILLS TICKER */}
-        <div className="w-full overflow-hidden border-y border-zinc-200 py-12 mb-32 relative">
+        <div className="w-full overflow-hidden border-y border-black py-12 mb-32 relative">
           <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white to-transparent z-10"></div>
           <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white to-transparent z-10"></div>
 
@@ -244,8 +244,8 @@ export default function App() {
               <div key={i} className="flex items-center">
                 {PORTFOLIO_DATA.skills.flatMap(s => s.items).map((skill, idx) => (
                   <div key={`${i}-${idx}`} className="flex items-center gap-4 mx-8 group cursor-default">
-                    <CheckCircle2 size={16} className="text-zinc-300 group-hover:text-orange-600 transition-colors" />
-                    <span className="font-mono text-sm md:text-lg font-bold uppercase tracking-widest text-zinc-500 group-hover:text-black transition-colors">
+                    <CheckCircle2 size={16} className="text-black group-hover:text-orange-600 transition-colors" />
+                    <span className="font-mono text-sm md:text-lg font-bold uppercase tracking-widest text-black group-hover:text-black transition-colors">
                       {skill}
                     </span>
                   </div>
@@ -256,14 +256,14 @@ export default function App() {
         </div>
 
         {/* FOOTER / CONTACT */}
-        <footer className="bg-black text-zinc-50 py-24 border-t border-zinc-800">
+        <footer className="bg-black text-black py-24 border-t border-black">
           <div className="container mx-auto px-6 md:px-12">
             <div className="grid md:grid-cols-2 gap-16 mb-16">
               <div>
                 <h2 className="font-sans text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[0.9] mb-8 text-white">
                   Let&apos;s Build<br />Something.
                 </h2>
-                <p className="body-large text-zinc-500 mb-8">
+                <p className="body-large text-black mb-8">
                   Available for select projects. If you&apos;re building something ambitious and need a technical partner who cares about craft, let&apos;s talk.
                 </p>
                 <Button
@@ -277,7 +277,7 @@ export default function App() {
 
               <div className="space-y-8">
                 <div>
-                  <h3 className="label-mono text-zinc-500 mb-4">Contact</h3>
+                  <h3 className="label-mono text-black mb-4">Contact</h3>
                   <div className="flex items-center gap-2">
                     <a
                       href={`mailto:${PORTFOLIO_DATA.profile.socials.email}`}
@@ -287,7 +287,7 @@ export default function App() {
                     </a>
                     <button
                       onClick={handleCopyEmail}
-                      className="p-2 rounded-full hover:bg-zinc-800 text-zinc-500 hover:text-orange-500 transition-colors"
+                      className="p-2 rounded-full hover:bg-zinc-800 text-black hover:text-orange-500 transition-colors"
                       title="Copy Email"
                     >
                       {emailCopied ? <Check size={18} /> : <Copy size={18} />}
@@ -296,13 +296,13 @@ export default function App() {
                 </div>
 
                 <div>
-                  <h3 className="label-mono text-zinc-500 mb-4">Connect</h3>
+                  <h3 className="label-mono text-black mb-4">Connect</h3>
                   <div className="flex flex-col gap-2">
                     <a
                       href={PORTFOLIO_DATA.profile.socials.github}
                       target="_blank"
                       rel="noreferrer"
-                      className="font-mono text-zinc-500 hover:text-orange-500 transition-colors"
+                      className="font-mono text-black hover:text-orange-500 transition-colors"
                     >
                       GitHub
                     </a>
@@ -310,7 +310,7 @@ export default function App() {
                       href={PORTFOLIO_DATA.profile.socials.linkedin}
                       target="_blank"
                       rel="noreferrer"
-                      className="font-mono text-zinc-500 hover:text-orange-500 transition-colors"
+                      className="font-mono text-black hover:text-orange-500 transition-colors"
                     >
                       LinkedIn
                     </a>
@@ -318,7 +318,7 @@ export default function App() {
                       href={PORTFOLIO_DATA.profile.socials.twitter}
                       target="_blank"
                       rel="noreferrer"
-                      className="font-mono text-zinc-500 hover:text-orange-500 transition-colors"
+                      className="font-mono text-black hover:text-orange-500 transition-colors"
                     >
                       Twitter
                     </a>
@@ -327,11 +327,11 @@ export default function App() {
               </div>
             </div>
 
-            <div className="pt-8 border-t border-zinc-800 flex flex-col md:flex-row justify-between items-center gap-4">
-              <p className="label-mono text-zinc-500">
+            <div className="pt-8 border-t border-black flex flex-col md:flex-row justify-between items-center gap-4">
+              <p className="label-mono text-black">
                 © 2026 Raj Shah. All rights reserved.
               </p>
-              <p className="label-mono text-zinc-500">
+              <p className="label-mono text-black">
                 Designed & Engineered with Precision
               </p>
             </div>

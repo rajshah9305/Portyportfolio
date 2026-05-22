@@ -1,13 +1,20 @@
 import React, { memo } from 'react';
 import { MoveRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export const ProjectCard = memo(({ project, index }) => {
   const Icon = project.icon;
 
   return (
-    <div className="group card relative overflow-hidden h-full flex flex-col">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="group card relative overflow-hidden h-full flex flex-col"
+    >
       {/* Background Image - Subtle Reveal */}
-      <div
+      <motion.div
         className="absolute inset-0 z-0 transition-opacity duration-500 ease-out opacity-10 lg:opacity-0 lg:group-hover:opacity-10"
         style={{
           backgroundImage: `url(${project.image})`,
@@ -23,10 +30,13 @@ export const ProjectCard = memo(({ project, index }) => {
       <div className="relative z-10 flex flex-col h-full">
         {/* Header: Icon & Number */}
         <div className="flex justify-between items-start mb-6">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-zinc-50 text-black border border-zinc-200 group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all duration-300">
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-zinc-50 text-black border border-black group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all duration-300"
+          >
             <Icon size={24} />
-          </div>
-          <span className="font-mono text-xs font-bold text-zinc-300 group-hover:text-primary transition-colors">
+          </motion.div>
+          <span className="font-mono text-xs font-bold text-black group-hover:text-primary transition-colors">
             {index + 1 < 10 ? `0${index + 1}` : index + 1}
           </span>
         </div>
@@ -46,7 +56,7 @@ export const ProjectCard = memo(({ project, index }) => {
             {project.tech.slice(0, 3).map((t, i) => (
               <span
                 key={i}
-                className="px-2 py-1 bg-zinc-50 border border-zinc-100 text-[10px] font-mono font-bold text-zinc-500 uppercase tracking-wider"
+                className="px-2 py-1 bg-zinc-50 border border-black text-[10px] font-mono font-bold text-black uppercase tracking-wider"
               >
                 {t}
               </span>
@@ -57,7 +67,8 @@ export const ProjectCard = memo(({ project, index }) => {
             <span className="label-mono text-black/60">
               {project.stat}
             </span>
-            <a
+            <motion.a
+              whileHover={{ x: 5 }}
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
@@ -67,11 +78,11 @@ export const ProjectCard = memo(({ project, index }) => {
             >
               View Repo
               <MoveRight size={12} className="transition-transform group-hover:translate-x-1" />
-            </a>
+            </motion.a>
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 });
 
