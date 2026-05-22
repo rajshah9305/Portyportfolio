@@ -12,8 +12,8 @@ export const ParallaxGrid = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  const moveX = (mousePos.x / window.innerWidth) * 20;
-  const moveY = (mousePos.y / window.innerHeight) * 20;
+  const moveX = (mousePos.x / window.innerWidth) * 40;
+  const moveY = (mousePos.y / window.innerHeight) * 40;
 
   return (
     <div
@@ -21,23 +21,36 @@ export const ParallaxGrid = () => {
       aria-hidden="true"
     >
       <div
-        className="absolute inset-[-50px] transition-transform duration-100 ease-out will-change-transform"
+        className="absolute inset-[-100px] transition-transform duration-300 ease-out will-change-transform"
         style={{ transform: `translate(${-moveX}px, ${-moveY}px)` }}
       >
         <div
-          className="absolute inset-0 opacity-[0.15]"
+          className="absolute inset-0 opacity-[0.1]"
           style={{
-            backgroundImage: 'linear-gradient(#e4e4e7 1px, transparent 1px), linear-gradient(90deg, #e4e4e7 1px, transparent 1px)',
-            backgroundSize: '80px 80px'
+            backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)',
+            backgroundSize: '100px 100px'
           }}
         />
         <div
-          className="absolute inset-0 opacity-[0.08]"
+          className="absolute inset-0 opacity-[0.05]"
           style={{
-            backgroundImage: 'linear-gradient(#e4e4e7 1px, transparent 1px), linear-gradient(90deg, #e4e4e7 1px, transparent 1px)',
-            backgroundSize: '20px 20px'
+            backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)',
+            backgroundSize: '25px 25px'
           }}
         />
+
+        {/* Blueprint Mode Grid Enhancement */}
+        <div className="absolute inset-0 opacity-0 group-[.blueprint-mode]/body:opacity-20 transition-opacity duration-1000"
+             style={{
+               backgroundImage: 'linear-gradient(#FF6B00 1px, transparent 1px), linear-gradient(90deg, #FF6B00 1px, transparent 1px)',
+               backgroundSize: '50px 50px'
+             }}
+        />
+      </div>
+
+      {/* Blueprint Mode Watermark */}
+      <div className="absolute bottom-12 right-12 font-mono text-[100px] font-black text-primary opacity-0 group-[.blueprint-mode]/body:opacity-5 transition-opacity duration-1000 select-none pointer-events-none">
+        BLUEPRINT_v2.0
       </div>
     </div>
   );

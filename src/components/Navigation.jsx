@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Github, Linkedin, Menu, X } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../data/portfolio';
+import { BlueprintToggle } from './BlueprintToggle';
 import { useActiveSection } from '../hooks/useActiveSection';
 import { useLockBodyScroll } from '../hooks/useLockBodyScroll';
 
@@ -10,7 +11,7 @@ const NAV_ITEMS = [
   { name: 'EXPERIENCE', href: '#experience', id: 'experience', num: '03' }
 ];
 
-export const Navigation = ({ onScrollToTop }) => {
+export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) => {
   const [currentTime, setCurrentTime] = useState('');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const activeSection = useActiveSection(['services', 'work', 'experience']);
@@ -70,7 +71,7 @@ export const Navigation = ({ onScrollToTop }) => {
               RS
             </div>
             <div className="flex flex-col">
-              <span className="font-bold tracking-wider text-sm text-zinc-900">
+              <span className="font-bold tracking-wider text-sm text-black">
                 {PORTFOLIO_DATA.profile.name}
               </span>
             </div>
@@ -86,8 +87,8 @@ export const Navigation = ({ onScrollToTop }) => {
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
                   className={`relative px-6 py-2.5 rounded-full font-mono text-[11px] font-bold tracking-widest transition-all duration-300 flex items-center gap-2 group ${isActive
-                    ? 'bg-white text-zinc-900 shadow-sm'
-                    : 'text-zinc-500 hover:text-zinc-900 hover:bg-white/50'
+                    ? 'bg-white text-black shadow-sm'
+                    : 'text-zinc-500 hover:text-black hover:bg-white/50'
                     }`}
                 >
                   <span
@@ -104,7 +105,12 @@ export const Navigation = ({ onScrollToTop }) => {
 
           {/* Socials & Status */}
           <div className="flex items-center gap-6">
-            <div className="hidden md:flex flex-col items-end text-[10px] font-mono font-medium leading-tight text-zinc-400">
+            <BlueprintToggle
+              isBlueprintMode={blueprintMode}
+              onToggle={() => setBlueprintMode(!blueprintMode)}
+            />
+
+            <div className="hidden md:flex flex-col items-end text-[10px] font-mono font-medium leading-tight text-zinc-500">
               <span>
                 STATUS: <span className="text-orange-600 font-bold">ONLINE</span>
               </span>
@@ -117,7 +123,7 @@ export const Navigation = ({ onScrollToTop }) => {
               href={PORTFOLIO_DATA.profile.socials.github}
               target="_blank"
               rel="noreferrer"
-              className="text-zinc-500 hover:text-zinc-900 transition-colors hidden sm:block"
+              className="text-zinc-500 hover:text-black transition-colors hidden sm:block"
               aria-label="GitHub Profile"
             >
               <Github size={20} />
@@ -136,7 +142,7 @@ export const Navigation = ({ onScrollToTop }) => {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 text-zinc-900 hover:bg-zinc-100 rounded-md z-50"
+              className="lg:hidden p-2 text-black hover:bg-zinc-100 rounded-md z-50"
               aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={isMobileMenuOpen}
             >
@@ -163,9 +169,9 @@ export const Navigation = ({ onScrollToTop }) => {
                 key={item.name}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
-                className="group flex items-baseline gap-4 font-sans text-4xl sm:text-5xl font-black text-zinc-900 hover:text-orange-600 transition-colors tracking-tighter"
+                className="group flex items-baseline gap-4 font-sans text-4xl sm:text-5xl font-black text-black hover:text-orange-600 transition-colors tracking-tighter"
               >
-                <span className="text-sm font-mono font-bold text-zinc-400 group-hover:text-orange-600">
+                <span className="text-sm font-mono font-bold text-zinc-500 group-hover:text-orange-600">
                   {item.num}
                 </span>
                 {item.name}
@@ -178,7 +184,7 @@ export const Navigation = ({ onScrollToTop }) => {
               href={PORTFOLIO_DATA.profile.socials.github}
               target="_blank"
               rel="noreferrer"
-              className="text-zinc-500 hover:text-zinc-900 transition-colors"
+              className="text-zinc-500 hover:text-black transition-colors"
               aria-label="GitHub Profile"
             >
               <Github size={32} />

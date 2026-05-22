@@ -12,9 +12,9 @@ export const Button = ({
   const baseClasses = "group relative flex items-center justify-center gap-3 overflow-hidden font-mono text-xs font-bold uppercase tracking-widest transition-all duration-300 cursor-pointer z-20";
 
   const variants = {
-    primary: "px-8 py-4 border shadow-sm hover:shadow-md border-zinc-900 bg-zinc-900 text-white hover:bg-orange-600 hover:border-orange-600",
-    outline: "px-8 py-4 border shadow-sm hover:shadow-md border-zinc-300 bg-white text-zinc-900 hover:border-orange-600 hover:text-white",
-    minimal: "px-0 py-2 border-none bg-transparent text-zinc-400 hover:text-white justify-start"
+    primary: "px-8 py-4 border shadow-sm hover:shadow-md border-black bg-black text-white hover:bg-orange-600 hover:border-orange-600",
+    outline: "px-8 py-4 border shadow-sm hover:shadow-md border-zinc-300 bg-white text-black hover:border-orange-600 hover:text-white",
+    minimal: "px-0 py-2 border-none bg-transparent text-zinc-500 hover:text-white justify-start"
   };
 
   const content = (

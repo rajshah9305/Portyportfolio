@@ -19,6 +19,7 @@ import architectureDiagram from './assets/architecture.jpg';
 
 export default function App() {
   const [loading, setLoading] = useState(true);
+  const [blueprintMode, setBlueprintMode] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
   const [emailCopied, setEmailCopied] = useState(false);
 
@@ -41,33 +42,42 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-white text-zinc-900 font-sans overflow-x-hidden relative">
+    <div className={`group/body min-h-screen bg-white text-black font-sans overflow-x-hidden relative ${blueprintMode ? 'blueprint-mode' : ''}`}>
       <ParallaxGrid />
 
       {/* Orange Spray Effect */}
       <div
-        className="absolute top-0 right-0 w-[800px] h-[600px] bg-orange-600/10 rounded-full blur-[100px] pointer-events-none translate-x-1/3 -translate-y-1/4 mix-blend-multiply z-0"
+        className="absolute top-0 right-0 w-[800px] h-[600px] bg-primary/10 rounded-full blur-[120px] pointer-events-none translate-x-1/3 -translate-y-1/4 mix-blend-multiply z-0 animate-pulse"
         aria-hidden="true"
       />
 
       <ScrollProgress />
 
-      <Navigation onScrollToTop={scrollToTop} />
+      <Navigation
+        onScrollToTop={scrollToTop}
+        blueprintMode={blueprintMode}
+        setBlueprintMode={setBlueprintMode}
+      />
       <FloatingActions onScrollToTop={scrollToTop} />
 
       <main className="relative z-10">
         {/* HERO SECTION */}
         <section className="container mx-auto px-6 md:px-12 pt-32 md:pt-40 pb-24 md:pb-32">
           <div className="space-y-12">
-            <h1 className="font-sans text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tighter leading-[0.85] text-zinc-900">
-              RAJ <span className="text-outline-zinc">SHAH</span>
+            <h1 className="hero-text font-sans text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tighter leading-[0.85] text-black">
+              <span className="block overflow-hidden">
+                <span className="block animate-slideUp">RAJ</span>
+              </span>
+              <span className="block overflow-hidden">
+                <span className="block animate-slideUp [animation-delay:200ms] text-outline-zinc">SHAH</span>
+              </span>
             </h1>
 
             <div className="flex flex-col md:flex-row gap-16 md:items-end justify-between">
               <div>
                 <h2 className="heading-2 mb-6">Digital Architect & Engineer</h2>
                 <p className="max-w-xl body-large">
-                  Fusing <span className="text-zinc-900 font-bold underline decoration-orange-600 underline-offset-4">Algorithmic Complexity</span> with <span className="text-zinc-900 font-bold underline decoration-orange-600 underline-offset-4">Structural Minimalism</span>. I architect high-performance digital ecosystems where form follows function—delivering software that is fault-tolerant, scalable, and aesthetically absolute.
+                  Fusing <span className="text-black font-bold underline decoration-orange-600 underline-offset-4">Algorithmic Complexity</span> with <span className="text-black font-bold underline decoration-orange-600 underline-offset-4">Structural Minimalism</span>. I architect high-performance digital ecosystems where form follows function—delivering software that is fault-tolerant, scalable, and aesthetically absolute.
                 </p>
               </div>
 
@@ -88,8 +98,8 @@ export default function App() {
           <div className="container mx-auto grid grid-cols-2 md:grid-cols-4 divide-x divide-zinc-200">
             {PORTFOLIO_DATA.stats.map((stat, i) => (
               <div key={i} className="p-8 md:p-12 hover:bg-zinc-50 transition-colors duration-300">
-                <span className="block label-mono text-zinc-400 mb-2">{stat.label}</span>
-                <span className="block font-sans text-3xl md:text-5xl font-black tracking-tighter text-zinc-900">
+                <span className="block label-mono text-zinc-500 mb-2">{stat.label}</span>
+                <span className="block font-sans text-3xl md:text-5xl font-black tracking-tighter text-black">
                   {stat.value}
                 </span>
               </div>
@@ -136,7 +146,7 @@ export default function App() {
               </div>
               <h3 className="heading-1">Selected Works</h3>
             </div>
-            <div className="hidden md:block text-right label-mono text-zinc-400">
+            <div className="hidden md:block text-right label-mono text-zinc-500">
               <span>Sort: Chronological</span><br />
               <span>Status: All Systems Go</span>
             </div>
@@ -175,7 +185,7 @@ export default function App() {
         </section>
 
         {/* PHILOSOPHY / ABOUT */}
-        <section className="bg-zinc-900 text-zinc-50 py-24 mb-32 relative overflow-hidden">
+        <section className="bg-black text-zinc-50 py-24 mb-32 relative overflow-hidden">
           <div
             className="absolute inset-0 opacity-10 pointer-events-none"
             style={{
@@ -191,7 +201,7 @@ export default function App() {
               <h2 className="font-sans text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[0.9] mb-8">
                 Code as<br />Craftsmanship.
               </h2>
-              <p className="body-large text-zinc-400 mb-8">
+              <p className="body-large text-zinc-500 mb-8">
                 I believe that software should be as beautiful internally as it is externally.
                 Every function, every component, and every API endpoint is crafted with the same attention to detail as the visual interface.
                 <br /><br />
@@ -208,13 +218,13 @@ export default function App() {
                 </div>
               </div>
             </div>
-            <div className="h-full min-h-[400px] relative overflow-hidden flex items-center justify-center border border-zinc-700 bg-zinc-900">
+            <div className="h-full min-h-[400px] relative overflow-hidden flex items-center justify-center border border-zinc-700 bg-black">
               <img
                 src={architectureDiagram}
                 alt="System Architecture Diagram"
                 className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity duration-300"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/80 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
 
             </div>
           </div>
@@ -231,7 +241,7 @@ export default function App() {
                 {PORTFOLIO_DATA.skills.flatMap(s => s.items).map((skill, idx) => (
                   <div key={`${i}-${idx}`} className="flex items-center gap-4 mx-8 group cursor-default">
                     <CheckCircle2 size={16} className="text-zinc-300 group-hover:text-orange-600 transition-colors" />
-                    <span className="font-mono text-sm md:text-lg font-bold uppercase tracking-widest text-zinc-400 group-hover:text-zinc-900 transition-colors">
+                    <span className="font-mono text-sm md:text-lg font-bold uppercase tracking-widest text-zinc-500 group-hover:text-black transition-colors">
                       {skill}
                     </span>
                   </div>
@@ -242,14 +252,14 @@ export default function App() {
         </div>
 
         {/* FOOTER / CONTACT */}
-        <footer className="bg-zinc-900 text-zinc-50 py-24 border-t border-zinc-800">
+        <footer className="bg-black text-zinc-50 py-24 border-t border-zinc-800">
           <div className="container mx-auto px-6 md:px-12">
             <div className="grid md:grid-cols-2 gap-16 mb-16">
               <div>
                 <h2 className="font-sans text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[0.9] mb-8 text-white">
                   Let&apos;s Build<br />Something.
                 </h2>
-                <p className="body-large text-zinc-400 mb-8">
+                <p className="body-large text-zinc-500 mb-8">
                   Available for select projects. If you&apos;re building something ambitious and need a technical partner who cares about craft, let&apos;s talk.
                 </p>
                 <Button
@@ -273,7 +283,7 @@ export default function App() {
                     </a>
                     <button
                       onClick={handleCopyEmail}
-                      className="p-2 rounded-full hover:bg-zinc-800 text-zinc-400 hover:text-orange-500 transition-colors"
+                      className="p-2 rounded-full hover:bg-zinc-800 text-zinc-500 hover:text-orange-500 transition-colors"
                       title="Copy Email"
                     >
                       {emailCopied ? <Check size={18} /> : <Copy size={18} />}
@@ -288,7 +298,7 @@ export default function App() {
                       href={PORTFOLIO_DATA.profile.socials.github}
                       target="_blank"
                       rel="noreferrer"
-                      className="font-mono text-zinc-400 hover:text-orange-500 transition-colors"
+                      className="font-mono text-zinc-500 hover:text-orange-500 transition-colors"
                     >
                       GitHub
                     </a>
@@ -296,7 +306,7 @@ export default function App() {
                       href={PORTFOLIO_DATA.profile.socials.linkedin}
                       target="_blank"
                       rel="noreferrer"
-                      className="font-mono text-zinc-400 hover:text-orange-500 transition-colors"
+                      className="font-mono text-zinc-500 hover:text-orange-500 transition-colors"
                     >
                       LinkedIn
                     </a>
@@ -304,7 +314,7 @@ export default function App() {
                       href={PORTFOLIO_DATA.profile.socials.twitter}
                       target="_blank"
                       rel="noreferrer"
-                      className="font-mono text-zinc-400 hover:text-orange-500 transition-colors"
+                      className="font-mono text-zinc-500 hover:text-orange-500 transition-colors"
                     >
                       Twitter
                     </a>
@@ -327,10 +337,15 @@ export default function App() {
 
       <style>{`
         .text-outline-zinc {
-          -webkit-text-stroke: 2px #27272a;
+          -webkit-text-stroke: 2px #000000;
           -webkit-text-fill-color: transparent;
-          text-stroke: 2px #27272a;
+          text-stroke: 2px #000000;
           text-fill-color: transparent;
+        }
+
+        .blueprint-mode .text-outline-zinc {
+          -webkit-text-stroke: 2px #FF6B00;
+          text-stroke: 2px #FF6B00;
         }
         
         @keyframes marquee {

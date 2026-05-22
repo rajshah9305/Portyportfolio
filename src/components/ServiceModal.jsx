@@ -24,7 +24,7 @@ export const ServiceModal = ({ service, isOpen, onClose }) => {
 
   return (
     <div 
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-900/80 backdrop-blur-sm animate-fadeIn"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fadeIn"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
@@ -46,7 +46,7 @@ export const ServiceModal = ({ service, isOpen, onClose }) => {
               </span>
               <h3 
                 id="modal-title"
-                className="font-sans text-2xl md:text-3xl font-black uppercase tracking-tight text-zinc-900"
+                className="font-sans text-2xl md:text-3xl font-black uppercase tracking-tight text-black"
               >
                 {service.title}
               </h3>
@@ -65,7 +65,7 @@ export const ServiceModal = ({ service, isOpen, onClose }) => {
         <div className="p-6 md:p-8 space-y-8">
           {/* Full Description */}
           <div>
-            <h4 className="font-mono text-xs font-bold text-zinc-400 uppercase tracking-widest mb-3">
+            <h4 className="font-mono text-xs font-bold text-zinc-500 uppercase tracking-widest mb-3">
               Overview
             </h4>
             <p className="font-sans text-lg font-medium text-zinc-600 leading-relaxed">
@@ -75,7 +75,7 @@ export const ServiceModal = ({ service, isOpen, onClose }) => {
 
           {/* Capabilities */}
           <div>
-            <h4 className="font-mono text-xs font-bold text-zinc-400 uppercase tracking-widest mb-4">
+            <h4 className="font-mono text-xs font-bold text-zinc-500 uppercase tracking-widest mb-4">
               Core Capabilities
             </h4>
             <div className="grid gap-3">
@@ -93,14 +93,14 @@ export const ServiceModal = ({ service, isOpen, onClose }) => {
 
           {/* Technologies */}
           <div>
-            <h4 className="font-mono text-xs font-bold text-zinc-400 uppercase tracking-widest mb-4">
+            <h4 className="font-mono text-xs font-bold text-zinc-500 uppercase tracking-widest mb-4">
               Technology Stack
             </h4>
             <div className="flex flex-wrap gap-2">
               {service.details.technologies.map((tech, index) => (
                 <span 
                   key={index} 
-                  className="px-3 py-2 bg-zinc-900 text-white font-mono text-xs font-bold uppercase tracking-wider"
+                  className="px-3 py-2 bg-black text-white font-mono text-xs font-bold uppercase tracking-wider"
                 >
                   {tech}
                 </span>
@@ -110,7 +110,7 @@ export const ServiceModal = ({ service, isOpen, onClose }) => {
 
           {/* Deliverables */}
           <div>
-            <h4 className="font-mono text-xs font-bold text-zinc-400 uppercase tracking-widest mb-4">
+            <h4 className="font-mono text-xs font-bold text-zinc-500 uppercase tracking-widest mb-4">
               Deliverables
             </h4>
             <div className="grid md:grid-cols-2 gap-3">

@@ -6,10 +6,10 @@ export const ServiceCard = ({ service, onDetailsClick }) => {
 
   return (
     <div className="group card relative overflow-hidden h-full flex flex-col">
-      <div className="absolute inset-0 bg-gradient-to-br from-orange-50 to-transparent opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-500"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-500"></div>
 
       <div className="relative z-10 flex flex-col h-full">
-        <div className="mb-6 inline-flex items-center justify-center w-12 h-12 rounded-full bg-zinc-100 text-zinc-900 group-hover:bg-orange-600 group-hover:text-white transition-colors">
+        <div className="mb-6 inline-flex items-center justify-center w-12 h-12 rounded-full bg-zinc-50 text-black border border-zinc-200 group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all duration-300">
           <Icon size={24} />
         </div>
 
@@ -23,7 +23,7 @@ export const ServiceCard = ({ service, onDetailsClick }) => {
 
         <button
           onClick={() => onDetailsClick(service)}
-          className="mt-6 flex items-center gap-2 label-mono text-zinc-400 group-hover:text-orange-600 transition-colors cursor-pointer"
+          className="mt-6 flex items-center gap-2 label-mono text-zinc-500 group-hover:text-primary transition-colors cursor-pointer"
           aria-label={`View details for ${service.title}`}
         >
           <span>Details</span>

@@ -12,6 +12,11 @@ export default {
       },
       colors: {
         border: 'rgb(var(--color-border) / <alpha-value>)',
+        primary: {
+          DEFAULT: 'rgb(var(--color-primary) / <alpha-value>)',
+          dark: 'rgb(var(--color-primary-dark) / <alpha-value>)',
+          light: 'rgb(var(--color-primary-light) / <alpha-value>)',
+        },
       },
       transitionTimingFunction: {
         'in-out-cubic': 'cubic-bezier(0.65, 0, 0.35, 1)',

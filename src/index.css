@@ -7,28 +7,26 @@
 @layer base {
   :root {
     /* Color System */
-    --color-primary: 234 88 12;
-    /* orange-600 */
-    --color-primary-dark: 194 65 12;
-    /* orange-700 */
-    --color-primary-light: 255 237 213;
-    /* orange-100 */
+    --color-primary: 255 107 0;
+    /* #FF6B00 */
+    --color-primary-dark: 204 86 0;
+    --color-primary-light: 255 226 204;
 
     --color-surface: 255 255 255;
     /* white */
     --color-surface-elevated: 255 255 255;
     /* white */
-    --color-border: 228 228 231;
-    /* zinc-200 */
-    --color-border-hover: 161 161 170;
-    /* zinc-400 */
+    --color-border: 0 0 0;
+    /* black */
+    --color-border-hover: 255 107 0;
+    /* orange */
 
-    --color-text-primary: 24 24 27;
-    /* zinc-900 */
-    --color-text-secondary: 82 82 91;
+    --color-text-primary: 0 0 0;
+    /* absolute black */
+    --color-text-secondary: 39 39 42;
+    /* zinc-800 */
+    --color-text-tertiary: 82 82 91;
     /* zinc-600 */
-    --color-text-tertiary: 161 161 170;
-    /* zinc-400 */
 
     /* Spacing Scale */
     --space-xs: 0.25rem;
@@ -90,6 +88,32 @@
 
   * {
     @apply border-border;
+  }
+
+  .blueprint-mode {
+    background-color: #FFFFFF !important;
+  }
+
+  .blueprint-mode * {
+    background-color: transparent !important;
+    border-color: #FF6B00 !important;
+    color: #FF6B00 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    background-image: none !important;
+  }
+
+  .blueprint-mode img,
+  .blueprint-mode video,
+  .blueprint-mode canvas {
+    filter: grayscale(1) contrast(2) invert(1) !important;
+    opacity: 0.3 !important;
+  }
+
+  .blueprint-mode .bg-orange-600,
+  .blueprint-mode .bg-primary {
+    background-color: #FF6B00 !important;
+    color: #FFFFFF !important;
   }
 
   html {

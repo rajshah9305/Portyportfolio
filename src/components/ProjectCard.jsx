@@ -18,15 +18,15 @@ export const ProjectCard = ({ project, index }) => {
       />
 
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-orange-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
       <div className="relative z-10 flex flex-col h-full">
         {/* Header: Icon & Number */}
         <div className="flex justify-between items-start mb-6">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-zinc-100 text-zinc-900 group-hover:bg-orange-600 group-hover:text-white transition-colors">
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-zinc-50 text-black border border-zinc-200 group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all duration-300">
             <Icon size={24} />
           </div>
-          <span className="font-mono text-xs font-bold text-zinc-300 group-hover:text-orange-600 transition-colors">
+          <span className="font-mono text-xs font-bold text-zinc-300 group-hover:text-primary transition-colors">
             {index + 1 < 10 ? `0${index + 1}` : index + 1}
           </span>
         </div>
@@ -54,14 +54,14 @@ export const ProjectCard = ({ project, index }) => {
           </div>
 
           <div className="pt-4 border-t border-zinc-100 flex items-center justify-between">
-            <span className="label-mono text-zinc-400">
+            <span className="label-mono text-zinc-500">
               {project.stat}
             </span>
             <a
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 label-mono text-zinc-900 hover:text-orange-600 transition-colors"
+              className="flex items-center gap-2 label-mono text-black hover:text-primary transition-colors"
               onClick={(e) => e.stopPropagation()}
               aria-label={`View ${project.title} repository on GitHub`}
             >
