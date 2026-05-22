@@ -11,6 +11,10 @@ export const ServiceModal = ({ service, isOpen, onClose }) => {
   useLockBodyScroll(isOpen);
 
   useEffect(() => {
+    if (isOpen) {
+      modalRef.current?.focus();
+    }
+
     const handleKeyDown = (e) => {
       if (e.key === 'Escape' && isOpen) {
         onClose();
@@ -18,13 +22,16 @@ export const ServiceModal = ({ service, isOpen, onClose }) => {
 
       if (e.key === 'Tab' && isOpen && modalRef.current) {
         const focusableElements = modalRef.current.querySelectorAll(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+          'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
         );
+
+        if (focusableElements.length === 0) return;
+
         const firstElement = focusableElements[0];
         const lastElement = focusableElements[focusableElements.length - 1];
 
         if (e.shiftKey) {
-          if (document.activeElement === firstElement) {
+          if (document.activeElement === firstElement || document.activeElement === modalRef.current) {
             lastElement.focus();
             e.preventDefault();
           }
@@ -53,7 +60,8 @@ export const ServiceModal = ({ service, isOpen, onClose }) => {
     >
       <div 
         ref={modalRef}
-        className="relative bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-sm shadow-2xl animate-slideUp"
+        tabIndex="-1"
+        className="relative bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-sm shadow-2xl animate-slideUp outline-none"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}

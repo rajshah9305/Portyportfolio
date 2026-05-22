@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Mail, Terminal, Cpu, CheckCircle2, Copy, Check } from 'lucide-react';
 import { Analytics } from '@vercel/analytics/react';
 import {
@@ -12,42 +12,65 @@ import {
   Navigation,
   FloatingActions,
   LoadingScreen,
-  Button
+  Button,
+  Cursor
 } from './components';
 import { PORTFOLIO_DATA } from './data/portfolio';
 import architectureDiagram from './assets/architecture.jpg';
 
-export default function App() {
-  const [loading, setLoading] = useState(true);
-  const [blueprintMode, setBlueprintMode] = useState(false);
-  const [selectedService, setSelectedService] = useState(null);
-  const [emailCopied, setEmailCopied] = useState(false);
+import { motion, useSpring as useFramerSpring, useMotionValue } from 'framer-motion';
+import { usePortfolioState } from './hooks/usePortfolioState';
 
-  const handleCopyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText(PORTFOLIO_DATA.profile.socials.email);
-      setEmailCopied(true);
-      setTimeout(() => setEmailCopied(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy text: ', err);
-    }
+export default function App() {
+  const {
+    loading,
+    blueprintMode,
+    selectedService,
+    emailCopied,
+    handleCopyEmail,
+    toggleBlueprintMode,
+    openServiceModal,
+    closeServiceModal,
+    finishLoading
+  } = usePortfolioState();
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const handleMouseMove = (e) => {
+    const { clientX, clientY } = e;
+    mouseX.set(clientX);
+    mouseY.set(clientY);
   };
+
+  const sprayX = useFramerSpring(mouseX, { damping: 50, stiffness: 200 });
+  const sprayY = useFramerSpring(mouseY, { damping: 50, stiffness: 200 });
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   if (loading) {
-    return <LoadingScreen onComplete={() => setLoading(false)} />;
+    return <LoadingScreen onComplete={finishLoading} />;
   }
 
   return (
-    <div className={`group/body min-h-screen bg-white text-black font-sans overflow-x-hidden relative ${blueprintMode ? 'blueprint-mode' : ''}`}>
+    <div
+      onMouseMove={handleMouseMove}
+      className={`group/body min-h-screen bg-white text-black font-sans overflow-x-hidden relative ${blueprintMode ? 'blueprint-mode' : ''}`}
+    >
+      <Cursor />
       <ParallaxGrid />
 
-      {/* Orange Spray Effect */}
-      <div
-        className="absolute top-0 right-0 w-[800px] h-[600px] bg-primary/10 rounded-full blur-[120px] pointer-events-none translate-x-1/3 -translate-y-1/4 mix-blend-multiply z-0 animate-pulse"
+      {/* Dynamic Orange Spray Effect */}
+      <motion.div
+        className="fixed top-0 left-0 w-[800px] h-[600px] bg-primary/10 rounded-full blur-[120px] pointer-events-none mix-blend-multiply z-0"
+        style={{
+          x: sprayX,
+          y: sprayY,
+          translateX: '-50%',
+          translateY: '-50%',
+        }}
         aria-hidden="true"
       />
 
@@ -56,7 +79,7 @@ export default function App() {
       <Navigation
         onScrollToTop={scrollToTop}
         blueprintMode={blueprintMode}
-        setBlueprintMode={setBlueprintMode}
+        setBlueprintMode={toggleBlueprintMode}
       />
       <FloatingActions onScrollToTop={scrollToTop} />
 
@@ -125,7 +148,7 @@ export default function App() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {PORTFOLIO_DATA.services.map((service) => (
-              <ServiceCard key={service.id} service={service} onDetailsClick={setSelectedService} />
+              <ServiceCard key={service.id} service={service} onDetailsClick={openServiceModal} />
             ))}
           </div>
 
@@ -133,7 +156,7 @@ export default function App() {
             <ServiceModal
               service={selectedService}
               isOpen={!!selectedService}
-              onClose={() => setSelectedService(null)}
+              onClose={closeServiceModal}
             />
           )}
         </section>

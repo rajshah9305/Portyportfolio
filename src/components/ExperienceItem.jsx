@@ -1,13 +1,24 @@
 import React, { memo } from 'react';
+import { motion } from 'framer-motion';
 
 export const ExperienceItem = memo(({ item, last }) => (
-  <div className="relative pl-8 md:pl-12 py-2 group">
+  <motion.div
+    initial={{ opacity: 0, x: -20 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.5 }}
+    className="relative pl-8 md:pl-12 py-2 group"
+  >
     {!last && (
       <div className="absolute left-[11px] md:left-[15px] top-4 h-full w-[1px] bg-zinc-200 group-hover:bg-zinc-300 transition-colors"></div>
     )}
     
     <div className="absolute left-0 top-2 h-6 w-6 md:h-8 md:w-8 rounded-full border border-zinc-200 bg-white flex items-center justify-center z-10 transition-transform duration-300 group-hover:scale-110 group-hover:border-orange-600">
-      <div className="h-1.5 w-1.5 md:h-2 md:w-2 rounded-full bg-orange-600"></div>
+      <motion.div
+        animate={{ scale: [1, 1.2, 1] }}
+        transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+        className="h-1.5 w-1.5 md:h-2 md:w-2 rounded-full bg-orange-600"
+      />
     </div>
 
     <div className="mb-10">
@@ -24,7 +35,7 @@ export const ExperienceItem = memo(({ item, last }) => (
         {item.desc}
       </p>
     </div>
-  </div>
+  </motion.div>
 ));
 
 ExperienceItem.displayName = 'ExperienceItem';

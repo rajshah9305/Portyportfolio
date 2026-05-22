@@ -86,7 +86,7 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
           <button
             className="flex items-center gap-4 group cursor-pointer"
             onClick={onScrollToTop}
-            aria-label="Scroll to top"
+            aria-label="Back to home and scroll to top"
           >
             <div className="flex h-8 w-8 items-center justify-center bg-orange-600 text-white font-black text-sm tracking-tighter shadow-md hover:scale-105 transition-transform">
               RS
@@ -107,6 +107,7 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
                   key={item.name}
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
+                  aria-label={`Navigate to ${item.name} section`}
                   className={`relative px-6 py-2.5 rounded-full font-mono text-[11px] font-bold tracking-widest transition-all duration-300 flex items-center gap-2 group ${isActive
                     ? 'bg-white text-black shadow-sm'
                     : 'text-zinc-500 hover:text-black hover:bg-white/50'
@@ -191,6 +192,7 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
                 key={item.name}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
+                aria-label={`Navigate to ${item.name} section`}
                 className="group flex items-baseline gap-4 font-sans text-4xl sm:text-5xl font-black text-black hover:text-orange-600 transition-colors tracking-tighter"
               >
                 <span className="text-sm font-mono font-bold text-zinc-500 group-hover:text-orange-600">

@@ -1,11 +1,18 @@
 import React, { memo } from 'react';
 import { MoveRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export const ProjectCard = memo(({ project, index }) => {
   const Icon = project.icon;
 
   return (
-    <div className="group card relative overflow-hidden h-full flex flex-col">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="group card relative overflow-hidden h-full flex flex-col"
+    >
       {/* Background Image - Subtle Reveal */}
       <div
         className="absolute inset-0 z-0 transition-opacity duration-500 ease-out opacity-10 lg:opacity-0 lg:group-hover:opacity-10"
@@ -23,9 +30,13 @@ export const ProjectCard = memo(({ project, index }) => {
       <div className="relative z-10 flex flex-col h-full">
         {/* Header: Icon & Number */}
         <div className="flex justify-between items-start mb-6">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-zinc-50 text-black border border-zinc-200 group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all duration-300">
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-zinc-50 text-black border border-zinc-200 group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all duration-300"
+          >
             <Icon size={24} />
-          </div>
+          </motion.div>
           <span className="font-mono text-xs font-bold text-zinc-300 group-hover:text-primary transition-colors">
             {index + 1 < 10 ? `0${index + 1}` : index + 1}
           </span>
@@ -61,17 +72,22 @@ export const ProjectCard = memo(({ project, index }) => {
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 label-mono text-black hover:text-primary transition-colors"
+              className="flex items-center gap-2 label-mono text-black hover:text-primary transition-colors cursor-pointer"
               onClick={(e) => e.stopPropagation()}
               aria-label={`View ${project.title} repository on GitHub`}
             >
               View Repo
-              <MoveRight size={12} className="transition-transform group-hover:translate-x-1" />
+              <motion.div
+                animate={{ x: [0, 5, 0] }}
+                transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+              >
+                <MoveRight size={12} />
+              </motion.div>
             </a>
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 });
 

@@ -1,14 +1,17 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { useDecrypt } from '../hooks/useDecrypt';
-import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 
 export const DecryptText = ({ text, className = '' }) => {
-  const [ref, isVisible] = useIntersectionObserver({ threshold: 0.1 });
+  const [isVisible, setIsVisible] = React.useState(false);
   const decrypted = useDecrypt(text, isVisible);
 
   return (
-    <span ref={ref} className={className}>
+    <motion.span
+      onViewportEnter={() => setIsVisible(true)}
+      className={className}
+    >
       {decrypted}
-    </span>
+    </motion.span>
   );
 };
