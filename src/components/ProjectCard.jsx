@@ -32,7 +32,7 @@ export const ProjectCard = memo(({ project, index }) => {
         <div className="flex justify-between items-start mb-6">
           <motion.div
             whileHover={{ scale: 1.1 }}
-            className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-zinc-50 text-black border border-black group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all duration-300"
+            className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white text-black border border-black group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all duration-300"
           >
             <Icon size={24} />
           </motion.div>
@@ -56,7 +56,7 @@ export const ProjectCard = memo(({ project, index }) => {
             {project.tech.slice(0, 3).map((t, i) => (
               <span
                 key={i}
-                className="px-2 py-1 bg-zinc-50 border border-black text-[10px] font-mono font-bold text-black uppercase tracking-wider"
+                className="px-2 py-1 bg-white border border-black text-[10px] font-mono font-bold text-black uppercase tracking-wider"
               >
                 {t}
               </span>

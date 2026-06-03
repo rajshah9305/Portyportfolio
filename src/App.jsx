@@ -69,7 +69,7 @@ export default function App() {
                 <span className="block animate-slideUp">RAJ</span>
               </span>
               <span className="block overflow-hidden">
-                <span className="block animate-slideUp [animation-delay:200ms] text-outline-zinc">SHAH</span>
+                <span className="block animate-slideUp [animation-delay:200ms] text-outline-black">SHAH</span>
               </span>
             </h1>
 
@@ -97,9 +97,9 @@ export default function App() {
 
         {/* METRICS & STATS */}
         <section className="mb-32 border-y border-black">
-          <div className="container mx-auto grid grid-cols-2 md:grid-cols-4 divide-x divide-zinc-200">
+          <div className="container mx-auto grid grid-cols-2 md:grid-cols-4 divide-x divide-black">
             {PORTFOLIO_DATA.stats.map((stat, i) => (
-              <div key={i} className="p-8 md:p-12 hover:bg-zinc-50 transition-colors duration-300">
+              <div key={i} className="p-8 md:p-12 hover:bg-white transition-colors duration-300">
                 <span className="block label-mono text-black mb-2">{stat.label}</span>
                 <span className="block font-sans text-3xl md:text-5xl font-black tracking-tighter text-black">
                   {stat.value}
@@ -287,8 +287,9 @@ export default function App() {
                     </a>
                     <button
                       onClick={handleCopyEmail}
-                      className="p-2 rounded-full hover:bg-zinc-800 text-black hover:text-orange-500 transition-colors"
+                      className="p-2 rounded-full hover:bg-black text-black hover:text-orange-500 transition-colors"
                       title="Copy Email"
+                      aria-label={emailCopied ? "Email copied" : "Copy email address"}
                     >
                       {emailCopied ? <Check size={18} /> : <Copy size={18} />}
                     </button>
@@ -340,14 +341,14 @@ export default function App() {
       </main>
 
       <style>{`
-        .text-outline-zinc {
+        .text-outline-black {
           -webkit-text-stroke: 2px #000000;
           -webkit-text-fill-color: transparent;
           text-stroke: 2px #000000;
           text-fill-color: transparent;
         }
 
-        .blueprint-mode .text-outline-zinc {
+        .blueprint-mode .text-outline-black {
           -webkit-text-stroke: 2px #FF6B00;
           text-stroke: 2px #FF6B00;
         }

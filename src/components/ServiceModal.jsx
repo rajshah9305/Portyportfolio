@@ -90,7 +90,7 @@ export const ServiceModal = ({ service, isOpen, onClose }) => {
           </div>
           <button 
             onClick={onClose}
-            className="p-2 hover:bg-zinc-100 rounded-sm transition-colors"
+            className="p-2 hover:bg-black/5 rounded-sm transition-colors"
             aria-label="Close modal"
           >
             <X size={24} className="text-black" />
@@ -118,7 +118,7 @@ export const ServiceModal = ({ service, isOpen, onClose }) => {
               {service.details.capabilities.map((capability, index) => (
                 <div 
                   key={index} 
-                  className="flex items-start gap-3 p-3 bg-zinc-50 border border-black hover:border-orange-200 transition-colors"
+                  className="flex items-start gap-3 p-3 bg-white border border-black hover:border-orange-600 transition-colors"
                 >
                   <CheckCircle2 size={18} className="text-orange-600 flex-shrink-0 mt-0.5" />
                   <span className="font-sans text-sm font-medium text-black">{capability}</span>

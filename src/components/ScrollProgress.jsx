@@ -6,7 +6,7 @@ export const ScrollProgress = () => {
 
   return (
     <div 
-      className="fixed right-0 top-0 z-50 h-full w-1.5 hidden md:block bg-zinc-200/30 backdrop-blur-sm"
+      className="fixed right-0 top-0 z-50 h-full w-1.5 hidden md:block bg-black/5 backdrop-blur-sm"
       role="progressbar"
       aria-valuenow={Math.round(scrolled)}
       aria-valuemin="0"

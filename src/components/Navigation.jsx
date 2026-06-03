@@ -102,7 +102,7 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
           </button>
 
           {/* Desktop Nav Links */}
-          <div className="hidden lg:flex items-center p-1.5 bg-zinc-100/80 backdrop-blur-md border border-black/5 rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div className="hidden lg:flex items-center p-1.5 bg-white backdrop-blur-md border border-black rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300">
             {NAV_ITEMS.map((item) => {
               const isActive = activeSection === item.id;
               return (
@@ -111,14 +111,14 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
                   className={`relative px-6 py-2.5 rounded-full font-mono text-[11px] font-bold tracking-widest transition-all duration-300 flex items-center gap-2 group ${isActive
-                    ? 'bg-white text-black shadow-sm'
-                    : 'text-black hover:text-black hover:bg-white/50'
+                    ? 'bg-black text-white shadow-sm'
+                    : 'text-black hover:text-black hover:bg-black/5'
                     }`}
                 >
                   <span
                     className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${isActive
                       ? 'bg-orange-600 scale-125'
-                      : 'bg-zinc-300 group-hover:bg-orange-400'
+                      : 'bg-black group-hover:bg-orange-400'
                       }`}
                   />
                   {item.name}
@@ -166,7 +166,7 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 text-black hover:bg-zinc-100 rounded-md z-50"
+              className="lg:hidden p-2 text-black hover:bg-white rounded-md z-50 border border-transparent hover:border-black"
               aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={isMobileMenuOpen}
             >
@@ -179,7 +179,7 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
       {/* Mobile Menu */}
       <div
         ref={mobileMenuRef}
-        className={`fixed inset-0 z-40 bg-zinc-50/90 backdrop-blur-xl transition-transform duration-500 ease-out-expo lg:hidden ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        className={`fixed inset-0 z-40 bg-white/95 backdrop-blur-xl transition-transform duration-500 ease-out-expo lg:hidden ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
         onClick={(e) => {
           if (e.target === e.currentTarget) {
