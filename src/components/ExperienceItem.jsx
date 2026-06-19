@@ -3,7 +3,7 @@ import React, { memo } from 'react';
 export const ExperienceItem = memo(({ item, last }) => (
   <div className="relative pl-8 md:pl-12 py-2 group">
     {!last && (
-      <div className="absolute left-[11px] md:left-[15px] top-4 h-full w-[1px] bg-zinc-200 group-hover:bg-zinc-300 transition-colors"></div>
+      <div className="absolute left-[11px] md:left-[15px] top-4 h-full w-[1px] bg-black/10 group-hover:bg-black/30 transition-colors"></div>
     )}
     
     <div className="absolute left-0 top-2 h-6 w-6 md:h-8 md:w-8 rounded-full border border-black bg-white flex items-center justify-center z-10 transition-transform duration-300 group-hover:scale-110 group-hover:border-orange-600">

@@ -23,10 +23,10 @@
 
     --color-text-primary: 0 0 0;
     /* absolute black */
-    --color-text-secondary: 39 39 42;
-    /* zinc-800 */
-    --color-text-tertiary: 82 82 91;
-    /* zinc-600 */
+    --color-text-secondary: 0 0 0;
+    /* absolute black */
+    --color-text-tertiary: 0 0 0;
+    /* absolute black */
 
     /* Spacing Scale */
     --space-xs: 0.25rem;
@@ -141,11 +141,11 @@
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-zinc-100;
+    @apply bg-white;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-zinc-400 rounded-full;
+    @apply bg-black rounded-full;
     transition: background-color var(--transition-base);
   }
 

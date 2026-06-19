@@ -18,7 +18,7 @@ export const ServiceCard = memo(({ service, onDetailsClick }) => {
       <div className="relative z-10 flex flex-col h-full">
         <motion.div
           whileHover={{ scale: 1.1, rotate: 5 }}
-          className="mb-6 inline-flex items-center justify-center w-12 h-12 rounded-full bg-zinc-50 text-black border border-black group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all duration-300"
+          className="mb-6 inline-flex items-center justify-center w-12 h-12 rounded-full bg-white text-black border border-black group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all duration-300"
         >
           <Icon size={24} />
         </motion.div>

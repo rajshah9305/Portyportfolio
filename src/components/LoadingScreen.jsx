@@ -39,7 +39,7 @@ export const LoadingScreen = ({ onComplete }) => {
           ))}
         </div>
 
-        <div className="h-1 w-full bg-zinc-200" role="progressbar" aria-valuenow={(bootLog.length / BOOT_LOGS.length) * 100} aria-valuemin="0" aria-valuemax="100">
+        <div className="h-1 w-full bg-black/10" role="progressbar" aria-valuenow={(bootLog.length / BOOT_LOGS.length) * 100} aria-valuemin="0" aria-valuemax="100">
           <div
             className="h-full bg-orange-600 transition-all duration-300 ease-out"
             style={{ width: `${(bootLog.length / BOOT_LOGS.length) * 100}%` }}
