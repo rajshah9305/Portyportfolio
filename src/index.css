@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap');
+/* Fonts are loaded via <link> in index.html to avoid render-blocking @import */
 
 @tailwind base;
 @tailwind components;
@@ -6,6 +6,7 @@
 
 @layer base {
   :root {
+
     /* Color System */
     --color-primary: 255 107 0;
     /* #FF6B00 */
@@ -191,30 +192,35 @@
     @apply font-mono text-xs font-bold uppercase tracking-widest;
   }
 
+  /* Hero text — fluid clamp size defined in App.jsx inline */
+  .hero-text {
+    @apply font-sans font-black uppercase tracking-tighter leading-[0.82] text-black;
+  }
+
   /* Card Component */
   .card {
     @apply border border-black bg-white p-8 transition-all duration-300;
-    @apply hover:border-orange-600 hover:shadow-lg hover:-translate-y-1;
+    @apply hover:border-orange-600;
   }
 
   /* Button Base */
   .btn-base {
     @apply relative flex items-center justify-center gap-3 overflow-hidden;
     @apply px-8 py-4 font-mono text-xs font-bold uppercase tracking-widest;
-    @apply transition-all duration-300 border shadow-sm hover:shadow-md cursor-pointer;
+    @apply transition-all duration-300 border cursor-pointer;
   }
 
   /* Animations */
   .animate-fadeIn {
-    animation: fadeIn var(--transition-base) var(--ease-out-expo);
+    animation: fadeIn 600ms var(--ease-out-expo) both;
   }
 
   .animate-slideUp {
-    animation: slideUp var(--transition-base) var(--ease-out-expo);
+    animation: slideUp 700ms var(--ease-out-expo) both;
   }
 
   .animate-slideDown {
-    animation: slideDown var(--transition-base) var(--ease-out-expo);
+    animation: slideDown 500ms var(--ease-out-expo) both;
   }
 }
 

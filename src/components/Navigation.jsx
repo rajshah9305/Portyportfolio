@@ -11,9 +11,10 @@ const NAV_ITEMS = [
   { name: 'EXPERIENCE', href: '#experience', id: 'experience', num: '03' }
 ];
 
-export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) => {
+export const Navigation = ({ onScrollToTop, blueprintMode, onToggleBlueprintMode }) => {
   const [currentTime, setCurrentTime] = useState('');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const mobileMenuRef = useRef(null);
   const activeSection = useActiveSection(['services', 'work', 'experience']);
 
@@ -33,6 +34,12 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
     }, 1000);
 
     return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
@@ -71,6 +78,7 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
 
   const handleNavClick = (e, href) => {
     e.preventDefault();
+    const wasOpen = isMobileMenuOpen;
     setIsMobileMenuOpen(false);
 
     setTimeout(() => {
@@ -78,12 +86,12 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
       if (element) {
         element.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
-    }, isMobileMenuOpen ? 300 : 0);
+    }, wasOpen ? 300 : 0);
   };
 
   return (
     <>
-      <nav className="fixed top-0 z-50 w-full border-b border-black/10 bg-white/80 backdrop-blur-md">
+      <nav className={`fixed top-0 z-50 w-full transition-all duration-300 ${scrolled ? 'border-b border-black/10 bg-white/90 backdrop-blur-md shadow-sm' : 'bg-transparent'}`}>
         <div className="flex h-16 md:h-20 items-center justify-between px-6 md:px-12 max-w-[1920px] mx-auto">
           {/* Logo */}
           <button
@@ -91,18 +99,19 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
             onClick={onScrollToTop}
             aria-label="Scroll to top"
           >
-            <div className="flex h-8 w-8 items-center justify-center bg-orange-600 text-white font-black text-sm tracking-tighter shadow-md hover:scale-105 transition-transform">
+            <div className="flex h-8 w-8 items-center justify-center bg-orange-600 text-white font-black text-sm tracking-tighter shadow-md group-hover:scale-105 transition-transform">
               RS
             </div>
             <div className="flex flex-col">
               <span className="font-bold tracking-wider text-sm text-black">
                 {PORTFOLIO_DATA.profile.name}
               </span>
+              <span className="font-mono text-[9px] text-black/40 uppercase tracking-widest">{PORTFOLIO_DATA.profile.tagline}</span>
             </div>
           </button>
 
           {/* Desktop Nav Links */}
-          <div className="hidden lg:flex items-center p-1.5 bg-white backdrop-blur-md border border-black rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div className="hidden lg:flex items-center p-1.5 bg-white/80 backdrop-blur-md border border-black/10 rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300">
             {NAV_ITEMS.map((item) => {
               const isActive = activeSection === item.id;
               return (
@@ -117,8 +126,8 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
                 >
                   <span
                     className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${isActive
-                      ? 'bg-orange-600 scale-125'
-                      : 'bg-black group-hover:bg-orange-400'
+                      ? 'bg-orange-500 scale-125'
+                      : 'bg-black/30 group-hover:bg-orange-400'
                       }`}
                   />
                   {item.name}
@@ -128,13 +137,13 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
           </div>
 
           {/* Socials & Status */}
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4 md:gap-6">
             <BlueprintToggle
               isBlueprintMode={blueprintMode}
-              onToggle={() => setBlueprintMode(!blueprintMode)}
+              onToggle={onToggleBlueprintMode}
             />
 
-            <div className="hidden md:flex flex-col items-end text-[10px] font-mono font-medium leading-tight text-black">
+            <div className="hidden md:flex flex-col items-end text-[10px] font-mono font-medium leading-tight text-black/50">
               <span>
                 STATUS: <span className="text-orange-600 font-bold">ONLINE</span>
               </span>
@@ -147,7 +156,7 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
               href={PORTFOLIO_DATA.profile.socials.github}
               target="_blank"
               rel="noreferrer"
-              className="text-black hover:text-black transition-colors hidden sm:block"
+              className="text-black/60 hover:text-black transition-colors hidden sm:block"
               aria-label="GitHub Profile"
             >
               <Github size={20} />
@@ -157,7 +166,7 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
               href={PORTFOLIO_DATA.profile.socials.linkedin}
               target="_blank"
               rel="noreferrer"
-              className="text-black hover:text-blue-700 transition-colors hidden sm:block"
+              className="text-black/60 hover:text-blue-700 transition-colors hidden sm:block"
               aria-label="LinkedIn Profile"
             >
               <Linkedin size={20} />
@@ -165,8 +174,8 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
 
             {/* Mobile Menu Button */}
             <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 text-black hover:bg-white rounded-md z-50 border border-transparent hover:border-black"
+              onClick={() => setIsMobileMenuOpen(prev => !prev)}
+              className="lg:hidden p-2 text-black hover:bg-black/5 rounded-md z-50 border border-transparent hover:border-black/10"
               aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={isMobileMenuOpen}
             >
@@ -179,7 +188,7 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
       {/* Mobile Menu */}
       <div
         ref={mobileMenuRef}
-        className={`fixed inset-0 z-40 bg-white/95 backdrop-blur-xl transition-transform duration-500 ease-out-expo lg:hidden ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        className={`fixed inset-0 z-40 bg-white/98 backdrop-blur-xl transition-transform duration-500 lg:hidden ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
         onClick={(e) => {
           if (e.target === e.currentTarget) {
@@ -196,7 +205,7 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
                 onClick={(e) => handleNavClick(e, item.href)}
                 className="group flex items-baseline gap-4 font-sans text-4xl sm:text-5xl font-black text-black hover:text-orange-600 transition-colors tracking-tighter"
               >
-                <span className="text-sm font-mono font-bold text-black group-hover:text-orange-600">
+                <span className="text-sm font-mono font-bold text-black/30 group-hover:text-orange-600 transition-colors">
                   {item.num}
                 </span>
                 {item.name}
@@ -209,7 +218,7 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
               href={PORTFOLIO_DATA.profile.socials.github}
               target="_blank"
               rel="noreferrer"
-              className="text-black hover:text-black transition-colors"
+              className="text-black/60 hover:text-black transition-colors"
               aria-label="GitHub Profile"
             >
               <Github size={32} />
@@ -218,7 +227,7 @@ export const Navigation = ({ onScrollToTop, blueprintMode, setBlueprintMode }) =
               href={PORTFOLIO_DATA.profile.socials.linkedin}
               target="_blank"
               rel="noreferrer"
-              className="text-black hover:text-blue-700 transition-colors"
+              className="text-black/60 hover:text-blue-700 transition-colors"
               aria-label="LinkedIn Profile"
             >
               <Linkedin size={32} />

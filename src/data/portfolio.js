@@ -169,7 +169,7 @@ export const PORTFOLIO_DATA = {
       category: "REAL-TIME SYSTEMS",
       tech: ["Socket.io", "Redis", "Node.js"],
       description: "End-to-end encrypted messaging infrastructure designed for zero-latency communication. Features ephemeral message storage.",
-      link: "https://github.com/rajshah9305/kindred-heart-story",
+      link: "https://github.com/rajshah9305/aurora-orchestrator",
       stat: "< 50ms LATENCY",
       icon: Terminal,
       image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=2000"
@@ -180,7 +180,7 @@ export const PORTFOLIO_DATA = {
       category: "MACHINE LEARNING",
       tech: ["PyTorch", "OpenCV", "FastAPI"],
       description: "High-performance object detection pipeline optimized for edge deployment. Processes video streams in real-time with custom trained YOLOv8 models.",
-      link: "https://github.com/rajshah9305/Auraka",
+      link: "https://github.com/rajshah9305/awsmetagpt",
       stat: "95% MAP",
       icon: Eye,
       image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2000"
@@ -191,7 +191,7 @@ export const PORTFOLIO_DATA = {
       category: "DISTRIBUTED COMPUTING",
       tech: ["Rust", "WASM", "libp2p"],
       description: "Decentralized compute sharing protocol allowing browsers to contribute idle processing power to scientific simulations.",
-      link: "https://github.com/rajshah9305/groqqcrewwss",
+      link: "https://github.com/rajshah9305/raj-ai-app-builder",
       stat: "1M+ OPS/SEC",
       icon: Network,
       image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&q=80&w=2000"
@@ -224,7 +224,7 @@ export const PORTFOLIO_DATA = {
       category: "MEDIA INFRASTRUCTURE",
       tech: ["Elixir", "Phoenix", "WebRTC"],
       description: "Adaptive bitrate video streaming server capable of handling millions of concurrent connections with minimal resource footprint.",
-      link: "https://github.com/rajshah9305/hoteldeposits",
+      link: "https://github.com/rajshah9305/codingnexusai",
       stat: "4K HDR LIVE",
       icon: Cloud,
       image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&q=80&w=2000"
@@ -235,7 +235,7 @@ export const PORTFOLIO_DATA = {
       category: "IOT ORCHESTRATION",
       tech: ["Node.js", "MQTT", "Docker"],
       description: "Lightweight container orchestration system specifically built for low-power edge devices and industrial IoT sensors.",
-      link: "https://github.com/rajshah9305/Fantastic-doodle",
+      link: "https://github.com/rajshah9305/groqqcrewwss",
       stat: "5MB FOOTPRINT",
       icon: Smartphone,
       image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2000"
@@ -246,7 +246,7 @@ export const PORTFOLIO_DATA = {
       category: "CYBERSECURITY",
       tech: ["Python", "TensorFlow", "eBPF"],
       description: "Kernel-level intrusion detection system using anomaly detection to identify zero-day exploits in real-time.",
-      link: "https://github.com/rajshah9305/codingnexusai",
+      link: "https://github.com/rajshah9305/v0-ai-agent-visualization",
       stat: "99.8% DETECTION",
       icon: Shield,
       image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=2000"

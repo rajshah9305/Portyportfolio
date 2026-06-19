@@ -7,38 +7,54 @@ export const ServiceCard = memo(({ service, onDetailsClick }) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: parseInt(service.id) * 0.1 }}
-      className="group card relative overflow-hidden h-full flex flex-col"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ duration: 0.5, delay: parseInt(service.id) * 0.08 }}
+      className="group relative border border-black bg-white overflow-hidden flex flex-col hover:border-orange-600 transition-colors duration-300 cursor-default"
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-500"></div>
+      {/* Top accent */}
+      <div className="h-0.5 w-0 bg-orange-600 group-hover:w-full transition-all duration-500 ease-out" />
 
-      <div className="relative z-10 flex flex-col h-full">
-        <motion.div
-          whileHover={{ scale: 1.1, rotate: 5 }}
-          className="mb-6 inline-flex items-center justify-center w-12 h-12 rounded-full bg-white text-black border border-black group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all duration-300"
-        >
-          <Icon size={24} />
-        </motion.div>
+      <div className="p-8 flex flex-col flex-grow">
+        {/* Service number */}
+        <div className="flex items-start justify-between mb-6">
+          <motion.div
+            whileHover={{ scale: 1.1, rotate: 5 }}
+            className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white text-black border border-black group-hover:bg-orange-600 group-hover:text-white group-hover:border-orange-600 transition-all duration-300"
+          >
+            <Icon size={22} />
+          </motion.div>
+          <span className="font-mono text-[10px] font-bold text-black/20 group-hover:text-orange-600/50 transition-colors">
+            {service.id}
+          </span>
+        </div>
 
-        <h3 className="heading-3 mb-3">
+        <h3 className="font-sans text-xl font-black uppercase tracking-tight text-black mb-3">
           {service.title}
         </h3>
 
-        <p className="body-base flex-grow">
+        <p className="font-sans text-sm font-medium leading-relaxed text-black/60 flex-grow mb-6">
           {service.desc}
         </p>
 
+        {/* Tech preview */}
+        <div className="flex flex-wrap gap-1.5 mb-6">
+          {service.details.technologies.slice(0, 3).map((tech, i) => (
+            <span key={i} className="font-mono text-[9px] font-bold uppercase tracking-wider text-black/40 border border-black/10 px-2 py-0.5 group-hover:border-orange-600/20 transition-colors">
+              {tech}
+            </span>
+          ))}
+        </div>
+
         <motion.button
-          whileHover={{ x: 5 }}
+          whileHover={{ x: 4 }}
           onClick={() => onDetailsClick(service)}
-          className="mt-6 flex items-center gap-2 label-mono text-black group-hover:text-primary transition-colors cursor-pointer"
+          className="flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-widest text-black/50 group-hover:text-orange-600 transition-colors cursor-pointer mt-auto"
           aria-label={`View details for ${service.title}`}
         >
-          <span>Details</span>
-          <MoveRight size={12} className="transition-transform group-hover:translate-x-1" />
+          <span>View Details</span>
+          <MoveRight size={12} />
         </motion.button>
       </div>
     </motion.div>

@@ -1,17 +1,24 @@
 import { useEffect } from 'react';
 
+// Tracks lock count to handle multiple simultaneous callers (modal + mobile menu)
+let lockCount = 0;
+
 export const useLockBodyScroll = (lock = false) => {
   useEffect(() => {
-    const originalOverflow = document.body.style.overflow;
-    
     if (lock) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = originalOverflow;
+      lockCount++;
+      if (lockCount === 1) {
+        document.body.style.overflow = 'hidden';
+      }
     }
 
     return () => {
-      document.body.style.overflow = originalOverflow;
+      if (lock) {
+        lockCount = Math.max(0, lockCount - 1);
+        if (lockCount === 0) {
+          document.body.style.overflow = '';
+        }
+      }
     };
   }, [lock]);
 };
