@@ -7,8 +7,8 @@ import { useLockBodyScroll } from '../hooks/useLockBodyScroll';
 
 const NAV_ITEMS = [
   { name: 'SERVICES', href: '#services', id: 'services', num: '01' },
-  { name: 'WORK', href: '#work', id: 'work', num: '02' },
-  { name: 'EXPERIENCE', href: '#experience', id: 'experience', num: '03' }
+  { name: 'WORK',     href: '#work',     id: 'work',     num: '02' },
+  { name: 'EXPERIENCE', href: '#experience', id: 'experience', num: '03' },
 ];
 
 export const Navigation = ({ onScrollToTop, blueprintMode, onToggleBlueprintMode }) => {
@@ -20,98 +20,78 @@ export const Navigation = ({ onScrollToTop, blueprintMode, onToggleBlueprintMode
 
   useLockBodyScroll(isMobileMenuOpen);
 
+  // Clock
   useEffect(() => {
-    const timer = setInterval(() => {
+    const tick = () => {
       const now = new Date();
-      setCurrentTime(
-        now.toLocaleTimeString('en-US', {
-          hour12: false,
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit'
-        })
-      );
-    }, 1000);
-
-    return () => clearInterval(timer);
+      setCurrentTime(now.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' }));
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
   }, []);
 
+  // Scroll-aware nav bg
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Keyboard: Escape + focus trap
   useEffect(() => {
-    const handleKeyDown = (e) => {
+    const onKey = (e) => {
       if (e.key === 'Escape' && isMobileMenuOpen) {
         setIsMobileMenuOpen(false);
+        return;
       }
-
       if (e.key === 'Tab' && isMobileMenuOpen && mobileMenuRef.current) {
-        const focusableElements = Array.from(mobileMenuRef.current.querySelectorAll(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-        )).filter(el => !el.hasAttribute('disabled') && el.offsetParent !== null);
-
-        if (focusableElements.length === 0) return;
-
-        const firstElement = focusableElements[0];
-        const lastElement = focusableElements[focusableElements.length - 1];
-
-        if (e.shiftKey) {
-          if (document.activeElement === firstElement) {
-            lastElement.focus();
-            e.preventDefault();
-          }
-        } else {
-          if (document.activeElement === lastElement) {
-            firstElement.focus();
-            e.preventDefault();
-          }
-        }
+        const els = Array.from(mobileMenuRef.current.querySelectorAll(
+          'button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])'
+        )).filter(el => !el.disabled && el.offsetParent !== null);
+        if (!els.length) return;
+        const first = els[0], last = els[els.length - 1];
+        if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
+        else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
       }
     };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
   }, [isMobileMenuOpen]);
 
   const handleNavClick = (e, href) => {
     e.preventDefault();
     const wasOpen = isMobileMenuOpen;
     setIsMobileMenuOpen(false);
-
     setTimeout(() => {
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, wasOpen ? 300 : 0);
   };
 
   return (
     <>
-      <nav className={`fixed top-0 z-50 w-full transition-all duration-300 ${scrolled ? 'border-b border-black/10 bg-white/90 backdrop-blur-md shadow-sm' : 'bg-transparent'}`}>
-        <div className="flex h-16 md:h-20 items-center justify-between px-6 md:px-12 max-w-[1920px] mx-auto">
+      <nav className={`fixed top-0 z-50 w-full transition-all duration-300 ${
+        scrolled ? 'border-b border-black/10 bg-white/90 backdrop-blur-md shadow-sm' : 'bg-transparent'
+      }`}>
+        <div className="flex h-14 sm:h-16 md:h-20 items-center justify-between px-4 sm:px-6 md:px-12 max-w-[1920px] mx-auto">
+
           {/* Logo */}
           <button
-            className="flex items-center gap-4 group cursor-pointer"
+            className="flex items-center gap-2.5 sm:gap-3 md:gap-4 group cursor-pointer shrink-0"
             onClick={onScrollToTop}
             aria-label="Scroll to top"
           >
-            <div className="flex h-8 w-8 items-center justify-center bg-orange-600 text-white font-black text-sm tracking-tighter shadow-md group-hover:scale-105 transition-transform">
+            <div className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center bg-orange-600 text-white font-black text-[11px] sm:text-sm tracking-tighter shadow-md group-hover:scale-105 transition-transform shrink-0">
               RS
             </div>
-            <div className="flex flex-col">
-              <span className="font-bold tracking-wider text-sm text-black">
-                {PORTFOLIO_DATA.profile.name}
-              </span>
-              <span className="font-mono text-[9px] text-black/40 uppercase tracking-widest">{PORTFOLIO_DATA.profile.tagline}</span>
+            <div className="flex flex-col leading-none">
+              <span className="font-bold tracking-wider text-xs sm:text-sm text-black">{PORTFOLIO_DATA.profile.name}</span>
+              <span className="font-mono text-[8px] sm:text-[9px] text-black/35 uppercase tracking-widest hidden xs:block">{PORTFOLIO_DATA.profile.tagline}</span>
             </div>
           </button>
 
-          {/* Desktop Nav Links */}
-          <div className="hidden lg:flex items-center p-1.5 bg-white/80 backdrop-blur-md border border-black/10 rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300">
+          {/* Desktop pill nav */}
+          <div className="hidden lg:flex items-center p-1 sm:p-1.5 bg-white/80 backdrop-blur-md border border-black/10 rounded-full shadow-md hover:shadow-lg transition-shadow duration-300">
             {NAV_ITEMS.map((item) => {
               const isActive = activeSection === item.id;
               return (
@@ -119,120 +99,100 @@ export const Navigation = ({ onScrollToTop, blueprintMode, onToggleBlueprintMode
                   key={item.name}
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className={`relative px-6 py-2.5 rounded-full font-mono text-[11px] font-bold tracking-widest transition-all duration-300 flex items-center gap-2 group ${isActive
-                    ? 'bg-black text-white shadow-sm'
-                    : 'text-black hover:text-black hover:bg-black/5'
-                    }`}
+                  className={`relative px-4 xl:px-6 py-2 sm:py-2.5 rounded-full font-mono text-[10px] sm:text-[11px] font-bold tracking-widest transition-all duration-300 flex items-center gap-1.5 sm:gap-2 group ${
+                    isActive ? 'bg-black text-white shadow-sm' : 'text-black hover:bg-black/5'
+                  }`}
                 >
-                  <span
-                    className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${isActive
-                      ? 'bg-orange-500 scale-125'
-                      : 'bg-black/30 group-hover:bg-orange-400'
-                      }`}
-                  />
+                  <span className={`w-1.5 h-1.5 rounded-full transition-all duration-300 shrink-0 ${
+                    isActive ? 'bg-orange-500 scale-125' : 'bg-black/25 group-hover:bg-orange-400'
+                  }`} />
                   {item.name}
                 </a>
               );
             })}
           </div>
 
-          {/* Socials & Status */}
-          <div className="flex items-center gap-4 md:gap-6">
-            <BlueprintToggle
-              isBlueprintMode={blueprintMode}
-              onToggle={onToggleBlueprintMode}
-            />
+          {/* Right cluster */}
+          <div className="flex items-center gap-2 sm:gap-3 md:gap-4 lg:gap-6">
+            <BlueprintToggle isBlueprintMode={blueprintMode} onToggle={onToggleBlueprintMode} />
 
-            <div className="hidden md:flex flex-col items-end text-[10px] font-mono font-medium leading-tight text-black/50">
-              <span>
-                STATUS: <span className="text-orange-600 font-bold">ONLINE</span>
-              </span>
+            <div className="hidden xl:flex flex-col items-end text-[9px] sm:text-[10px] font-mono font-medium leading-tight text-black/45">
+              <span>STATUS: <span className="text-orange-600 font-bold">ONLINE</span></span>
               <span>UTC {currentTime}</span>
             </div>
 
-            <div className="h-8 w-[1px] bg-black/10 hidden md:block"></div>
+            <div className="h-6 sm:h-8 w-[1px] bg-black/10 hidden md:block" />
 
-            <a
-              href={PORTFOLIO_DATA.profile.socials.github}
-              target="_blank"
-              rel="noreferrer"
-              className="text-black/60 hover:text-black transition-colors hidden sm:block"
-              aria-label="GitHub Profile"
-            >
-              <Github size={20} />
+            <a href={PORTFOLIO_DATA.profile.socials.github} target="_blank" rel="noreferrer"
+              className="text-black/50 hover:text-black transition-colors hidden sm:block" aria-label="GitHub">
+              <Github size={18} />
+            </a>
+            <a href={PORTFOLIO_DATA.profile.socials.linkedin} target="_blank" rel="noreferrer"
+              className="text-black/50 hover:text-blue-700 transition-colors hidden sm:block" aria-label="LinkedIn">
+              <Linkedin size={18} />
             </a>
 
-            <a
-              href={PORTFOLIO_DATA.profile.socials.linkedin}
-              target="_blank"
-              rel="noreferrer"
-              className="text-black/60 hover:text-blue-700 transition-colors hidden sm:block"
-              aria-label="LinkedIn Profile"
-            >
-              <Linkedin size={20} />
-            </a>
-
-            {/* Mobile Menu Button */}
+            {/* Hamburger */}
             <button
               onClick={() => setIsMobileMenuOpen(prev => !prev)}
-              className="lg:hidden p-2 text-black hover:bg-black/5 rounded-md z-50 border border-transparent hover:border-black/10"
-              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              className="lg:hidden p-1.5 sm:p-2 text-black hover:bg-black/5 rounded-md border border-transparent hover:border-black/10 transition-colors"
+              aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isMobileMenuOpen}
             >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
         </div>
       </nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile full-screen menu */}
       <div
         ref={mobileMenuRef}
-        className={`fixed inset-0 z-40 bg-white/98 backdrop-blur-xl transition-transform duration-500 lg:hidden ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-          }`}
-        onClick={(e) => {
-          if (e.target === e.currentTarget) {
-            setIsMobileMenuOpen(false);
-          }
-        }}
+        className={`fixed inset-0 z-40 bg-white backdrop-blur-xl transition-transform duration-500 ease-out lg:hidden flex flex-col ${
+          isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
       >
-        <div className="flex flex-col h-full justify-between p-8 pt-32">
-          <div className="flex flex-col gap-6">
-            {NAV_ITEMS.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-                className="group flex items-baseline gap-4 font-sans text-4xl sm:text-5xl font-black text-black hover:text-orange-600 transition-colors tracking-tighter"
-              >
-                <span className="text-sm font-mono font-bold text-black/30 group-hover:text-orange-600 transition-colors">
-                  {item.num}
-                </span>
-                {item.name}
-              </a>
-            ))}
-          </div>
+        {/* Close button top-right */}
+        <div className="flex justify-end px-4 sm:px-6 pt-4 sm:pt-5">
+          <button
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="p-2 text-black hover:bg-black/5 rounded-md"
+            aria-label="Close menu"
+          >
+            <X size={24} />
+          </button>
+        </div>
 
-          <div className="flex gap-6 pt-8 border-t border-black/10">
+        {/* Nav links */}
+        <div className="flex flex-col justify-center flex-grow px-6 sm:px-10 gap-4 sm:gap-6">
+          {NAV_ITEMS.map((item) => (
             <a
-              href={PORTFOLIO_DATA.profile.socials.github}
-              target="_blank"
-              rel="noreferrer"
-              className="text-black/60 hover:text-black transition-colors"
-              aria-label="GitHub Profile"
+              key={item.name}
+              href={item.href}
+              onClick={(e) => handleNavClick(e, item.href)}
+              className="group flex items-baseline gap-3 sm:gap-4 font-sans text-4xl xs:text-5xl sm:text-6xl font-black text-black hover:text-orange-600 transition-colors tracking-tighter leading-none"
             >
-              <Github size={32} />
+              <span className="text-xs sm:text-sm font-mono font-bold text-black/25 group-hover:text-orange-600 transition-colors shrink-0">
+                {item.num}
+              </span>
+              {item.name}
             </a>
-            <a
-              href={PORTFOLIO_DATA.profile.socials.linkedin}
-              target="_blank"
-              rel="noreferrer"
-              className="text-black/60 hover:text-blue-700 transition-colors"
-              aria-label="LinkedIn Profile"
-            >
-              <Linkedin size={32} />
-            </a>
-          </div>
+          ))}
+        </div>
+
+        {/* Bottom socials */}
+        <div className="flex items-center gap-5 sm:gap-6 px-6 sm:px-10 pb-8 sm:pb-10 border-t border-black/10 pt-6">
+          <a href={PORTFOLIO_DATA.profile.socials.github} target="_blank" rel="noreferrer"
+            className="text-black/50 hover:text-black transition-colors" aria-label="GitHub">
+            <Github size={28} />
+          </a>
+          <a href={PORTFOLIO_DATA.profile.socials.linkedin} target="_blank" rel="noreferrer"
+            className="text-black/50 hover:text-blue-700 transition-colors" aria-label="LinkedIn">
+            <Linkedin size={28} />
+          </a>
+          <span className="ml-auto font-mono text-[10px] text-black/30 uppercase tracking-widest">
+            {PORTFOLIO_DATA.profile.location}
+          </span>
         </div>
       </div>
     </>

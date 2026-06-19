@@ -5,17 +5,17 @@ export const ScrollProgress = () => {
   const scrolled = useScrollProgress();
 
   return (
-    <div 
-      className="fixed right-0 top-0 z-50 h-full w-1.5 hidden md:block bg-black/5 backdrop-blur-sm"
+    <div
+      className="fixed right-0 top-0 z-50 h-full w-1 hidden sm:block bg-black/5"
       role="progressbar"
       aria-valuenow={Math.round(scrolled)}
       aria-valuemin="0"
       aria-valuemax="100"
       aria-label="Page scroll progress"
     >
-      <div 
-        className="w-full bg-orange-600 transition-all duration-150 ease-out" 
-        style={{ height: `${scrolled}%` }} 
+      <div
+        className="w-full bg-orange-600 transition-all duration-100 ease-out"
+        style={{ height: `${scrolled}%` }}
       />
     </div>
   );
