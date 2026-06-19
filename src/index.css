@@ -33,11 +33,13 @@
     box-shadow: none !important;
     text-shadow: none !important;
     background-image: none !important;
-    transition:
-      background-color 500ms var(--ease-out-expo),
-      border-color 500ms var(--ease-out-expo),
-      color 500ms var(--ease-out-expo),
-      opacity 500ms var(--ease-out-expo) !important;
+    transition: background-color 500ms var(--ease-out-expo),
+                border-color 500ms var(--ease-out-expo),
+                color 500ms var(--ease-out-expo),
+                box-shadow 500ms var(--ease-out-expo),
+                text-shadow 500ms var(--ease-out-expo),
+                filter 500ms var(--ease-out-expo),
+                opacity 500ms var(--ease-out-expo) !important;
   }
   .blueprint-mode img,
   .blueprint-mode video,

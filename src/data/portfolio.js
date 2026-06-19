@@ -21,7 +21,7 @@ export const PORTFOLIO_DATA = {
     name: "RAJ SHAH",
     title: "FULL STACK ARCHITECT",
     tagline: "SYSTEMS_OVER_TEMPLATES",
-    location: "GUJARAT, IN",
+    location: "CALGARY, AB",
     availability: "AVAILABLE FOR WORK",
     socials: {
       github: "https://github.com/rajshah9305",

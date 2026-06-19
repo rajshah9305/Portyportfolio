@@ -17,8 +17,7 @@ export const ProjectCard = memo(({ project, index }) => {
       <div className="relative h-36 xs:h-40 sm:h-44 md:h-48 overflow-hidden bg-black/5 shrink-0">
         <img
           src={project.image}
-          alt=""
-          aria-hidden="true"
+          alt={`Visual representation of project ${project.title}`}
           loading="lazy"
           decoding="async"
           className="absolute inset-0 w-full h-full object-cover grayscale transition-transform duration-700 ease-out group-hover:scale-105"

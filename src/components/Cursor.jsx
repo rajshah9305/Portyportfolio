@@ -6,6 +6,16 @@ const INTERACTIVE = new Set(['A', 'BUTTON']);
 export const Cursor = () => {
   const [mousePos, setMousePos] = useState({ x: -100, y: -100 });
   const [isHovering, setIsHovering] = useState(false);
+  const [isVisible, setIsVisible] = useState(() =>
+    typeof window !== 'undefined' ? window.matchMedia('(pointer: fine)').matches : false
+  );
+
+  useEffect(() => {
+    const mql = window.matchMedia('(pointer: fine)');
+    const handler = (e) => setIsVisible(e.matches);
+    mql.addEventListener('change', handler);
+    return () => mql.removeEventListener('change', handler);
+  }, []);
 
   const handleMouseMove = useCallback((e) => {
     setMousePos({ x: e.clientX, y: e.clientY });
@@ -29,6 +39,8 @@ export const Cursor = () => {
       window.removeEventListener('mouseover', handleMouseOver);
     };
   }, [handleMouseMove, handleMouseOver]);
+
+  if (!isVisible) return null;
 
   return (
     <motion.div

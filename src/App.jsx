@@ -12,7 +12,8 @@ import {
   Navigation,
   FloatingActions,
   LoadingScreen,
-  Cursor
+  Cursor,
+  Button
 } from './components';
 import { PORTFOLIO_DATA } from './data/portfolio';
 import { usePortfolioState } from './hooks/usePortfolioState';
@@ -106,27 +107,22 @@ export default function App() {
               </div>
 
               <div className="flex flex-col xs:flex-row gap-3 sm:gap-4 w-full lg:w-auto shrink-0">
-                <a
+                <Button
                   href={`mailto:${PORTFOLIO_DATA.profile.socials.email}`}
-                  className="group relative flex items-center justify-center gap-2 overflow-hidden px-6 sm:px-8 py-3.5 sm:py-4 font-mono text-[11px] sm:text-xs font-bold uppercase tracking-widest border border-black bg-black text-white hover:border-orange-600 transition-colors duration-300 cursor-pointer"
+                  icon={Mail}
+                  ariaLabel="Initialize Contact via Email"
                 >
-                  <span className="z-10 flex items-center gap-2 relative">
-                    <Mail size={13} className="transition-transform duration-300 group-hover:rotate-12 shrink-0" />
-                    Initialize Contact
-                  </span>
-                  <div className="absolute inset-0 -translate-x-full bg-orange-600 transition-transform duration-300 ease-out group-hover:translate-x-0" />
-                </a>
-                <a
+                  Initialize Contact
+                </Button>
+                <Button
                   href="#work"
                   onClick={scrollToWork}
-                  className="group relative flex items-center justify-center gap-2 overflow-hidden px-6 sm:px-8 py-3.5 sm:py-4 font-mono text-[11px] sm:text-xs font-bold uppercase tracking-widest border border-black bg-white text-black hover:text-white transition-colors duration-300 cursor-pointer"
+                  variant="outline"
+                  icon={Terminal}
+                  ariaLabel="View Projects Database"
                 >
-                  <span className="z-10 flex items-center gap-2 relative">
-                    <Terminal size={13} className="transition-transform duration-300 group-hover:rotate-12 shrink-0" />
-                    View Database
-                  </span>
-                  <div className="absolute inset-0 -translate-x-full bg-black transition-transform duration-300 ease-out group-hover:translate-x-0" />
-                </a>
+                  View Database
+                </Button>
               </div>
             </div>
 
@@ -284,7 +280,7 @@ export default function App() {
             <div className="h-56 sm:h-72 md:h-full md:min-h-[380px] lg:min-h-[420px] relative overflow-hidden flex items-center justify-center border border-white/10 bg-white/5 group">
               <img
                 src={architectureDiagram}
-                alt="System Architecture Diagram"
+                alt="Technical architecture diagram showing microservices orchestration and cloud infrastructure"
                 loading="lazy"
                 decoding="async"
                 className="w-full h-full object-contain opacity-75 group-hover:opacity-100 transition-opacity duration-500"
@@ -326,16 +322,14 @@ export default function App() {
                 Let&apos;s Build<br />
                 <span className="text-outline-white">Something.</span>
               </h2>
-              <a
+              <Button
                 href={`mailto:${PORTFOLIO_DATA.profile.socials.email}`}
-                className="group relative inline-flex items-center justify-center gap-2 overflow-hidden px-6 sm:px-8 py-3.5 sm:py-4 font-mono text-[11px] sm:text-xs font-bold uppercase tracking-widest border border-white bg-transparent text-white hover:border-orange-600 transition-colors duration-300 cursor-pointer"
+                icon={Mail}
+                className="border-white bg-transparent text-white hover:border-orange-600"
+                ariaLabel="Start Conversation via Email"
               >
-                <span className="z-10 flex items-center gap-2 relative">
-                  <Mail size={13} className="transition-transform duration-300 group-hover:rotate-12 shrink-0" />
-                  Start Conversation
-                </span>
-                <div className="absolute inset-0 -translate-x-full bg-orange-600 transition-transform duration-300 ease-out group-hover:translate-x-0" />
-              </a>
+                Start Conversation
+              </Button>
             </div>
 
             {/* Three-column info */}
