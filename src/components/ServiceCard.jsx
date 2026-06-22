@@ -7,10 +7,19 @@ export const ServiceCard = memo(({ service, onDetailsClick }) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-40px' }}
-      transition={{ duration: 0.45, delay: parseInt(service.id) * 0.07 }}
+      variants={{
+        hidden: { opacity: 0, y: 16 },
+        visible: {
+          opacity: 1,
+          y: 0,
+          transition: {
+            type: 'spring',
+            stiffness: 100,
+            damping: 20,
+            delay: parseInt(service.id) * 0.1
+          }
+        }
+      }}
       className="group relative border border-black bg-white overflow-hidden flex flex-col hover:border-orange-600 transition-colors duration-300"
     >
       {/* Top accent bar */}

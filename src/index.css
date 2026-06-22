@@ -65,10 +65,10 @@
   }
 
   /* Scrollbar */
-  ::-webkit-scrollbar { width: 6px; height: 6px; }
-  ::-webkit-scrollbar-track { @apply bg-white; }
-  ::-webkit-scrollbar-thumb { @apply bg-black/20 rounded-full; }
-  ::-webkit-scrollbar-thumb:hover { @apply bg-orange-600; }
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { @apply bg-transparent; }
+  ::-webkit-scrollbar-thumb { @apply bg-black/10 rounded-full transition-colors duration-300; }
+  ::-webkit-scrollbar-thumb:hover { @apply bg-orange-600/80; }
 
   /* Selection */
   ::selection { @apply bg-orange-600 text-white; }
@@ -89,35 +89,35 @@
   /* Fluid headings — scale from mobile → desktop */
   .heading-1 {
     @apply font-sans font-black uppercase tracking-tighter text-black;
-    font-size: clamp(1.75rem, 5vw, 3.75rem);
-    line-height: 1.05;
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    line-height: 0.9;
   }
 
   .heading-2 {
     @apply font-sans font-black uppercase tracking-tight text-black;
-    font-size: clamp(1.375rem, 3.5vw, 2.5rem);
+    font-size: clamp(1.75rem, 5vw, 3.5rem);
     line-height: 1.1;
   }
 
   .heading-3 {
     @apply font-sans font-bold uppercase tracking-tight text-black;
-    font-size: clamp(1rem, 2vw, 1.5rem);
+    font-size: clamp(1.25rem, 3vw, 2rem);
     line-height: 1.2;
   }
 
   .body-large {
-    @apply font-sans font-medium leading-relaxed text-black;
-    font-size: clamp(0.9375rem, 1.5vw, 1.125rem);
+    @apply font-sans font-medium leading-relaxed text-black/70;
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
   }
 
   .body-base {
-    @apply font-sans font-medium leading-relaxed text-black;
-    font-size: clamp(0.875rem, 1.2vw, 1rem);
+    @apply font-sans font-medium leading-relaxed text-black/60;
+    font-size: clamp(0.875rem, 1.2vw, 1.125rem);
   }
 
   .label-mono {
     @apply font-mono font-bold uppercase tracking-widest;
-    font-size: clamp(0.5625rem, 0.8vw, 0.75rem);
+    font-size: clamp(0.625rem, 0.8vw, 0.875rem);
   }
 
   /* ── Cards ──────────────────────────────────────────── */

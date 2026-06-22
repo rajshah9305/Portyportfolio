@@ -7,10 +7,19 @@ export const ProjectCard = memo(({ project, index }) => {
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{ duration: 0.45, delay: (index % 2) * 0.08 }}
+      variants={{
+        hidden: { opacity: 0, y: 20 },
+        visible: {
+          opacity: 1,
+          y: 0,
+          transition: {
+            type: 'spring',
+            stiffness: 100,
+            damping: 20,
+            delay: (index % 2) * 0.1
+          }
+        }
+      }}
       className="group relative border border-black bg-white overflow-hidden flex flex-col hover:border-orange-600 transition-colors duration-300"
     >
       {/* Image strip — native lazy load, no layout shift via fixed height */}
