@@ -1,30 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Mail, CheckCircle2, ArrowUp } from 'lucide-react';
-import { PORTFOLIO_DATA } from '../data/portfolio';
 
-export const FloatingActions = ({ onScrollToTop }) => {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText(PORTFOLIO_DATA.profile.socials.email);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      // Clipboard API unavailable — silent fail
-    }
-  };
-
+export const FloatingActions = ({ onScrollToTop, onCopyEmail, isCopied }) => {
   return (
     <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 z-40 flex flex-col gap-2">
       <button
-        onClick={handleCopyEmail}
+        onClick={onCopyEmail}
         className="h-9 w-9 sm:h-10 sm:w-10 bg-black text-white flex items-center justify-center shadow-lg hover:bg-orange-600 transition-colors relative group rounded-sm"
-        aria-label={copied ? 'Email copied' : 'Copy email address'}
+        aria-label={isCopied ? 'Email copied' : 'Copy email address'}
       >
-        {copied ? <CheckCircle2 size={16} /> : <Mail size={16} />}
+        {isCopied ? <CheckCircle2 size={16} /> : <Mail size={16} />}
         <span className="absolute right-full mr-2 bg-black text-white text-[9px] sm:text-[10px] px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap font-mono pointer-events-none">
-          {copied ? 'COPIED' : 'COPY EMAIL'}
+          {isCopied ? 'COPIED' : 'COPY EMAIL'}
         </span>
       </button>
 

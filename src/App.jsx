@@ -18,6 +18,8 @@ import {
 } from './components';
 import { PORTFOLIO_DATA } from './data/portfolio';
 import { usePortfolioState } from './hooks/usePortfolioState';
+
+// TODO: Optimize architecture.jpg (currently 3.3MB) for better production performance
 import architectureDiagram from './assets/architecture.jpg';
 
 export default function App() {
@@ -58,7 +60,11 @@ export default function App() {
         blueprintMode={blueprintMode}
         onToggleBlueprintMode={toggleBlueprintMode}
       />
-      <FloatingActions onScrollToTop={scrollToTop} />
+      <FloatingActions
+        onScrollToTop={scrollToTop}
+        onCopyEmail={handleCopyEmail}
+        isCopied={emailCopied}
+      />
 
       <main className="relative z-10">
         {/* Mid-section ambient glow */}
@@ -492,34 +498,6 @@ export default function App() {
           </div>
         </footer>
       </main>
-
-      <style>{`
-        .text-outline-black {
-          -webkit-text-stroke: 2px #000;
-          -webkit-text-fill-color: transparent;
-        }
-        .text-outline-white {
-          -webkit-text-stroke: 2px rgba(255,255,255,0.25);
-          -webkit-text-fill-color: transparent;
-        }
-        .blueprint-mode .text-outline-black {
-          -webkit-text-stroke: 2px #FF6B00;
-        }
-        @keyframes marquee {
-          0%   { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-marquee {
-          animation: marquee 50s linear infinite;
-        }
-        .animate-marquee:hover {
-          animation-play-state: paused;
-        }
-        /* Prevent horizontal overflow on very small screens */
-        @media (max-width: 360px) {
-          .text-outline-black { -webkit-text-stroke: 1.5px #000; }
-        }
-      `}</style>
       <Analytics />
     </div>
   );
