@@ -79,7 +79,7 @@ export const ServiceModal = ({ service, isOpen, onClose }) => {
           {/* Overview */}
           <div>
             <h4 className="font-mono text-[9px] sm:text-xs font-bold text-black uppercase tracking-widest mb-2 sm:mb-3">Overview</h4>
-            <p className="font-sans text-sm sm:text-base md:text-lg font-medium text-black/80 leading-relaxed">
+            <p className="font-sans text-sm sm:text-base md:text-lg font-medium text-black/80 leading-relaxed whitespace-pre-line">
               {service.details.fullDescription}
             </p>
           </div>

@@ -16,7 +16,7 @@ export const useDecrypt = (text, trigger = true) => {
         text
           .split('')
           .map((letter, index) => {
-            if (index < iteration) return letter;
+            if (index < iteration || letter === ' ') return letter;
             return CHARS[Math.floor(Math.random() * CHARS.length)];
           })
           .join('')
