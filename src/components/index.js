@@ -10,5 +10,4 @@ export { ExperienceItem } from './ExperienceItem';
 export { Navigation } from './Navigation';
 export { FloatingActions } from './FloatingActions';
 export { LoadingScreen } from './LoadingScreen';
-export { BlueprintToggle } from './BlueprintToggle';
 export { Cursor } from './Cursor';
