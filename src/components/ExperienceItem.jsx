@@ -29,7 +29,7 @@ export const ExperienceItem = memo(({ item, last }) => (
       <div className="font-mono text-[9px] sm:text-[10px] md:text-xs font-bold uppercase tracking-widest text-black/35 mb-3 sm:mb-4">
         {item.company}
       </div>
-      <p className="font-sans text-xs sm:text-sm md:text-base font-medium leading-relaxed text-black/55 max-w-2xl">
+      <p className="font-sans text-xs sm:text-sm md:text-base font-medium leading-relaxed text-black/55 max-w-2xl whitespace-pre-line">
         {item.desc}
       </p>
     </div>

@@ -65,7 +65,7 @@ export const ProjectCard = memo(({ project, index }) => {
           </h3>
         </div>
 
-        <p className="font-sans text-xs xs:text-sm font-medium leading-relaxed text-black/55 mb-4 xs:mb-5 flex-grow">
+        <p className="font-sans text-xs xs:text-sm font-medium leading-relaxed text-black/55 mb-4 xs:mb-5 flex-grow whitespace-pre-line">
           {project.description}
         </p>
 

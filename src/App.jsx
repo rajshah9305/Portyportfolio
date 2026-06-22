@@ -61,6 +61,17 @@ export default function App() {
       <FloatingActions onScrollToTop={scrollToTop} />
 
       <main className="relative z-10">
+        {/* Mid-section ambient glow */}
+        <div
+          className="hidden md:block absolute top-[40%] left-0 w-[500px] lg:w-[700px] h-[500px] lg:h-[700px] bg-orange-500/5 rounded-full blur-[120px] lg:blur-[140px] pointer-events-none -translate-x-1/2 z-0"
+          aria-hidden="true"
+        />
+
+        {/* Footer-area ambient glow */}
+        <div
+          className="hidden md:block absolute bottom-0 right-0 w-[600px] lg:w-[800px] h-[600px] lg:h-[800px] bg-orange-600/5 rounded-full blur-[120px] lg:blur-[140px] pointer-events-none translate-x-1/4 translate-y-1/4 z-0"
+          aria-hidden="true"
+        />
 
         {/* ─── HERO ─────────────────────────────────────────────── */}
         <section className="container mx-auto px-4 sm:px-6 md:px-12 pt-28 sm:pt-32 md:pt-40 lg:pt-44 pb-16 sm:pb-20 md:pb-28 lg:pb-32">
@@ -96,28 +107,19 @@ export default function App() {
 
             {/* Name */}
             <h1 className="font-sans font-black uppercase tracking-tighter leading-[0.82] text-black text-[clamp(3.5rem,13vw,11rem)]">
-              <span className="block overflow-hidden">
-                <motion.span
-                  variants={{
-                    hidden: { y: "100%" },
-                    visible: { y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
-                  }}
-                  className="block"
-                >
-                  RAJ
-                </motion.span>
-              </span>
-              <span className="block overflow-hidden">
-                <motion.span
-                  variants={{
-                    hidden: { y: "100%" },
-                    visible: { y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
-                  }}
-                  className="block text-outline-black"
-                >
-                  SHAH
-                </motion.span>
-              </span>
+              {PORTFOLIO_DATA.profile.name.split(' ').map((part, index) => (
+                <span key={index} className="block overflow-hidden">
+                  <motion.span
+                    variants={{
+                      hidden: { y: "100%" },
+                      visible: { y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+                    }}
+                    className={`block ${index > 0 ? 'text-outline-black' : ''}`}
+                  >
+                    {part}
+                  </motion.span>
+                </span>
+              ))}
             </h1>
 
             {/* Subtitle + CTAs */}
@@ -130,7 +132,7 @@ export default function App() {
             >
               <div className="max-w-xl">
                 <h2 className="font-sans text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black uppercase tracking-tight text-black mb-4 sm:mb-5">
-                  <DecryptText text="Digital Architect & Engineer" />
+                  <DecryptText text={PORTFOLIO_DATA.profile.title} />
                 </h2>
                 <p className="font-sans text-base sm:text-lg font-medium leading-relaxed text-black/65 max-w-lg">
                   Fusing{' '}
@@ -448,7 +450,6 @@ export default function App() {
                   <button
                     onClick={handleCopyEmail}
                     className="p-1.5 rounded hover:bg-white/10 text-white/35 hover:text-orange-500 transition-colors shrink-0"
-                    title="Copy Email"
                     aria-label={emailCopied ? 'Email copied' : 'Copy email address'}
                   >
                     {emailCopied ? <Check size={13} /> : <Copy size={13} />}

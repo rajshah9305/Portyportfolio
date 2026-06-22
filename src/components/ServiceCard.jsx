@@ -43,7 +43,7 @@ export const ServiceCard = memo(({ service, onDetailsClick }) => {
           {service.title}
         </h3>
 
-        <p className="font-sans text-xs sm:text-sm font-medium leading-relaxed text-black/55 flex-grow mb-5 sm:mb-6">
+        <p className="font-sans text-xs sm:text-sm font-medium leading-relaxed text-black/55 flex-grow mb-5 sm:mb-6 whitespace-pre-line">
           {service.desc}
         </p>
 
