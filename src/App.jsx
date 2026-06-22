@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import { Mail, Terminal, Cpu, CheckCircle2, Copy, Check, ArrowDown } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { Analytics } from '@vercel/analytics/react';
 import {
   ParallaxGrid,
@@ -10,6 +11,7 @@ import {
   ProjectCard,
   ExperienceItem,
   Navigation,
+  Button,
   FloatingActions,
   LoadingScreen,
   Cursor
@@ -33,11 +35,6 @@ export default function App() {
 
   const scrollToTop = useCallback(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, []);
-
-  const scrollToWork = useCallback((e) => {
-    e.preventDefault();
-    document.querySelector('#work')?.scrollIntoView({ behavior: 'smooth' });
   }, []);
 
   if (loading) {
@@ -67,10 +64,27 @@ export default function App() {
 
         {/* ─── HERO ─────────────────────────────────────────────── */}
         <section className="container mx-auto px-4 sm:px-6 md:px-12 pt-28 sm:pt-32 md:pt-40 lg:pt-44 pb-16 sm:pb-20 md:pb-28 lg:pb-32">
-          <div className="space-y-8 sm:space-y-10">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: { staggerChildren: 0.12, delayChildren: 0.2 }
+              }
+            }}
+            className="space-y-8 sm:space-y-10"
+          >
 
             {/* Status badge */}
-            <div className="flex items-center gap-2.5 animate-fadeIn">
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, x: -10 },
+                visible: { opacity: 1, x: 0 }
+              }}
+              className="flex items-center gap-2.5"
+            >
               <span className="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-500 opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 sm:h-2.5 sm:w-2.5 bg-orange-600" />
@@ -78,20 +92,42 @@ export default function App() {
               <span className="font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-black/50">
                 {PORTFOLIO_DATA.profile.availability} — {PORTFOLIO_DATA.profile.location}
               </span>
-            </div>
+            </motion.div>
 
             {/* Name */}
             <h1 className="font-sans font-black uppercase tracking-tighter leading-[0.82] text-black text-[clamp(3.5rem,13vw,11rem)]">
               <span className="block overflow-hidden">
-                <span className="block animate-slideUp">RAJ</span>
+                <motion.span
+                  variants={{
+                    hidden: { y: "100%" },
+                    visible: { y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+                  }}
+                  className="block"
+                >
+                  RAJ
+                </motion.span>
               </span>
               <span className="block overflow-hidden">
-                <span className="block animate-slideUp [animation-delay:150ms] text-outline-black">SHAH</span>
+                <motion.span
+                  variants={{
+                    hidden: { y: "100%" },
+                    visible: { y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+                  }}
+                  className="block text-outline-black"
+                >
+                  SHAH
+                </motion.span>
               </span>
             </h1>
 
             {/* Subtitle + CTAs */}
-            <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 lg:items-end justify-between">
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+              }}
+              className="flex flex-col lg:flex-row gap-8 lg:gap-12 lg:items-end justify-between"
+            >
               <div className="max-w-xl">
                 <h2 className="font-sans text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black uppercase tracking-tight text-black mb-4 sm:mb-5">
                   <DecryptText text="Digital Architect & Engineer" />
@@ -106,36 +142,35 @@ export default function App() {
               </div>
 
               <div className="flex flex-col xs:flex-row gap-3 sm:gap-4 w-full lg:w-auto shrink-0">
-                <a
+                <Button
                   href={`mailto:${PORTFOLIO_DATA.profile.socials.email}`}
-                  className="group relative flex items-center justify-center gap-2 overflow-hidden px-6 sm:px-8 py-3.5 sm:py-4 font-mono text-[11px] sm:text-xs font-bold uppercase tracking-widest border border-black bg-black text-white hover:border-orange-600 transition-colors duration-300 cursor-pointer"
+                  icon={Mail}
+                  variant="primary"
                 >
-                  <span className="z-10 flex items-center gap-2 relative">
-                    <Mail size={13} className="transition-transform duration-300 group-hover:rotate-12 shrink-0" />
-                    Initialize Contact
-                  </span>
-                  <div className="absolute inset-0 -translate-x-full bg-orange-600 transition-transform duration-300 ease-out group-hover:translate-x-0" />
-                </a>
-                <a
+                  Initialize Contact
+                </Button>
+                <Button
                   href="#work"
-                  onClick={scrollToWork}
-                  className="group relative flex items-center justify-center gap-2 overflow-hidden px-6 sm:px-8 py-3.5 sm:py-4 font-mono text-[11px] sm:text-xs font-bold uppercase tracking-widest border border-black bg-white text-black hover:text-white transition-colors duration-300 cursor-pointer"
+                  icon={Terminal}
+                  variant="outline"
                 >
-                  <span className="z-10 flex items-center gap-2 relative">
-                    <Terminal size={13} className="transition-transform duration-300 group-hover:rotate-12 shrink-0" />
-                    View Database
-                  </span>
-                  <div className="absolute inset-0 -translate-x-full bg-black transition-transform duration-300 ease-out group-hover:translate-x-0" />
-                </a>
+                  View Database
+                </Button>
               </div>
-            </div>
+            </motion.div>
 
             {/* Scroll hint */}
-            <div className="flex items-center gap-2.5 pt-1 opacity-25 select-none">
+            <motion.div
+              variants={{
+                hidden: { opacity: 0 },
+                visible: { opacity: 0.25, transition: { delay: 1 } }
+              }}
+              className="flex items-center gap-2.5 pt-1 select-none"
+            >
               <ArrowDown size={13} className="animate-bounce" />
               <span className="font-mono text-[10px] uppercase tracking-widest">Scroll to explore</span>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </section>
 
         {/* ─── STATS ────────────────────────────────────────────── */}
@@ -155,8 +190,24 @@ export default function App() {
         </section>
 
         {/* ─── SERVICES ─────────────────────────────────────────── */}
-        <section id="services" className="container mx-auto px-4 sm:px-6 md:px-12 mb-16 sm:mb-20 md:mb-28 lg:mb-32 scroll-mt-20 sm:scroll-mt-24 md:scroll-mt-32">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10 sm:mb-12 md:mb-16">
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-10%" }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+          }}
+          id="services"
+          className="container mx-auto px-4 sm:px-6 md:px-12 mb-16 sm:mb-20 md:mb-28 lg:mb-32 scroll-mt-20 sm:scroll-mt-24 md:scroll-mt-32"
+        >
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}
+            className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10 sm:mb-12 md:mb-16"
+          >
             <div className="max-w-2xl">
               <div className="flex items-center gap-2.5 mb-3 sm:mb-4">
                 <div className="w-1.5 h-1.5 bg-orange-600 rounded-full shrink-0" />
@@ -172,7 +223,7 @@ export default function App() {
             <div className="hidden lg:block shrink-0">
               <Cpu size={44} className="text-black/12" />
             </div>
-          </div>
+          </motion.div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:gap-8">
             {PORTFOLIO_DATA.services.map((service) => (
@@ -187,11 +238,27 @@ export default function App() {
               onClose={closeServiceModal}
             />
           )}
-        </section>
+        </motion.section>
 
         {/* ─── PROJECTS ─────────────────────────────────────────── */}
-        <section id="work" className="mb-16 sm:mb-20 md:mb-28 lg:mb-32 scroll-mt-20 sm:scroll-mt-24 md:scroll-mt-32">
-          <div className="container mx-auto px-4 sm:px-6 md:px-12 mb-8 sm:mb-10 md:mb-12 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-10%" }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+          }}
+          id="work"
+          className="mb-16 sm:mb-20 md:mb-28 lg:mb-32 scroll-mt-20 sm:scroll-mt-24 md:scroll-mt-32"
+        >
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}
+            className="container mx-auto px-4 sm:px-6 md:px-12 mb-8 sm:mb-10 md:mb-12 flex flex-col sm:flex-row sm:items-end justify-between gap-4"
+          >
             <div>
               <div className="flex items-center gap-2.5 mb-3 sm:mb-4">
                 <div className="w-1.5 h-1.5 bg-orange-600 rounded-full shrink-0" />
@@ -205,7 +272,7 @@ export default function App() {
               <span className="block">Sort: Chronological</span>
               <span className="text-orange-600">● All Systems Go</span>
             </div>
-          </div>
+          </motion.div>
 
           <div className="container mx-auto px-4 sm:px-6 md:px-12">
             <div className="grid sm:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
@@ -214,12 +281,28 @@ export default function App() {
               ))}
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* ─── EXPERIENCE ───────────────────────────────────────── */}
-        <section id="experience" className="container mx-auto px-4 sm:px-6 md:px-12 mb-16 sm:mb-20 md:mb-28 lg:mb-32 scroll-mt-20 sm:scroll-mt-24 md:scroll-mt-32">
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-10%" }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+          }}
+          id="experience"
+          className="container mx-auto px-4 sm:px-6 md:px-12 mb-16 sm:mb-20 md:mb-28 lg:mb-32 scroll-mt-20 sm:scroll-mt-24 md:scroll-mt-32"
+        >
           <div className="grid md:grid-cols-12 gap-8 md:gap-12">
-            <div className="md:col-span-4">
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, x: -20 },
+                visible: { opacity: 1, x: 0 }
+              }}
+              className="md:col-span-4"
+            >
               <div className="flex items-center gap-2.5 mb-3 sm:mb-4">
                 <div className="w-1.5 h-1.5 bg-orange-600 rounded-full shrink-0" />
                 <span className="label-mono text-black/40 text-[9px] sm:text-[10px] md:text-xs">Career_Log</span>
@@ -230,8 +313,14 @@ export default function App() {
               <p className="font-sans text-sm sm:text-base font-medium leading-relaxed text-black/55 max-w-sm">
                 A timeline of increasing responsibility and technical complexity.
               </p>
-            </div>
-            <div className="md:col-span-8 border-l border-black/20 pl-0 md:pl-8">
+            </motion.div>
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0 }
+              }}
+              className="md:col-span-8 border-l border-black/20 pl-0 md:pl-8"
+            >
               {PORTFOLIO_DATA.experience.map((item, index) => (
                 <ExperienceItem
                   key={index}
@@ -239,9 +328,9 @@ export default function App() {
                   last={index === PORTFOLIO_DATA.experience.length - 1}
                 />
               ))}
-            </div>
+            </motion.div>
           </div>
-        </section>
+        </motion.section>
 
         {/* ─── PHILOSOPHY ───────────────────────────────────────── */}
         <section className="bg-black text-white py-16 sm:py-20 md:py-24 mb-16 sm:mb-20 md:mb-28 lg:mb-32 relative overflow-hidden">
@@ -326,16 +415,14 @@ export default function App() {
                 Let&apos;s Build<br />
                 <span className="text-outline-white">Something.</span>
               </h2>
-              <a
+              <Button
                 href={`mailto:${PORTFOLIO_DATA.profile.socials.email}`}
-                className="group relative inline-flex items-center justify-center gap-2 overflow-hidden px-6 sm:px-8 py-3.5 sm:py-4 font-mono text-[11px] sm:text-xs font-bold uppercase tracking-widest border border-white bg-transparent text-white hover:border-orange-600 transition-colors duration-300 cursor-pointer"
+                icon={Mail}
+                variant="outline"
+                className="!text-white !border-white hover:!border-orange-600"
               >
-                <span className="z-10 flex items-center gap-2 relative">
-                  <Mail size={13} className="transition-transform duration-300 group-hover:rotate-12 shrink-0" />
-                  Start Conversation
-                </span>
-                <div className="absolute inset-0 -translate-x-full bg-orange-600 transition-transform duration-300 ease-out group-hover:translate-x-0" />
-              </a>
+                Start Conversation
+              </Button>
             </div>
 
             {/* Three-column info */}
