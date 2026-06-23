@@ -20,8 +20,14 @@ export const ProjectCard = memo(({ project, index }) => {
           }
         }
       }}
-      className="group relative border border-black bg-white overflow-hidden flex flex-col hover:border-orange-600 transition-colors duration-300"
+      whileHover={{ y: -5 }}
+      className="group relative border border-black bg-white overflow-hidden flex flex-col hover:border-orange-600 hover:shadow-2xl transition-all duration-500"
     >
+      {/* Glint effect */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none z-30 transition-opacity duration-700">
+        <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+      </div>
+
       {/* Image strip — native lazy load, no layout shift via fixed height */}
       <div className="relative h-36 xs:h-40 sm:h-44 md:h-48 overflow-hidden bg-black/5 shrink-0">
         <img

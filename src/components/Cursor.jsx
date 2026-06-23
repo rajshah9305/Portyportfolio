@@ -6,6 +6,7 @@ const INTERACTIVE = new Set(['A', 'BUTTON']);
 export const Cursor = () => {
   const [mousePos, setMousePos] = useState({ x: -100, y: -100 });
   const [isHovering, setIsHovering] = useState(false);
+  const [isClicking, setIsClicking] = useState(false);
 
   const handleMouseMove = useCallback((e) => {
     setMousePos({ x: e.clientX, y: e.clientY });
@@ -21,14 +22,21 @@ export const Cursor = () => {
     );
   }, []);
 
+  const handleMouseDown = useCallback(() => setIsClicking(true), []);
+  const handleMouseUp = useCallback(() => setIsClicking(false), []);
+
   useEffect(() => {
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     window.addEventListener('mouseover', handleMouseOver, { passive: true });
+    window.addEventListener('mousedown', handleMouseDown, { passive: true });
+    window.addEventListener('mouseup', handleMouseUp, { passive: true });
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseover', handleMouseOver);
+      window.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mouseup', handleMouseUp);
     };
-  }, [handleMouseMove, handleMouseOver]);
+  }, [handleMouseMove, handleMouseOver, handleMouseDown, handleMouseUp]);
 
   return (
     <motion.div
@@ -36,7 +44,7 @@ export const Cursor = () => {
       animate={{
         x: mousePos.x - 14,
         y: mousePos.y - 14,
-        scale: isHovering ? 2.2 : 1,
+        scale: isClicking ? 0.9 : isHovering ? 2.2 : 1,
       }}
       transition={{
         type: 'spring',
@@ -45,6 +53,11 @@ export const Cursor = () => {
         mass: 0.45,
         x: { duration: 0 },
         y: { duration: 0 },
+        scale: {
+          type: 'spring',
+          damping: 15,
+          stiffness: 300
+        }
       }}
       style={{ backgroundColor: '#fff' }}
     >
