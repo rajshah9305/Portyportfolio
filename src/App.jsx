@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { Mail, Terminal, Cpu, CheckCircle2, Copy, Check, ArrowDown } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Analytics } from '@vercel/analytics/react';
 import {
   ParallaxGrid,
@@ -34,6 +34,11 @@ export default function App() {
     closeServiceModal,
     completeLoading
   } = usePortfolioState();
+
+  const { scrollY } = useScroll();
+  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const heroY = useTransform(scrollY, [0, 300], [0, -50]);
+  const scrollHintOpacity = useTransform(scrollY, [0, 100], [0.25, 0]);
 
   const scrollToTop = useCallback(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -82,6 +87,7 @@ export default function App() {
         {/* ─── HERO ─────────────────────────────────────────────── */}
         <section className="container mx-auto px-4 sm:px-6 md:px-12 pt-28 sm:pt-32 md:pt-40 lg:pt-44 pb-16 sm:pb-20 md:pb-28 lg:pb-32">
           <motion.div
+            style={{ opacity: heroOpacity, y: heroY }}
             initial="hidden"
             animate="visible"
             variants={{
@@ -169,6 +175,7 @@ export default function App() {
 
             {/* Scroll hint */}
             <motion.div
+              style={{ opacity: scrollHintOpacity }}
               variants={{
                 hidden: { opacity: 0 },
                 visible: { opacity: 0.25, transition: { delay: 1 } }

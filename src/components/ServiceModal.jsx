@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { X, CheckCircle2, Mail } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { useLockBodyScroll } from '../hooks/useLockBodyScroll';
 import { PORTFOLIO_DATA } from '../data/portfolio';
 
@@ -37,17 +38,31 @@ export const ServiceModal = ({ service, isOpen, onClose }) => {
 
   if (!isOpen || !service) return null;
 
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] }
+    }
+  };
+
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/80 backdrop-blur-sm animate-fadeIn"
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/80 backdrop-blur-sm"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
     >
-      <div
+      <motion.div
         ref={modalRef}
-        className="relative bg-white w-full sm:max-w-2xl md:max-w-4xl max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl animate-slideUp rounded-t-xl sm:rounded-none"
+        initial={{ y: '100%' }}
+        animate={{ y: 0 }}
+        transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+        className="relative bg-white w-full sm:max-w-2xl md:max-w-4xl max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl rounded-t-xl sm:rounded-none"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -75,17 +90,24 @@ export const ServiceModal = ({ service, isOpen, onClose }) => {
         </div>
 
         {/* Body */}
-        <div className="px-4 sm:px-6 md:px-8 py-5 sm:py-6 md:py-8 space-y-6 sm:space-y-8">
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={{
+            visible: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } }
+          }}
+          className="px-4 sm:px-6 md:px-8 py-5 sm:py-6 md:py-8 space-y-6 sm:space-y-8"
+        >
           {/* Overview */}
-          <div>
+          <motion.div variants={itemVariants}>
             <h4 className="font-mono text-[9px] sm:text-xs font-bold text-black uppercase tracking-widest mb-2 sm:mb-3">Overview</h4>
             <p className="font-sans text-sm sm:text-base md:text-lg font-medium text-black/80 leading-relaxed whitespace-pre-line">
               {service.details.fullDescription}
             </p>
-          </div>
+          </motion.div>
 
           {/* Capabilities */}
-          <div>
+          <motion.div variants={itemVariants}>
             <h4 className="font-mono text-[9px] sm:text-xs font-bold text-black uppercase tracking-widest mb-3 sm:mb-4">Core Capabilities</h4>
             <div className="grid gap-2 sm:gap-3">
               {service.details.capabilities.map((cap, i) => (
@@ -95,10 +117,10 @@ export const ServiceModal = ({ service, isOpen, onClose }) => {
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Technologies */}
-          <div>
+          <motion.div variants={itemVariants}>
             <h4 className="font-mono text-[9px] sm:text-xs font-bold text-black uppercase tracking-widest mb-3 sm:mb-4">Technology Stack</h4>
             <div className="flex flex-wrap gap-1.5 sm:gap-2">
               {service.details.technologies.map((tech, i) => (
@@ -107,10 +129,10 @@ export const ServiceModal = ({ service, isOpen, onClose }) => {
                 </span>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Deliverables */}
-          <div>
+          <motion.div variants={itemVariants}>
             <h4 className="font-mono text-[9px] sm:text-xs font-bold text-black uppercase tracking-widest mb-3 sm:mb-4">Deliverables</h4>
             <div className="grid grid-cols-1 xs:grid-cols-2 gap-2 sm:gap-3">
               {service.details.deliverables.map((d, i) => (
@@ -120,10 +142,10 @@ export const ServiceModal = ({ service, isOpen, onClose }) => {
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* CTA */}
-          <div className="pt-4 sm:pt-6 border-t border-black/10">
+          <motion.div variants={itemVariants} className="pt-4 sm:pt-6 border-t border-black/10">
             <a
               href={`mailto:${PORTFOLIO_DATA.profile.socials.email}?subject=Inquiry about ${service.title}`}
               className="group relative inline-flex items-center justify-center gap-2 overflow-hidden px-6 sm:px-8 py-3 sm:py-4 font-mono text-[10px] sm:text-xs font-bold uppercase tracking-widest border border-black bg-black text-white hover:border-orange-600 transition-colors duration-300 cursor-pointer"
@@ -134,9 +156,9 @@ export const ServiceModal = ({ service, isOpen, onClose }) => {
               </span>
               <div className="absolute inset-0 -translate-x-full bg-orange-600 transition-transform duration-300 ease-out group-hover:translate-x-0" />
             </a>
-          </div>
-        </div>
-      </div>
-    </div>
+          </motion.div>
+        </motion.div>
+      </motion.div>
+    </motion.div>
   );
 };

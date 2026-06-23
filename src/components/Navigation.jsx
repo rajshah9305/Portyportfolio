@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Github, Linkedin, Menu, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { PORTFOLIO_DATA } from '../data/portfolio';
 import { BlueprintToggle } from './BlueprintToggle';
 import { useActiveSection } from '../hooks/useActiveSection';
@@ -100,13 +101,20 @@ export const Navigation = ({ onScrollToTop, blueprintMode, onToggleBlueprintMode
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
                   className={`relative px-4 xl:px-6 py-2 sm:py-2.5 rounded-full font-mono text-[10px] sm:text-[11px] font-bold tracking-widest transition-all duration-300 flex items-center gap-1.5 sm:gap-2 group ${
-                    isActive ? 'bg-black text-white shadow-sm' : 'text-black hover:bg-black/5'
+                    isActive ? 'text-white' : 'text-black hover:bg-black/5'
                   }`}
                 >
-                  <span className={`w-1.5 h-1.5 rounded-full transition-all duration-300 shrink-0 ${
+                  {isActive && (
+                    <motion.div
+                      layoutId="nav-pill"
+                      className="absolute inset-0 bg-black rounded-full shadow-sm"
+                      transition={{ type: 'spring', duration: 0.5, bounce: 0.2 }}
+                    />
+                  )}
+                  <span className={`relative z-10 w-1.5 h-1.5 rounded-full transition-all duration-300 shrink-0 ${
                     isActive ? 'bg-orange-500 scale-125' : 'bg-black/25 group-hover:bg-orange-400'
                   }`} />
-                  {item.name}
+                  <span className="relative z-10">{item.name}</span>
                 </a>
               );
             })}
@@ -146,55 +154,69 @@ export const Navigation = ({ onScrollToTop, blueprintMode, onToggleBlueprintMode
       </nav>
 
       {/* Mobile full-screen menu */}
-      <div
-        ref={mobileMenuRef}
-        className={`fixed inset-0 z-40 bg-white backdrop-blur-xl transition-transform duration-500 ease-out lg:hidden flex flex-col ${
-          isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
-      >
-        {/* Close button top-right */}
-        <div className="flex justify-end px-4 sm:px-6 pt-4 sm:pt-5">
-          <button
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="p-2 text-black hover:bg-black/5 rounded-md"
-            aria-label="Close menu"
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            ref={mobileMenuRef}
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            className="fixed inset-0 z-40 bg-white backdrop-blur-xl lg:hidden flex flex-col"
           >
-            <X size={24} />
-          </button>
-        </div>
+            {/* Close button top-right */}
+            <div className="flex justify-end px-4 sm:px-6 pt-4 sm:pt-5">
+              <button
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="p-2 text-black hover:bg-black/5 rounded-md"
+                aria-label="Close menu"
+              >
+                <X size={24} />
+              </button>
+            </div>
 
-        {/* Nav links */}
-        <div className="flex flex-col justify-center flex-grow px-6 sm:px-10 gap-4 sm:gap-6">
-          {NAV_ITEMS.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              onClick={(e) => handleNavClick(e, item.href)}
-              className="group flex items-baseline gap-3 sm:gap-4 font-sans text-4xl xs:text-5xl sm:text-6xl font-black text-black hover:text-orange-600 transition-colors tracking-tighter leading-none"
+            {/* Nav links */}
+            <div className="flex flex-col justify-center flex-grow px-6 sm:px-10 gap-4 sm:gap-6">
+              {NAV_ITEMS.map((item, index) => (
+                <motion.a
+                  key={item.name}
+                  href={item.href}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 + index * 0.1 }}
+                  onClick={(e) => handleNavClick(e, item.href)}
+                  className="group flex items-baseline gap-3 sm:gap-4 font-sans text-4xl xs:text-5xl sm:text-6xl font-black text-black hover:text-orange-600 transition-colors tracking-tighter leading-none"
+                >
+                  <span className="text-xs sm:text-sm font-mono font-bold text-black/25 group-hover:text-orange-600 transition-colors shrink-0">
+                    {item.num}
+                  </span>
+                  {item.name}
+                </motion.a>
+              ))}
+            </div>
+
+            {/* Bottom socials */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="flex items-center gap-5 sm:gap-6 px-6 sm:px-10 pb-8 sm:pb-10 border-t border-black/10 pt-6"
             >
-              <span className="text-xs sm:text-sm font-mono font-bold text-black/25 group-hover:text-orange-600 transition-colors shrink-0">
-                {item.num}
+              <a href={PORTFOLIO_DATA.profile.socials.github} target="_blank" rel="noreferrer"
+                className="text-black/50 hover:text-black transition-colors" aria-label="GitHub">
+                <Github size={28} />
+              </a>
+              <a href={PORTFOLIO_DATA.profile.socials.linkedin} target="_blank" rel="noreferrer"
+                className="text-black/50 hover:text-blue-700 transition-colors" aria-label="LinkedIn">
+                <Linkedin size={28} />
+              </a>
+              <span className="ml-auto font-mono text-[10px] text-black/30 uppercase tracking-widest">
+                {PORTFOLIO_DATA.profile.location}
               </span>
-              {item.name}
-            </a>
-          ))}
-        </div>
-
-        {/* Bottom socials */}
-        <div className="flex items-center gap-5 sm:gap-6 px-6 sm:px-10 pb-8 sm:pb-10 border-t border-black/10 pt-6">
-          <a href={PORTFOLIO_DATA.profile.socials.github} target="_blank" rel="noreferrer"
-            className="text-black/50 hover:text-black transition-colors" aria-label="GitHub">
-            <Github size={28} />
-          </a>
-          <a href={PORTFOLIO_DATA.profile.socials.linkedin} target="_blank" rel="noreferrer"
-            className="text-black/50 hover:text-blue-700 transition-colors" aria-label="LinkedIn">
-            <Linkedin size={28} />
-          </a>
-          <span className="ml-auto font-mono text-[10px] text-black/30 uppercase tracking-widest">
-            {PORTFOLIO_DATA.profile.location}
-          </span>
-        </div>
-      </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };
