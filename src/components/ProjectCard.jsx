@@ -20,12 +20,12 @@ export const ProjectCard = memo(({ project, index }) => {
           }
         }
       }}
-      whileHover={{ y: -5 }}
-      className="group relative border border-black bg-white overflow-hidden flex flex-col hover:border-orange-600 hover:shadow-2xl transition-all duration-500"
+      whileHover={{ y: -8, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } }}
+      className="group relative border border-black bg-white overflow-hidden flex flex-col hover:border-orange-600 hover:shadow-[0_20px_50px_rgba(0,0,0,0.15)] transition-all duration-500"
     >
       {/* Glint effect */}
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none z-30 transition-opacity duration-700">
-        <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+        <div className="absolute inset-0 translate-x-[-150%] group-hover:translate-x-[150%] rotate-[35deg] transition-transform duration-1000 ease-in-out bg-gradient-to-r from-transparent via-white/40 to-transparent w-[200%] h-full" />
       </div>
 
       {/* Image strip — native lazy load, no layout shift via fixed height */}
@@ -36,7 +36,7 @@ export const ProjectCard = memo(({ project, index }) => {
           aria-hidden="true"
           loading="lazy"
           decoding="async"
-          className="absolute inset-0 w-full h-full object-cover grayscale transition-transform duration-700 ease-out group-hover:scale-105"
+          className="absolute inset-0 w-full h-full object-cover grayscale transition-all duration-700 ease-out-quint group-hover:scale-110 group-hover:grayscale-0"
           style={{ filter: 'grayscale(75%)' }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/5 to-white pointer-events-none" />

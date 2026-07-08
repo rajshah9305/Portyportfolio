@@ -35,8 +35,9 @@ export const ServiceCard = memo(({ service, onDetailsClick }) => {
         {/* Icon + number */}
         <div className="flex items-start justify-between mb-5 sm:mb-6">
           <motion.div
-            whileHover={{ scale: 1.08, rotate: 4 }}
-            className="inline-flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full bg-white text-black border border-black group-hover:bg-orange-600 group-hover:text-white group-hover:border-orange-600 transition-all duration-300 shrink-0"
+            animate={{ y: [0, -4, 0] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            className="inline-flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full bg-white text-black border border-black group-hover:bg-orange-600 group-hover:text-white group-hover:border-orange-600 group-hover:shadow-[0_0_20px_rgba(255,107,0,0.3)] transition-all duration-300 shrink-0"
           >
             <Icon size={18} className="sm:w-5 sm:h-5 md:w-[22px] md:h-[22px]" />
           </motion.div>

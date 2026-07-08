@@ -10,6 +10,7 @@ import {
   ServiceCard,
   ProjectCard,
   ExperienceItem,
+  StatItem,
   Navigation,
   Button,
   FloatingActions,
@@ -39,9 +40,16 @@ export default function App() {
   } = usePortfolioState();
 
   const { scrollY } = useScroll();
-  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
-  const heroY = useTransform(scrollY, [0, 300], [0, -50]);
+  const heroOpacity = useTransform(scrollY, [0, 400], [1, 0]);
+  const heroY = useTransform(scrollY, [0, 400], [0, -100]);
   const scrollHintOpacity = useTransform(scrollY, [0, 100], [0.25, 0]);
+
+  // Parallax layers for name
+  const nameY2 = useTransform(scrollY, [0, 500], [0, -80]);
+
+  // Parallax for ambient glows
+  const glow1Y = useTransform(scrollY, [0, 1000], [0, -200]);
+  const glow2Y = useTransform(scrollY, [0, 1000], [0, 150]);
 
   const scrollToTop = useCallback(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -57,7 +65,8 @@ export default function App() {
       <ParallaxGrid />
 
       {/* Ambient glow — hidden on small screens to save paint */}
-      <div
+      <motion.div
+        style={{ y: glow1Y }}
         className="hidden md:block absolute top-0 right-0 w-[600px] lg:w-[900px] h-[500px] lg:h-[700px] bg-orange-500/8 rounded-full blur-[120px] lg:blur-[140px] pointer-events-none translate-x-1/3 -translate-y-1/4 z-0"
         aria-hidden="true"
       />
@@ -76,13 +85,15 @@ export default function App() {
 
       <main className="relative z-10">
         {/* Mid-section ambient glow */}
-        <div
+        <motion.div
+          style={{ y: glow2Y }}
           className="hidden md:block absolute top-[40%] left-0 w-[500px] lg:w-[700px] h-[500px] lg:h-[700px] bg-orange-500/5 rounded-full blur-[120px] lg:blur-[140px] pointer-events-none -translate-x-1/2 z-0"
           aria-hidden="true"
         />
 
         {/* Footer-area ambient glow */}
-        <div
+        <motion.div
+          style={{ y: glow1Y }}
           className="hidden md:block absolute bottom-0 right-0 w-[600px] lg:w-[800px] h-[600px] lg:h-[800px] bg-orange-600/5 rounded-full blur-[120px] lg:blur-[140px] pointer-events-none translate-x-1/4 translate-y-1/4 z-0"
           aria-hidden="true"
         />
@@ -121,21 +132,35 @@ export default function App() {
             </motion.div>
 
             {/* Name */}
-            <h1 className="font-sans font-black uppercase tracking-tighter leading-[0.82] text-black text-[clamp(3.5rem,13vw,11rem)]">
-              {PORTFOLIO_DATA.profile.name.split(' ').map((part, index) => (
-                <span key={index} className="block overflow-hidden">
-                  <motion.span
-                    variants={{
-                      hidden: { y: "100%" },
-                      visible: { y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
-                    }}
-                    className={`block ${index > 0 ? 'text-outline-black' : ''}`}
-                  >
-                    {part}
-                  </motion.span>
-                </span>
-              ))}
-            </h1>
+            <div className="relative">
+              <h1 className="font-sans font-black uppercase tracking-tighter leading-[0.82] text-black text-[clamp(3.5rem,13vw,11rem)] relative z-10">
+                {PORTFOLIO_DATA.profile.name.split(' ').map((part, index) => (
+                  <span key={index} className="block overflow-hidden">
+                    <motion.span
+                      variants={{
+                        hidden: { y: "100%" },
+                        visible: { y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+                      }}
+                      className="block"
+                    >
+                      {part}
+                    </motion.span>
+                  </span>
+                ))}
+              </h1>
+
+              {/* Parallax Outline Layer */}
+              <motion.div
+                style={{ y: nameY2, opacity: 0.4 }}
+                className="absolute top-4 left-4 w-full h-full pointer-events-none select-none z-0 hidden lg:block"
+              >
+                <h1 className="font-sans font-black uppercase tracking-tighter leading-[0.82] text-outline-black text-[clamp(3.5rem,13vw,11rem)] opacity-20">
+                  {PORTFOLIO_DATA.profile.name.split(' ').map((part, index) => (
+                    <span key={index} className="block">{part}</span>
+                  ))}
+                </h1>
+              </motion.div>
+            </div>
 
             {/* Subtitle + CTAs */}
             <motion.div
@@ -195,14 +220,7 @@ export default function App() {
         <section className="mb-16 sm:mb-20 md:mb-28 lg:mb-32 border-y border-black">
           <div className="container mx-auto grid grid-cols-2 md:grid-cols-4 divide-x divide-black">
             {PORTFOLIO_DATA.stats.map((stat, i) => (
-              <div key={i} className="p-6 sm:p-8 md:p-10 lg:p-12 group hover:bg-black transition-colors duration-300 cursor-default">
-                <span className="block label-mono text-black/40 group-hover:text-white/40 mb-1.5 sm:mb-2 transition-colors text-[9px] sm:text-[10px] md:text-xs">
-                  {stat.label}
-                </span>
-                <span className="block font-sans text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter text-black group-hover:text-white transition-colors">
-                  {stat.value}
-                </span>
-              </div>
+              <StatItem key={i} stat={stat} />
             ))}
           </div>
         </section>
@@ -364,12 +382,17 @@ export default function App() {
           <div className="absolute top-0 right-0 w-[300px] sm:w-[400px] md:w-[500px] h-[300px] sm:h-[400px] md:h-[500px] bg-orange-600/10 rounded-full blur-[80px] sm:blur-[100px] pointer-events-none" aria-hidden="true" />
 
           <div className="container mx-auto px-4 sm:px-6 md:px-12 grid md:grid-cols-2 gap-10 md:gap-16 items-center relative z-10">
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "out-quint" }}
+            >
               <span className="label-mono text-orange-500 mb-3 sm:mb-4 block text-[10px] sm:text-xs">Core Philosophy</span>
-              <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter leading-[0.9] mb-6 sm:mb-8 text-white">
+              <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-[calc(-0.05em)] leading-[0.85] mb-6 sm:mb-8 text-white">
                 Code as<br />Craftsmanship.
               </h2>
-              <p className="font-sans text-sm sm:text-base md:text-lg font-medium leading-relaxed text-white/65 mb-6 sm:mb-8">
+              <p className="font-sans text-sm sm:text-base md:text-lg font-medium leading-relaxed text-white/65 mb-6 sm:mb-8 text-balance">
                 I believe that software should be as beautiful internally as it is externally.
                 Every function, every component, and every API endpoint is crafted with the same
                 attention to detail as the visual interface.
@@ -386,19 +409,25 @@ export default function App() {
                   <span className="label-mono text-white/35 text-[9px] sm:text-[10px] md:text-xs">Craft Precision</span>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="h-56 sm:h-72 md:h-full md:min-h-[380px] lg:min-h-[420px] relative overflow-hidden flex items-center justify-center border border-white/10 bg-white/5 group">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, ease: "out-quint" }}
+              className="h-56 sm:h-72 md:h-full md:min-h-[380px] lg:min-h-[420px] relative overflow-hidden flex items-center justify-center border border-white/10 bg-white/5 group shadow-2xl"
+            >
               <img
                 src={architectureDiagram}
                 alt="System Architecture Diagram"
                 loading="lazy"
                 decoding="async"
-                className="w-full h-full object-contain opacity-75 group-hover:opacity-100 transition-opacity duration-500"
+                className="w-full h-full object-contain opacity-75 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
               <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 label-mono text-white/25 text-[9px] sm:text-[10px]">ARCH_DIAGRAM_v2.0</div>
-            </div>
+            </motion.div>
           </div>
         </section>
 
@@ -429,9 +458,9 @@ export default function App() {
 
             {/* Big CTA */}
             <div className="mb-12 sm:mb-14 md:mb-16 pb-12 sm:pb-14 md:pb-16 border-b border-white/10">
-              <h2 className="font-sans text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black uppercase tracking-tighter leading-[0.85] text-white mb-6 sm:mb-8">
+              <h2 className="font-sans text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl font-black uppercase tracking-[calc(-0.06em)] leading-[0.8] text-white mb-6 sm:mb-8">
                 Let&apos;s Build<br />
-                <span className="text-outline-white">Something.</span>
+                <span className="text-outline-white opacity-40">Something.</span>
               </h2>
               <Button
                 onClick={openContactModal}
@@ -486,9 +515,9 @@ export default function App() {
                       href={href}
                       target="_blank"
                       rel="noreferrer"
-                      className="font-mono text-xs sm:text-sm text-white/65 hover:text-orange-500 transition-colors flex items-center gap-2 group"
+                      className="font-mono text-xs sm:text-sm text-white/65 hover:text-orange-500 transition-all duration-300 flex items-center gap-2 group hover:translate-x-1"
                     >
-                      <span className="w-3 sm:w-4 h-[1px] bg-white/15 group-hover:bg-orange-500 transition-colors shrink-0" />
+                      <span className="w-3 sm:w-4 h-[1px] bg-white/15 group-hover:bg-orange-500 group-hover:w-6 transition-all shrink-0" />
                       {label}
                     </a>
                   ))}
