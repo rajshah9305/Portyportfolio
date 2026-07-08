@@ -19,11 +19,22 @@ export const Button = memo(({
 
   const content = (
     <>
-      <span className="z-10 flex items-center gap-2 relative">
-        {Icon && <Icon size={14} className="transition-transform duration-300 group-hover:rotate-12" />}
-        {children}
+      {/* Decorative layers */}
+      <div className="absolute inset-0 -translate-x-full bg-black/10 transition-transform duration-500 ease-out-quint group-hover:translate-x-0 group-hover:delay-75" />
+      <div className="absolute inset-0 -translate-x-full bg-orange-600 transition-transform duration-500 ease-out-quint group-hover:translate-x-0" />
+
+      <span className="z-10 flex items-center gap-2 relative transition-transform duration-500 group-hover:scale-[1.02]">
+        {Icon && (
+          <Icon
+            size={14}
+            className="transition-all duration-500 group-hover:rotate-[360deg] group-hover:text-white"
+          />
+        )}
+        <span className="relative group-hover:text-white transition-colors duration-500">
+          {children}
+          <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white transition-all duration-500 group-hover:w-full" />
+        </span>
       </span>
-      <div className="absolute inset-0 -translate-x-full bg-orange-600 transition-transform duration-300 ease-out-expo group-hover:translate-x-0" />
     </>
   );
 

@@ -20,26 +20,26 @@ export const ProjectCard = memo(({ project, index }) => {
           }
         }
       }}
-      whileHover={{ y: -5 }}
-      className="group relative border border-black bg-white overflow-hidden flex flex-col hover:border-orange-600 hover:shadow-2xl transition-all duration-500"
+      whileHover={{ y: -8 }}
+      className="group relative border border-black bg-white overflow-hidden flex flex-col hover:border-orange-600 shadow-premium hover:shadow-premium-hover transition-all duration-500 ease-out-quint"
     >
       {/* Glint effect */}
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none z-30 transition-opacity duration-700">
-        <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+        <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       </div>
 
       {/* Image strip — native lazy load, no layout shift via fixed height */}
-      <div className="relative h-36 xs:h-40 sm:h-44 md:h-48 overflow-hidden bg-black/5 shrink-0">
+      <div className="relative h-36 xs:h-40 sm:h-44 md:h-48 overflow-hidden bg-black shrink-0">
         <img
           src={project.image}
           alt=""
           aria-hidden="true"
           loading="lazy"
           decoding="async"
-          className="absolute inset-0 w-full h-full object-cover grayscale transition-transform duration-700 ease-out group-hover:scale-105"
-          style={{ filter: 'grayscale(75%)' }}
+          className="absolute inset-0 w-full h-full object-cover grayscale transition-all duration-700 ease-out-quint group-hover:scale-110 group-hover:grayscale-0 group-hover:opacity-80"
+          style={{ filter: 'grayscale(100%)' }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/5 to-white pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
         {/* Category badge */}
         <div className="absolute top-3 left-3 xs:top-4 xs:left-4">
@@ -77,13 +77,15 @@ export const ProjectCard = memo(({ project, index }) => {
 
         {/* Tech tags */}
         <div className="flex flex-wrap gap-1 xs:gap-1.5 sm:gap-2 mb-3 xs:mb-4 sm:mb-5">
-          {project.tech.slice(0, 3).map((t, i) => (
-            <span
+          {project.tech.slice(0, 4).map((t, i) => (
+            <motion.span
               key={i}
-              className="px-1.5 xs:px-2 py-0.5 xs:py-1 bg-black/4 border border-black/10 text-[8px] xs:text-[9px] sm:text-[10px] font-mono font-bold text-black/60 uppercase tracking-wider group-hover:border-orange-600/25 transition-colors"
+              initial={{ opacity: 0.6 }}
+              whileHover={{ opacity: 1, y: -2 }}
+              className="px-1.5 xs:px-2 py-0.5 xs:py-1 bg-black/5 border border-black/5 text-[8px] xs:text-[9px] sm:text-[10px] font-mono font-bold text-black/40 uppercase tracking-wider group-hover:text-black group-hover:border-orange-600/20 transition-all duration-300"
             >
               {t}
-            </span>
+            </motion.span>
           ))}
         </div>
 

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
 const BOOT_LOGS = [
-  { text: 'IDENTITY_VERIFIED...',      delay: 150 },
-  { text: 'INITIALIZING_RS_CORE...',   delay: 400 },
-  { text: 'LOADING_ASSETS...',         delay: 700 },
-  { text: 'CALIBRATING_INTERFACE...', delay: 1000 },
-  { text: 'SYSTEM_READY',             delay: 1300 },
+  { text: 'CORE_KERNEL_LOADED [v4.2.0]...', delay: 150 },
+  { text: 'INITIALIZING_ARCHITECTURAL_ENGINE...', delay: 400 },
+  { text: 'SYNCING_SYSTEM_BLUEPRINTS...', delay: 700 },
+  { text: 'CALIBRATING_PIXEL_PRECISION...', delay: 1000 },
+  { text: 'ESTABLISHING_SECURE_PROTOCOLS...', delay: 1300 },
+  { text: 'INTERFACE_READY', delay: 1600 },
 ];
 
 export const LoadingScreen = ({ onComplete }) => {
@@ -19,7 +20,7 @@ export const LoadingScreen = ({ onComplete }) => {
         setProgress(Math.round(((i + 1) / BOOT_LOGS.length) * 100));
       }, delay)
     );
-    const finish = setTimeout(() => onComplete?.(), 1700);
+    const finish = setTimeout(() => onComplete?.(), 2000);
     return () => { timers.forEach(clearTimeout); clearTimeout(finish); };
   }, [onComplete]);
 

@@ -40,10 +40,10 @@ export const PORTFOLIO_DATA = {
     {
       id: "01",
       title: "System Architecture",
-      desc: "Designing scalable, fault-tolerant backend infrastructures using microservices or monoliths depending on scale.",
+      desc: "Architecting high-availability, distributed infrastructures with a focus on horizontal scalability and fault tolerance.",
       icon: Server,
       details: {
-        fullDescription: "I design and implement enterprise-grade system architectures that scale from MVP to millions of users. My approach combines modern cloud-native patterns with battle-tested architectural principles.",
+        fullDescription: "I engineer enterprise-grade distributed systems that maintain 99.99% availability under extreme load. My methodology integrates cloud-native patterns with reactive manifestos to ensure resilient, high-performance backend ecosystems.",
         capabilities: [
           "Microservices & API Gateway Design",
           "Database Schema & Query Optimization",
@@ -58,10 +58,10 @@ export const PORTFOLIO_DATA = {
     {
       id: "02",
       title: "MVP Engineering",
-      desc: "Rapid prototyping and development of Minimum Viable Products for startups, focusing on speed-to-market and code quality.",
+      desc: "Accelerating product-market fit through rapid deployment of high-fidelity, production-grade MVPs and technical foundations.",
       icon: Zap,
       details: {
-        fullDescription: "I help startups validate their ideas quickly by building production-ready MVPs in weeks, not months. Focus on core features, clean code, and technical debt prevention.",
+        fullDescription: "I transform conceptual blueprints into market-ready assets within aggressive timelines. My approach prioritizes technical debt mitigation and modular scalability, ensuring your MVP is built on a foundation ready for Series A scaling.",
         capabilities: [
           "Rapid Full-Stack Development",
           "Product Feature Prioritization",
@@ -76,10 +76,10 @@ export const PORTFOLIO_DATA = {
     {
       id: "03",
       title: "UI/UX Engineering",
-      desc: "Translating complex Figma designs into pixel-perfect, responsive, and accessible frontend code.",
+      desc: "Synthesizing complex interaction design with performant frontend architecture to deliver immersive, Awwwards-caliber experiences.",
       icon: LayoutTemplate,
       details: {
-        fullDescription: "I bridge the gap between design and development, transforming static designs into interactive, performant, and accessible web experiences that work flawlessly across all devices.",
+        fullDescription: "I bridge the intersection of design and engineering, translating high-fidelity prototypes into performant, accessible, and mathematically precise interfaces. I specialize in complex state management, motion design, and sub-second rendering optimization.",
         capabilities: [
           "Pixel-Perfect Implementation",
           "Responsive & Mobile-First Design",
@@ -124,7 +124,7 @@ export const PORTFOLIO_DATA = {
       title: "AGENT_GPT",
       category: "ARTIFICIAL INTELLIGENCE",
       tech: ["Next.js 14", "TypeScript", "Cerebras"],
-      description: "Autonomous recursive agent orchestrator. Capable of self-prompting, task decomposition, and multi-agent coordination.",
+      description: "A recursive multi-agent orchestrator utilizing low-latency inference for autonomous task decomposition and execution.",
       link: "https://github.com/rajshah9305/v0-ai-agent-visualization",
       stat: "99.9% ACCURACY",
       icon: Cpu,
@@ -135,7 +135,7 @@ export const PORTFOLIO_DATA = {
       title: "AURA_WEAVE",
       category: "IMMERSIVE WEB",
       tech: ["WebGL", "Three.js", "GSAP"],
-      description: "Non-linear digital experience for creative agencies. Features complex shader transitions, scroll-linked physics, and a custom rendering pipeline.",
+      description: "High-performance immersive engine featuring custom GLSL shaders and a non-linear physics-based interaction model.",
       link: "https://github.com/rajshah9305/aurora-orchestrator",
       stat: "60FPS LOCKED",
       icon: Layers,

@@ -32,16 +32,35 @@ export const ParallaxGrid = () => {
     };
   }, []);
 
-  const moveX = (mousePos.x / dimensions.w) * 40;
-  const moveY = (mousePos.y / dimensions.h) * 40;
+  const moveX = (mousePos.x / dimensions.w - 0.5) * 50;
+  const moveY = (mousePos.y / dimensions.h - 0.5) * 50;
 
   return (
     <div
-      className="fixed inset-0 z-0 h-full w-full pointer-events-none overflow-hidden"
+      className="fixed inset-0 z-0 h-full w-full pointer-events-none overflow-hidden bg-white"
       aria-hidden="true"
     >
+      {/* Noise layer */}
+      <div className="absolute inset-0 opacity-[0.015] mix-blend-overlay"
+           style={{ backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")' }} />
+
+      {/* Layer 1: Distant subtle grid */}
       <div
-        className="absolute inset-[-100px] transition-transform duration-300 ease-out will-change-transform"
+        className="absolute inset-[-150px] transition-transform duration-1000 ease-out will-change-transform opacity-[0.03]"
+        style={{ transform: `translate(${moveX * 0.5}px, ${moveY * 0.5}px)` }}
+      >
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)',
+            backgroundSize: '200px 200px'
+          }}
+        />
+      </div>
+
+      {/* Layer 2: Main interactive grid */}
+      <div
+        className="absolute inset-[-100px] transition-transform duration-500 ease-out-quint will-change-transform"
         style={{ transform: `translate(${-moveX}px, ${-moveY}px)` }}
       >
         {/* Primary grid */}

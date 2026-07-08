@@ -7,7 +7,7 @@ export const ServiceCard = memo(({ service, onDetailsClick }) => {
 
   return (
     <motion.div
-      whileHover={{ y: -5 }}
+      whileHover={{ y: -8 }}
       variants={{
         hidden: { opacity: 0, y: 16 },
         visible: {
@@ -21,17 +21,20 @@ export const ServiceCard = memo(({ service, onDetailsClick }) => {
           }
         }
       }}
-      className="group relative border border-black bg-white overflow-hidden flex flex-col hover:border-orange-600 hover:shadow-2xl transition-all duration-500"
+      className="group relative border border-black bg-white overflow-hidden flex flex-col hover:border-orange-600 shadow-premium hover:shadow-premium-hover transition-all duration-500 ease-out-quint"
     >
+      {/* Background decoration */}
+      <div className="absolute top-0 right-0 w-32 h-32 bg-orange-600/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-orange-600/10 transition-colors duration-700" />
+
       {/* Glint effect */}
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none z-30 transition-opacity duration-700">
         <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       </div>
 
       {/* Top accent bar */}
-      <div className="h-0.5 w-0 bg-orange-600 group-hover:w-full transition-all duration-500 ease-out shrink-0" />
+      <div className="h-1 w-0 bg-orange-600 group-hover:w-full transition-all duration-700 ease-out-quint shrink-0" />
 
-      <div className="p-5 sm:p-6 md:p-7 lg:p-8 flex flex-col flex-grow">
+      <div className="p-5 sm:p-6 md:p-7 lg:p-8 flex flex-col flex-grow relative z-10">
         {/* Icon + number */}
         <div className="flex items-start justify-between mb-5 sm:mb-6">
           <motion.div

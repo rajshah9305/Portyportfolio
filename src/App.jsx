@@ -106,28 +106,44 @@ export default function App() {
             {/* Status badge */}
             <motion.div
               variants={{
-                hidden: { opacity: 0, x: -10 },
-                visible: { opacity: 1, x: 0 }
+                hidden: { opacity: 0, x: -20 },
+                visible: {
+                  opacity: 1,
+                  x: 0,
+                  transition: { duration: 0.8, ease: "easeOut" }
+                }
               }}
-              className="flex items-center gap-2.5"
+              className="flex items-center gap-4 group/status"
             >
-              <span className="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-500 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 sm:h-2.5 sm:w-2.5 bg-orange-600" />
-              </span>
-              <span className="font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-black/50">
-                {PORTFOLIO_DATA.profile.availability} — {PORTFOLIO_DATA.profile.location}
-              </span>
+              <div className="relative flex items-center justify-center">
+                <div className="absolute inset-0 bg-orange-500/20 rounded-full scale-[2.5] animate-pulse group-hover:scale-[3] transition-transform duration-500" />
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-500 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-orange-600 shadow-[0_0_10px_rgba(234,88,12,0.5)]" />
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="font-mono text-[10px] font-black uppercase tracking-[0.2em] text-black">
+                  {PORTFOLIO_DATA.profile.availability}
+                </span>
+                <span className="font-mono text-[9px] font-bold uppercase tracking-widest text-black/40">
+                  {PORTFOLIO_DATA.profile.location}
+                </span>
+              </div>
             </motion.div>
 
             {/* Name */}
-            <h1 className="font-sans font-black uppercase tracking-tighter leading-[0.82] text-black text-[clamp(3.5rem,13vw,11rem)]">
+            <h1 className="font-sans font-black uppercase tracking-tighter leading-[0.78] text-black text-[clamp(4rem,15vw,14rem)]">
               {PORTFOLIO_DATA.profile.name.split(' ').map((part, index) => (
                 <span key={index} className="block overflow-hidden">
                   <motion.span
                     variants={{
-                      hidden: { y: "100%" },
-                      visible: { y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+                      hidden: { y: "110%", skewY: 7 },
+                      visible: {
+                        y: 0,
+                        skewY: 0,
+                        transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] }
+                      }
                     }}
                     className={`block ${index > 0 ? 'text-outline-black' : ''}`}
                   >
@@ -149,11 +165,15 @@ export default function App() {
                 <h2 className="font-sans text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black uppercase tracking-tight text-black mb-4 sm:mb-5">
                   <DecryptText text={PORTFOLIO_DATA.profile.title} />
                 </h2>
-                <p className="font-sans text-base sm:text-lg font-medium leading-relaxed text-black/65 max-w-lg">
+                <p className="font-sans text-lg sm:text-xl font-medium leading-relaxed text-black/60 max-w-xl text-balance">
                   Fusing{' '}
-                  <span className="text-black font-bold underline decoration-orange-600 underline-offset-4">Algorithmic Complexity</span>
+                  <span className="text-black font-extrabold underline decoration-orange-600/30 decoration-2 underline-offset-8 hover:decoration-orange-600 transition-colors duration-500">
+                    Algorithmic Complexity
+                  </span>
                   {' '}with{' '}
-                  <span className="text-black font-bold underline decoration-orange-600 underline-offset-4">Structural Minimalism</span>.
+                  <span className="text-black font-extrabold underline decoration-orange-600/30 decoration-2 underline-offset-8 hover:decoration-orange-600 transition-colors duration-500">
+                    Structural Minimalism
+                  </span>.
                   {' '}I architect high-performance digital ecosystems where form follows function.
                 </p>
               </div>
