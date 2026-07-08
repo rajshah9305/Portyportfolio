@@ -5,6 +5,7 @@ export const usePortfolioState = () => {
   const [loading, setLoading] = useState(true);
   const [blueprintMode, setBlueprintMode] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [emailCopied, setEmailCopied] = useState(false);
 
   const handleCopyEmail = useCallback(async () => {
@@ -29,16 +30,22 @@ export const usePortfolioState = () => {
     setLoading(false);
   }, []);
 
+  const openContactModal = useCallback(() => setIsContactModalOpen(true), []);
+  const closeContactModal = useCallback(() => setIsContactModalOpen(false), []);
+
   return {
     loading,
     blueprintMode,
     selectedService,
+    isContactModalOpen,
     emailCopied,
     setBlueprintMode,
     setSelectedService,
     handleCopyEmail,
     toggleBlueprintMode,
     closeServiceModal,
-    completeLoading
+    completeLoading,
+    openContactModal,
+    closeContactModal
   };
 };
