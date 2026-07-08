@@ -14,12 +14,12 @@ import {
   Button,
   FloatingActions,
   LoadingScreen,
-  Cursor
+  Cursor,
+  ContactModal
 } from './components';
 import { PORTFOLIO_DATA } from './data/portfolio';
 import { usePortfolioState } from './hooks/usePortfolioState';
 
-// TODO: Optimize architecture.jpg (currently 3.3MB) for better production performance
 import architectureDiagram from './assets/architecture.jpg';
 
 export default function App() {
@@ -27,12 +27,15 @@ export default function App() {
     loading,
     blueprintMode,
     selectedService,
+    isContactModalOpen,
     emailCopied,
     toggleBlueprintMode,
     setSelectedService,
     handleCopyEmail,
     closeServiceModal,
-    completeLoading
+    completeLoading,
+    openContactModal,
+    closeContactModal
   } = usePortfolioState();
 
   const { scrollY } = useScroll();
@@ -157,7 +160,7 @@ export default function App() {
 
               <div className="flex flex-col xs:flex-row gap-3 sm:gap-4 w-full lg:w-auto shrink-0">
                 <Button
-                  href={`mailto:${PORTFOLIO_DATA.profile.socials.email}`}
+                  onClick={openContactModal}
                   icon={Mail}
                   variant="primary"
                 >
@@ -431,7 +434,7 @@ export default function App() {
                 <span className="text-outline-white">Something.</span>
               </h2>
               <Button
-                href={`mailto:${PORTFOLIO_DATA.profile.socials.email}`}
+                onClick={openContactModal}
                 icon={Mail}
                 variant="outline"
                 className="!text-white !border-white hover:!border-orange-600"
@@ -505,6 +508,7 @@ export default function App() {
           </div>
         </footer>
       </main>
+      <ContactModal isOpen={isContactModalOpen} onClose={closeContactModal} />
       <Analytics />
     </div>
   );

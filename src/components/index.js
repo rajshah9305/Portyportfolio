@@ -1,5 +1,4 @@
 export { Button } from './Button';
-
 export { ParallaxGrid } from './ParallaxGrid';
 export { ScrollProgress } from './ScrollProgress';
 export { DecryptText } from './DecryptText';
@@ -11,3 +10,6 @@ export { Navigation } from './Navigation';
 export { FloatingActions } from './FloatingActions';
 export { LoadingScreen } from './LoadingScreen';
 export { Cursor } from './Cursor';
+export { BlueprintToggle } from './BlueprintToggle';
+export { ContactForm } from './ContactForm';
+export { ContactModal } from './ContactModal';
