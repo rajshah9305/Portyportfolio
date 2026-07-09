@@ -34,7 +34,7 @@ export const ContactModal = ({ isOpen, onClose }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-sm"
+          className="fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-sm blueprint-modal-overlay"
           onClick={onClose}
           role="dialog"
           aria-modal="true"
@@ -68,10 +68,10 @@ export const ContactModal = ({ isOpen, onClose }) => {
             {/* Content */}
             <div className="p-6 sm:p-8">
               <div className="mb-8">
-                <h2 className="text-3xl font-black uppercase tracking-tighter leading-none mb-3">
+                <h2 className="heading-3 mb-3">
                   Let&apos;s Build<br />Something.
                 </h2>
-                <p className="text-black/50 text-sm font-medium">
+                <p className="body-base text-black/50">
                   Initialize a secure communication channel for your next project or architectural inquiry.
                 </p>
               </div>

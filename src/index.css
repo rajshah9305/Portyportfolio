@@ -28,7 +28,7 @@
   }
   .blueprint-mode * {
     background-color: transparent !important;
-    border-color: #FF6B00 !important;
+    border-color: rgba(255, 107, 0, 0.4) !important;
     color: #FF6B00 !important;
     box-shadow: none !important;
     text-shadow: none !important;
@@ -40,11 +40,25 @@
       opacity 600ms var(--ease-out-expo),
       transform 600ms var(--ease-out-expo) !important;
   }
+
+  .blueprint-mode .border-black,
+  .blueprint-mode .border-black\/10,
+  .blueprint-mode .border-white\/10 {
+    border-color: #FF6B00 !important;
+    border-width: 0.5px !important;
+  }
+
   .blueprint-mode img,
   .blueprint-mode video,
   .blueprint-mode canvas {
     filter: grayscale(1) contrast(2) invert(1) !important;
-    opacity: 0.25 !important;
+    opacity: 0.15 !important;
+  }
+
+  /* Blueprint modal behavior */
+  .blueprint-mode .blueprint-modal-overlay {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    backdrop-blur: none !important;
   }
 
   html {
@@ -88,37 +102,43 @@
   /* ── Typography ─────────────────────────────────────── */
 
   /* Fluid headings — scale from mobile → desktop */
+  .heading-hero {
+    @apply font-sans font-black uppercase tracking-tighter text-black;
+    font-size: clamp(3.5rem, 13vw, 11rem);
+    line-height: 0.82;
+  }
+
   .heading-1 {
     @apply font-sans font-black uppercase tracking-tighter text-black;
-    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-size: clamp(2.5rem, 7vw, 6rem);
     line-height: 0.9;
   }
 
   .heading-2 {
     @apply font-sans font-black uppercase tracking-tight text-black;
-    font-size: clamp(1.75rem, 5vw, 3.5rem);
-    line-height: 1.1;
+    font-size: clamp(2rem, 5vw, 4rem);
+    line-height: 1.05;
   }
 
   .heading-3 {
-    @apply font-sans font-bold uppercase tracking-tight text-black;
-    font-size: clamp(1.25rem, 3vw, 2rem);
-    line-height: 1.2;
+    @apply font-sans font-black uppercase tracking-tight text-black;
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+    line-height: 1.1;
   }
 
   .body-large {
-    @apply font-sans font-medium leading-relaxed text-black/70;
-    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    @apply font-sans font-medium leading-relaxed text-black/65;
+    font-size: clamp(1rem, 1.4vw, 1.25rem);
   }
 
   .body-base {
     @apply font-sans font-medium leading-relaxed text-black/60;
-    font-size: clamp(0.875rem, 1.2vw, 1.125rem);
+    font-size: clamp(0.875rem, 1.1vw, 1rem);
   }
 
   .label-mono {
     @apply font-mono font-bold uppercase tracking-widest;
-    font-size: clamp(0.625rem, 0.8vw, 0.875rem);
+    font-size: clamp(0.625rem, 0.75vw, 0.75rem);
   }
 
   /* ── Cards ──────────────────────────────────────────── */

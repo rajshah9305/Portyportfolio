@@ -13,3 +13,4 @@ export { Cursor } from './Cursor';
 export { BlueprintToggle } from './BlueprintToggle';
 export { ContactForm } from './ContactForm';
 export { ContactModal } from './ContactModal';
+export { StatItem } from './StatItem';

@@ -23,13 +23,13 @@ export const ExperienceItem = memo(({ item, last }) => (
       <span className="inline-block mb-1.5 sm:mb-2 font-mono text-[9px] sm:text-[10px] font-bold tracking-widest text-orange-600 uppercase bg-orange-50 border border-orange-100 px-1.5 sm:px-2 py-0.5 sm:py-1">
         {item.period}
       </span>
-      <h4 className="font-sans text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-black mt-1.5 sm:mt-2 mb-1 leading-tight">
+      <h4 className="heading-3 mt-1.5 sm:mt-2 mb-1">
         {item.role}
       </h4>
-      <div className="font-mono text-[9px] sm:text-[10px] md:text-xs font-bold uppercase tracking-widest text-black/35 mb-3 sm:mb-4">
+      <div className="label-mono text-black/35 mb-3 sm:mb-4">
         {item.company}
       </div>
-      <p className="font-sans text-xs sm:text-sm md:text-base font-medium leading-relaxed text-black/55 max-w-2xl whitespace-pre-line">
+      <p className="body-base max-w-2xl">
         {item.desc}
       </p>
     </div>

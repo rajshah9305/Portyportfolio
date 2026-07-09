@@ -51,7 +51,7 @@ export const ServiceModal = ({ service, isOpen, onClose }) => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/80 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/80 backdrop-blur-sm blueprint-modal-overlay"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
@@ -62,7 +62,7 @@ export const ServiceModal = ({ service, isOpen, onClose }) => {
         initial={{ y: '100%' }}
         animate={{ y: 0 }}
         transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-        className="relative bg-white w-full sm:max-w-2xl md:max-w-4xl max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl rounded-t-xl sm:rounded-none"
+        className="relative bg-white w-full sm:max-w-2xl md:max-w-4xl max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl rounded-t-xl sm:rounded-none border-black"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -100,20 +100,20 @@ export const ServiceModal = ({ service, isOpen, onClose }) => {
         >
           {/* Overview */}
           <motion.div variants={itemVariants}>
-            <h4 className="font-mono text-[9px] sm:text-xs font-bold text-black uppercase tracking-widest mb-2 sm:mb-3">Overview</h4>
-            <p className="font-sans text-sm sm:text-base md:text-lg font-medium text-black/80 leading-relaxed whitespace-pre-line">
+            <h4 className="label-mono mb-2 sm:mb-3">Overview</h4>
+            <p className="body-large text-black/80 whitespace-pre-line">
               {service.details.fullDescription}
             </p>
           </motion.div>
 
           {/* Capabilities */}
           <motion.div variants={itemVariants}>
-            <h4 className="font-mono text-[9px] sm:text-xs font-bold text-black uppercase tracking-widest mb-3 sm:mb-4">Core Capabilities</h4>
+            <h4 className="label-mono mb-3 sm:mb-4">Core Capabilities</h4>
             <div className="grid gap-2 sm:gap-3">
               {service.details.capabilities.map((cap, i) => (
                 <div key={i} className="flex items-start gap-2.5 sm:gap-3 p-2.5 sm:p-3 border border-black/10 hover:border-orange-600/50 transition-colors">
                   <CheckCircle2 size={15} className="text-orange-600 shrink-0 mt-0.5 sm:w-[18px] sm:h-[18px]" />
-                  <span className="font-sans text-xs sm:text-sm font-medium text-black/80">{cap}</span>
+                  <span className="body-base text-black/80">{cap}</span>
                 </div>
               ))}
             </div>
@@ -121,10 +121,10 @@ export const ServiceModal = ({ service, isOpen, onClose }) => {
 
           {/* Technologies */}
           <motion.div variants={itemVariants}>
-            <h4 className="font-mono text-[9px] sm:text-xs font-bold text-black uppercase tracking-widest mb-3 sm:mb-4">Technology Stack</h4>
+            <h4 className="label-mono mb-3 sm:mb-4">Technology Stack</h4>
             <div className="flex flex-wrap gap-1.5 sm:gap-2">
               {service.details.technologies.map((tech, i) => (
-                <span key={i} className="px-2.5 sm:px-3 py-1.5 sm:py-2 bg-black text-white font-mono text-[9px] sm:text-xs font-bold uppercase tracking-wider">
+                <span key={i} className="px-2.5 sm:px-3 py-1.5 sm:py-2 bg-black text-white label-mono">
                   {tech}
                 </span>
               ))}
@@ -133,12 +133,12 @@ export const ServiceModal = ({ service, isOpen, onClose }) => {
 
           {/* Deliverables */}
           <motion.div variants={itemVariants}>
-            <h4 className="font-mono text-[9px] sm:text-xs font-bold text-black uppercase tracking-widest mb-3 sm:mb-4">Deliverables</h4>
+            <h4 className="label-mono mb-3 sm:mb-4">Deliverables</h4>
             <div className="grid grid-cols-1 xs:grid-cols-2 gap-2 sm:gap-3">
               {service.details.deliverables.map((d, i) => (
                 <div key={i} className="flex items-center gap-2 p-2.5 sm:p-3 border border-black/10">
                   <div className="w-1.5 h-1.5 bg-orange-600 rounded-full shrink-0" />
-                  <span className="font-sans text-xs sm:text-sm font-medium text-black/80">{d}</span>
+                  <span className="body-base text-black/80">{d}</span>
                 </div>
               ))}
             </div>

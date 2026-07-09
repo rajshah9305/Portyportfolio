@@ -15,7 +15,8 @@ import {
   FloatingActions,
   LoadingScreen,
   Cursor,
-  ContactModal
+  ContactModal,
+  StatItem
 } from './components';
 import { PORTFOLIO_DATA } from './data/portfolio';
 import { usePortfolioState } from './hooks/usePortfolioState';
@@ -121,7 +122,7 @@ export default function App() {
             </motion.div>
 
             {/* Name */}
-            <h1 className="font-sans font-black uppercase tracking-tighter leading-[0.82] text-black text-[clamp(3.5rem,13vw,11rem)]">
+            <h1 className="heading-hero">
               {PORTFOLIO_DATA.profile.name.split(' ').map((part, index) => (
                 <span key={index} className="block overflow-hidden">
                   <motion.span
@@ -146,10 +147,10 @@ export default function App() {
               className="flex flex-col lg:flex-row gap-8 lg:gap-12 lg:items-end justify-between"
             >
               <div className="max-w-xl">
-                <h2 className="font-sans text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black uppercase tracking-tight text-black mb-4 sm:mb-5">
+                <h2 className="heading-3 mb-4 sm:mb-5">
                   <DecryptText text={PORTFOLIO_DATA.profile.title} />
                 </h2>
-                <p className="font-sans text-base sm:text-lg font-medium leading-relaxed text-black/65 max-w-lg">
+                <p className="body-large max-w-lg">
                   Fusing{' '}
                   <span className="text-black font-bold underline decoration-orange-600 underline-offset-4">Algorithmic Complexity</span>
                   {' '}with{' '}
@@ -195,14 +196,7 @@ export default function App() {
         <section className="mb-16 sm:mb-20 md:mb-28 lg:mb-32 border-y border-black">
           <div className="container mx-auto grid grid-cols-2 md:grid-cols-4 divide-x divide-black">
             {PORTFOLIO_DATA.stats.map((stat, i) => (
-              <div key={i} className="p-6 sm:p-8 md:p-10 lg:p-12 group hover:bg-black transition-colors duration-300 cursor-default">
-                <span className="block label-mono text-black/40 group-hover:text-white/40 mb-1.5 sm:mb-2 transition-colors text-[9px] sm:text-[10px] md:text-xs">
-                  {stat.label}
-                </span>
-                <span className="block font-sans text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter text-black group-hover:text-white transition-colors">
-                  {stat.value}
-                </span>
-              </div>
+              <StatItem key={i} label={stat.label} value={stat.value} />
             ))}
           </div>
         </section>
@@ -229,12 +223,12 @@ export default function App() {
             <div className="max-w-2xl">
               <div className="flex items-center gap-2.5 mb-3 sm:mb-4">
                 <div className="w-1.5 h-1.5 bg-orange-600 rounded-full shrink-0" />
-                <span className="label-mono text-black/40 text-[9px] sm:text-[10px] md:text-xs">Service_Modules</span>
+                <span className="label-mono text-black/40">Service_Modules</span>
               </div>
-              <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter text-black mb-4 sm:mb-6">
+              <h2 className="heading-1 mb-4 sm:mb-6">
                 Technical Services
               </h2>
-              <p className="font-sans text-sm sm:text-base md:text-lg font-medium leading-relaxed text-black/65 max-w-lg">
+              <p className="body-large max-w-lg">
                 Specialized engineering modules designed to accelerate digital transformation and product velocity.
               </p>
             </div>
@@ -280,13 +274,13 @@ export default function App() {
             <div>
               <div className="flex items-center gap-2.5 mb-3 sm:mb-4">
                 <div className="w-1.5 h-1.5 bg-orange-600 rounded-full shrink-0" />
-                <span className="label-mono text-black/40 text-[9px] sm:text-[10px] md:text-xs">Project_Index_2026</span>
+                <span className="label-mono text-black/40">Project_Index_2026</span>
               </div>
-              <h3 className="font-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter text-black">
+              <h3 className="heading-1">
                 <DecryptText text="Selected Works" />
               </h3>
             </div>
-            <div className="hidden sm:block text-right label-mono text-black/35 text-[9px] sm:text-[10px] md:text-xs shrink-0">
+            <div className="hidden sm:block text-right label-mono text-black/35 shrink-0">
               <span className="block">Sort: Chronological</span>
               <span className="text-orange-600">● All Systems Go</span>
             </div>
@@ -323,12 +317,12 @@ export default function App() {
             >
               <div className="flex items-center gap-2.5 mb-3 sm:mb-4">
                 <div className="w-1.5 h-1.5 bg-orange-600 rounded-full shrink-0" />
-                <span className="label-mono text-black/40 text-[9px] sm:text-[10px] md:text-xs">Career_Log</span>
+                <span className="label-mono text-black/40">Career_Log</span>
               </div>
-              <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tighter text-black mb-4 md:sticky md:top-32">
+              <h2 className="heading-2 mb-4 md:sticky md:top-32">
                 Career<br />Trajectory
               </h2>
-              <p className="font-sans text-sm sm:text-base font-medium leading-relaxed text-black/55 max-w-sm">
+              <p className="body-base max-w-sm">
                 A timeline of increasing responsibility and technical complexity.
               </p>
             </motion.div>
@@ -365,11 +359,11 @@ export default function App() {
 
           <div className="container mx-auto px-4 sm:px-6 md:px-12 grid md:grid-cols-2 gap-10 md:gap-16 items-center relative z-10">
             <div>
-              <span className="label-mono text-orange-500 mb-3 sm:mb-4 block text-[10px] sm:text-xs">Core Philosophy</span>
-              <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter leading-[0.9] mb-6 sm:mb-8 text-white">
+              <span className="label-mono text-orange-500 mb-3 sm:mb-4 block">Core Philosophy</span>
+              <h2 className="heading-1 mb-6 sm:mb-8 text-white">
                 Code as<br />Craftsmanship.
               </h2>
-              <p className="font-sans text-sm sm:text-base md:text-lg font-medium leading-relaxed text-white/65 mb-6 sm:mb-8">
+              <p className="body-large text-white/65 mb-6 sm:mb-8">
                 I believe that software should be as beautiful internally as it is externally.
                 Every function, every component, and every API endpoint is crafted with the same
                 attention to detail as the visual interface.
@@ -429,7 +423,7 @@ export default function App() {
 
             {/* Big CTA */}
             <div className="mb-12 sm:mb-14 md:mb-16 pb-12 sm:pb-14 md:pb-16 border-b border-white/10">
-              <h2 className="font-sans text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black uppercase tracking-tighter leading-[0.85] text-white mb-6 sm:mb-8">
+              <h2 className="heading-hero text-white mb-6 sm:mb-8">
                 Let&apos;s Build<br />
                 <span className="text-outline-white">Something.</span>
               </h2>

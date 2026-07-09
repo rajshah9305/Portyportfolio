@@ -143,7 +143,7 @@ export const Navigation = ({ onScrollToTop, blueprintMode, onToggleBlueprintMode
             {/* Hamburger */}
             <button
               onClick={() => setIsMobileMenuOpen(prev => !prev)}
-              className="lg:hidden p-1.5 sm:p-2 text-black hover:bg-black/5 rounded-md border border-transparent hover:border-black/10 transition-colors"
+            className="lg:hidden p-1.5 sm:p-2 text-black hover:bg-black/5 rounded-md border border-transparent hover:border-black/10 transition-colors shrink-0"
               aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isMobileMenuOpen}
             >
@@ -185,9 +185,9 @@ export const Navigation = ({ onScrollToTop, blueprintMode, onToggleBlueprintMode
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.1 + index * 0.1 }}
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className="group flex items-baseline gap-3 sm:gap-4 font-sans text-4xl xs:text-5xl sm:text-6xl font-black text-black hover:text-orange-600 transition-colors tracking-tighter leading-none"
+                  className="group flex items-baseline gap-3 sm:gap-4 heading-hero text-black hover:text-orange-600 transition-colors"
                 >
-                  <span className="text-xs sm:text-sm font-mono font-bold text-black/25 group-hover:text-orange-600 transition-colors shrink-0">
+                  <span className="label-mono text-black/25 group-hover:text-orange-600 transition-colors shrink-0">
                     {item.num}
                   </span>
                   {item.name}

@@ -7,7 +7,7 @@ export const ServiceCard = memo(({ service, onDetailsClick }) => {
 
   return (
     <motion.div
-      whileHover={{ y: -5 }}
+      whileHover={{ y: -8 }}
       variants={{
         hidden: { opacity: 0, y: 16 },
         visible: {
@@ -21,7 +21,7 @@ export const ServiceCard = memo(({ service, onDetailsClick }) => {
           }
         }
       }}
-      className="group relative border border-black bg-white overflow-hidden flex flex-col hover:border-orange-600 hover:shadow-2xl transition-all duration-500"
+      className="group relative border border-black bg-white overflow-hidden flex flex-col hover:border-orange-600 hover:shadow-[24px_24px_0px_0px_rgba(255,107,0,0.1)] transition-all duration-500"
     >
       {/* Glint effect */}
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none z-30 transition-opacity duration-700">
@@ -45,18 +45,18 @@ export const ServiceCard = memo(({ service, onDetailsClick }) => {
           </span>
         </div>
 
-        <h3 className="font-sans text-lg sm:text-xl font-black uppercase tracking-tight text-black mb-2.5 sm:mb-3">
+        <h3 className="heading-3 text-lg sm:text-xl mb-2.5 sm:mb-3">
           {service.title}
         </h3>
 
-        <p className="font-sans text-xs sm:text-sm font-medium leading-relaxed text-black/55 flex-grow mb-5 sm:mb-6 whitespace-pre-line">
+        <p className="body-base flex-grow mb-5 sm:mb-6">
           {service.desc}
         </p>
 
         {/* Tech preview */}
-        <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-5 sm:mb-6">
+        <div className="flex flex-wrap gap-1.5 mb-6">
           {service.details.technologies.slice(0, 3).map((tech, i) => (
-            <span key={i} className="font-mono text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-black/35 border border-black/10 px-1.5 sm:px-2 py-0.5 group-hover:border-orange-600/20 transition-colors">
+            <span key={i} className="label-mono text-[9px] text-black/35 border border-black/10 px-2 py-0.5 group-hover:border-orange-600/20 transition-colors">
               {tech}
             </span>
           ))}
