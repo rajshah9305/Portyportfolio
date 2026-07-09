@@ -8,7 +8,7 @@ export const Cursor = () => {
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
-  const springConfig = { damping: 25, stiffness: 250 };
+  const springConfig = { damping: 30, stiffness: 300, mass: 0.5 };
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
 
@@ -57,8 +57,10 @@ export const Cursor = () => {
           y: cursorYSpring,
           translateX: '-50%',
           translateY: '-50%',
-          scale: isHovering ? 1.5 : 1,
+          scale: isHovering ? 2.5 : 1,
           opacity: isHidden ? 0 : 1,
+          borderWidth: isHovering ? '1px' : '2px',
+          backgroundColor: isHovering ? 'rgba(255, 107, 0, 0.05)' : 'transparent',
         }}
       />
       <motion.div

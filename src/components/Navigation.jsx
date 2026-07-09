@@ -92,7 +92,7 @@ export const Navigation = ({ onScrollToTop, blueprintMode, onToggleBlueprintMode
           </button>
 
           {/* Desktop pill nav */}
-          <div className="hidden lg:flex items-center p-1 sm:p-1.5 bg-white/80 backdrop-blur-md border border-black/10 rounded-full shadow-md hover:shadow-lg transition-shadow duration-300">
+          <div className="hidden lg:flex items-center p-1 sm:p-1.5 bg-white/70 backdrop-blur-md border border-black/5 rounded-full shadow-lg hover:shadow-xl transition-all duration-500 hover:border-black/10">
             {NAV_ITEMS.map((item) => {
               const isActive = activeSection === item.id;
               return (
@@ -181,11 +181,15 @@ export const Navigation = ({ onScrollToTop, blueprintMode, onToggleBlueprintMode
                 <motion.a
                   key={item.name}
                   href={item.href}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.1 + index * 0.1 }}
+                  initial={{ opacity: 0, x: 30, filter: 'blur(10px)' }}
+                  animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+                  transition={{
+                    delay: 0.1 + index * 0.1,
+                    duration: 0.8,
+                    ease: [0.22, 1, 0.36, 1]
+                  }}
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className="group flex items-baseline gap-3 sm:gap-4 font-sans text-4xl xs:text-5xl sm:text-6xl font-black text-black hover:text-orange-600 transition-colors tracking-tighter leading-none"
+                  className="group flex items-baseline gap-3 sm:gap-4 font-sans text-4xl xs:text-5xl sm:text-6xl font-black text-black hover:text-orange-600 transition-all duration-300 tracking-tighter leading-none"
                 >
                   <span className="text-xs sm:text-sm font-mono font-bold text-black/25 group-hover:text-orange-600 transition-colors shrink-0">
                     {item.num}
