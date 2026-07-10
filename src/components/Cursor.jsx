@@ -20,17 +20,20 @@ export const Cursor = () => {
     };
 
     const handleMouseOver = (e) => {
-      if (
-        e.target.tagName.toLowerCase() === 'button' ||
-        e.target.tagName.toLowerCase() === 'a' ||
-        e.target.closest('button') ||
-        e.target.closest('a') ||
-        window.getComputedStyle(e.target).cursor === 'pointer'
-      ) {
-        setIsHovering(true);
-      } else {
-        setIsHovering(false);
-      }
+      const target = e.target;
+      if (!target) return;
+
+      const isInteractive =
+        target.tagName.toLowerCase() === 'button' ||
+        target.tagName.toLowerCase() === 'a' ||
+        target.closest('button') ||
+        target.closest('a') ||
+        target.closest('[role="button"]') ||
+        target.closest('input') ||
+        target.closest('textarea') ||
+        target.closest('select');
+
+      setIsHovering(!!isInteractive);
     };
 
     const handleMouseOut = () => {
