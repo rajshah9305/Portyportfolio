@@ -47,6 +47,26 @@
     opacity: 0.25 !important;
   }
 
+  /* Enhance Blueprint Mode overlay backgrounds & readability for critical components */
+  .blueprint-mode [role="dialog"],
+  .blueprint-mode [role="dialog"] *,
+  .blueprint-mode nav + div[style*="transform: translateX"],
+  .blueprint-mode nav + div[style*="transform: translateX"] * {
+    background-color: #ffffff !important;
+    color: #FF6B00 !important;
+    border-color: #FF6B00 !important;
+  }
+  .blueprint-mode [role="dialog"] button,
+  .blueprint-mode [role="dialog"] a,
+  .blueprint-mode nav + div[style*="transform: translateX"] button,
+  .blueprint-mode nav + div[style*="transform: translateX"] a {
+    border-color: #FF6B00 !important;
+  }
+  .blueprint-mode [role="dialog"] button:hover,
+  .blueprint-mode [role="dialog"] a:hover {
+    background-color: rgba(255, 107, 0, 0.08) !important;
+  }
+
   html {
     @apply scroll-smooth;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';

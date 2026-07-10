@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { X, CheckCircle2, Mail } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useLockBodyScroll } from '../hooks/useLockBodyScroll';
 import { PORTFOLIO_DATA } from '../data/portfolio';
 
@@ -36,8 +36,6 @@ export const ServiceModal = ({ service, isOpen, onClose }) => {
     return () => window.removeEventListener('keydown', onKey);
   }, [isOpen, onClose]);
 
-  if (!isOpen || !service) return null;
-
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -48,23 +46,27 @@ export const ServiceModal = ({ service, isOpen, onClose }) => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/80 backdrop-blur-sm"
-      onClick={onClose}
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="modal-title"
-    >
-      <motion.div
-        ref={modalRef}
-        initial={{ y: '100%' }}
-        animate={{ y: 0 }}
-        transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-        className="relative bg-white w-full sm:max-w-2xl md:max-w-4xl max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl rounded-t-xl sm:rounded-none"
-        onClick={(e) => e.stopPropagation()}
-      >
+    <AnimatePresence>
+      {isOpen && service && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/80 backdrop-blur-sm"
+          onClick={onClose}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-title"
+        >
+          <motion.div
+            ref={modalRef}
+            initial={{ y: '100%', opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: '100%', opacity: 0 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            className="relative bg-white w-full sm:max-w-2xl md:max-w-4xl max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl rounded-t-xl sm:rounded-none"
+            onClick={(e) => e.stopPropagation()}
+          >
         {/* Header */}
         <div className="sticky top-0 bg-white border-b border-black/10 px-4 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 flex items-start justify-between z-10">
           <div className="flex items-center gap-3 sm:gap-4">
@@ -160,5 +162,7 @@ export const ServiceModal = ({ service, isOpen, onClose }) => {
         </motion.div>
       </motion.div>
     </motion.div>
+      )}
+    </AnimatePresence>
   );
 };

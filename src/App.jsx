@@ -267,13 +267,11 @@ export default function App() {
             ))}
           </div>
 
-          {selectedService && (
-            <ServiceModal
-              service={selectedService}
-              isOpen={!!selectedService}
-              onClose={closeServiceModal}
-            />
-          )}
+          <ServiceModal
+            service={selectedService}
+            isOpen={!!selectedService}
+            onClose={closeServiceModal}
+          />
         </motion.section>
 
         {/* ─── PROJECTS ─────────────────────────────────────────── */}

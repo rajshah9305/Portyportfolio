@@ -1,23 +1,41 @@
-import React, { useState, useEffect } from 'react';
-
-// Lazy initializer reads window once at mount — avoids setState-in-effect
-const getWindowDimensions = () => ({
-  w: typeof window !== 'undefined' ? window.innerWidth : 1440,
-  h: typeof window !== 'undefined' ? window.innerHeight : 900,
-});
+import React, { useEffect, useRef } from 'react';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 
 export const ParallaxGrid = () => {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [dimensions, setDimensions] = useState(getWindowDimensions);
+  const dimensions = useRef({
+    w: typeof window !== 'undefined' ? window.innerWidth : 1440,
+    h: typeof window !== 'undefined' ? window.innerHeight : 900,
+  });
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // Setup smooth spring motion
+  const springConfig = { damping: 40, stiffness: 300, mass: 0.5 };
+  const smoothX = useSpring(mouseX, springConfig);
+  const smoothY = useSpring(mouseY, springConfig);
+
+  // Transform normalized mouse cursor movement into translate pixel values
+  const translateX = useTransform(smoothX, (val) => `${-val * 40}px`);
+  const translateY = useTransform(smoothY, (val) => `${-val * 40}px`);
 
   useEffect(() => {
-    const handleResize = () => setDimensions(getWindowDimensions());
+    const handleResize = () => {
+      dimensions.current = {
+        w: window.innerWidth,
+        h: window.innerHeight,
+      };
+    };
 
     let requestRef;
     const handleMouseMove = (e) => {
       if (requestRef) return;
       requestRef = requestAnimationFrame(() => {
-        setMousePos({ x: e.clientX, y: e.clientY });
+        // Normalize mouse positions to 0 - 1 values
+        const normX = e.clientX / dimensions.current.w;
+        const normY = e.clientY / dimensions.current.h;
+        mouseX.set(normX);
+        mouseY.set(normY);
         requestRef = null;
       });
     };
@@ -30,19 +48,16 @@ export const ParallaxGrid = () => {
       window.removeEventListener('resize', handleResize);
       if (requestRef) cancelAnimationFrame(requestRef);
     };
-  }, []);
-
-  const moveX = (mousePos.x / dimensions.w) * 40;
-  const moveY = (mousePos.y / dimensions.h) * 40;
+  }, [mouseX, mouseY]);
 
   return (
     <div
       className="fixed inset-0 z-0 h-full w-full pointer-events-none overflow-hidden"
       aria-hidden="true"
     >
-      <div
-        className="absolute inset-[-100px] transition-transform duration-300 ease-out will-change-transform"
-        style={{ transform: `translate(${-moveX}px, ${-moveY}px)` }}
+      <motion.div
+        className="absolute inset-[-100px] will-change-transform"
+        style={{ x: translateX, y: translateY }}
       >
         {/* Primary grid */}
         <div
@@ -68,7 +83,7 @@ export const ParallaxGrid = () => {
             backgroundSize: '50px 50px'
           }}
         />
-      </div>
+      </motion.div>
 
       {/* Blueprint Mode Watermark */}
       <div className="absolute bottom-12 right-12 font-mono text-[100px] font-black text-orange-600 opacity-0 group-[.blueprint-mode]/body:opacity-5 transition-opacity duration-1000 select-none pointer-events-none">
